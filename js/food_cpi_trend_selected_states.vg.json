@@ -1,0 +1,255 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Food Consumer Price Index trend over time",
+    "subtitle": "Selected Malaysian states, food and non-alcoholic beverages",
+    "anchor": "start",
+    "fontSize": 20,
+    "subtitleFontSize": 12,
+    "subtitleColor": "#555555"
+  },
+  "width": 780,
+  "height": 430,
+  "data": {
+    "url": "data/cpi_food_selected_states_trend_clean.csv"
+  },
+  "params": [
+    {
+      "name": "start_year",
+      "value": 2020,
+      "bind": {
+        "input": "select",
+        "options": [2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026],
+        "name": "Start year: "
+      }
+    },
+    {
+      "name": "end_year",
+      "value": 2026,
+      "bind": {
+        "input": "select",
+        "options": [2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026],
+        "name": "End year: "
+      }
+    }
+  ],
+  "transform": [
+    {
+      "calculate": "start_year <= end_year ? start_year : end_year",
+      "as": "range_start_year"
+    },
+    {
+      "calculate": "start_year <= end_year ? end_year : start_year",
+      "as": "range_end_year"
+    },
+    {
+      "filter": "datum.year >= datum.range_start_year && datum.year <= datum.range_end_year && datum.division == '01' && (datum.state_display == 'Selangor' || datum.state_display == 'Sabah' || datum.state_display == 'Kelantan' || datum.state_display == 'Johor' || datum.state_display == 'Sarawak')"
+    }
+  ],
+  "layer": [
+    {
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "size": 48,
+        "opacity": 0,
+        "tooltip": true
+      },
+      "encoding": {
+        "x": {
+          "field": "date",
+          "type": "temporal",
+          "timeUnit": "yearmonth"
+        },
+        "y": {
+          "field": "food_consumer_price_index",
+          "type": "quantitative"
+        },
+        "color": {
+          "field": "state_display",
+          "type": "nominal",
+          "legend": null
+        },
+        "tooltip": [
+          {
+            "field": "state_display",
+            "type": "nominal",
+            "title": "State"
+          },
+          {
+            "field": "month",
+            "type": "nominal",
+            "title": "Month"
+          },
+          {
+            "field": "year",
+            "type": "ordinal",
+            "title": "Year"
+          },
+          {
+            "field": "division_name",
+            "type": "nominal",
+            "title": "Division"
+          },
+          {
+            "field": "food_consumer_price_index",
+            "type": "quantitative",
+            "title": "Food Consumer Price Index",
+            "format": ".1f"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "rule",
+        "strokeDash": [4, 4],
+        "strokeWidth": 1,
+        "color": "#777777",
+        "opacity": 0.45
+      },
+      "transform": [
+        {
+          "filter": "datum.year == 2020 && datum.month_number == 1"
+        }
+      ],
+      "encoding": {
+        "x": {
+          "field": "date",
+          "type": "temporal",
+          "timeUnit": "yearmonth"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "line",
+        "interpolate": "monotone",
+        "strokeWidth": 2.4
+      },
+      "encoding": {
+        "x": {
+          "field": "date",
+          "type": "temporal",
+          "timeUnit": "yearmonth",
+          "title": "Month",
+          "axis": {
+            "format": "%b %Y",
+            "labelAngle": -45,
+            "grid": false
+          }
+        },
+        "y": {
+          "field": "food_consumer_price_index",
+          "type": "quantitative",
+          "title": "Food Consumer Price Index",
+          "scale": {
+            "zero": false
+          },
+          "axis": {
+            "grid": true
+          }
+        },
+        "color": {
+          "field": "state_display",
+          "type": "nominal",
+          "title": "State"
+        },
+        "tooltip": [
+          {
+            "field": "state_display",
+            "type": "nominal",
+            "title": "State"
+          },
+          {
+            "field": "month",
+            "type": "nominal",
+            "title": "Month"
+          },
+          {
+            "field": "year",
+            "type": "ordinal",
+            "title": "Year"
+          },
+          {
+            "field": "division_name",
+            "type": "nominal",
+            "title": "Division"
+          },
+          {
+            "field": "food_consumer_price_index",
+            "type": "quantitative",
+            "title": "Food Consumer Price Index",
+            "format": ".1f"
+          }
+        ]
+      }
+    },
+    {
+      "transform": [
+        {
+          "joinaggregate": [
+            {
+              "op": "max",
+              "field": "date_number",
+              "as": "latest_date_number"
+            }
+          ],
+          "groupby": ["state_display"]
+        },
+        {
+          "filter": "datum.date_number == datum.latest_date_number"
+        },
+        {
+          "calculate": "datum.state_display + '  ' + format(datum.food_consumer_price_index, '.1f')",
+          "as": "end_label"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "middle",
+        "dx": 8,
+        "fontSize": 11,
+        "fontWeight": "bold"
+      },
+      "encoding": {
+        "x": {
+          "field": "date",
+          "type": "temporal"
+        },
+        "y": {
+          "field": "food_consumer_price_index",
+          "type": "quantitative"
+        },
+        "color": {
+          "field": "state_display",
+          "type": "nominal",
+          "legend": null
+        },
+        "text": {
+          "field": "end_label"
+        }
+      }
+    }
+  ],
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "font": "Inter, Arial, sans-serif",
+    "axis": {
+      "labelFont": "Inter, Arial, sans-serif",
+      "titleFont": "Inter, Arial, sans-serif",
+      "gridColor": "#eeeeee",
+      "tickColor": "#cccccc",
+      "domainColor": "#cccccc"
+    },
+    "legend": {
+      "orient": "bottom",
+      "direction": "horizontal",
+      "titleFont": "Inter, Arial, sans-serif",
+      "labelFont": "Inter, Arial, sans-serif"
+    }
+  }
+}

@@ -1,0 +1,86 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Ranked lollipop chart showing food inflation (yoy) by state with year and month filters.",
+  "title": {
+    "text": "Top Food Pressure States",
+    "subtitle": "Year-on-year food inflation by state — highlighted state shows the highest pressure",
+    "anchor": "start",
+    "fontSize": 16,
+    "subtitleFontSize": 12
+  },
+  "width": 760,
+  "height": {"step": 28},
+  "params": [
+    {
+      "name": "selected_year",
+      "value": 2026,
+      "bind": {
+        "input": "select",
+        "options": [2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025,2026],
+        "name": "Year: "
+      }
+    },
+    {
+      "name": "selected_month",
+      "value": "March",
+      "bind": {
+        "input": "select",
+        "options": ["January","February","March","April","May","June","July","August","September","October","November","December"],
+        "name": "Month: "
+      }
+    }
+  ],
+  "data": { "url": "data/cpi_food_state_pressure_ranked.csv" },
+  "transform": [
+    { "filter": "datum.division == '01' && datum.year == selected_year && datum.month == selected_month" },
+    {
+      "window": [ { "op": "rank", "as": "rank" } ],
+      "sort": [ { "field": "inflation_yoy", "order": "descending" } ]
+    }
+  ],
+  "layer": [
+    {
+      "mark": { "type": "rule", "size": 1.5, "opacity": 0.9 },
+      "encoding": {
+        "y": { "field": "state_display", "type": "ordinal", "sort": { "field": "rank", "order": "ascending" }, "axis": { "title": null, "labelLimit": 300 } },
+        "x": { "field": "inflation_yoy", "type": "quantitative", "axis": { "title": "Year-on-year inflation (%)", "grid": true } },
+        "x2": { "value": 0 },
+        "color": { "value": "#dddddd" }
+      }
+    },
+    {
+      "mark": { "type": "point", "filled": true, "size": 100, "opacity": 0.95, "stroke": "#fff", "strokeWidth": 0.5 },
+      "encoding": {
+        "y": { "field": "state_display", "type": "ordinal", "sort": { "field": "rank", "order": "ascending" } },
+        "x": { "field": "inflation_yoy", "type": "quantitative" },
+        "color": {
+          "condition": { "test": "datum.rank === 1", "value": "#d9480f" },
+          "value": "#6b7280",
+          "legend": null
+        },
+        "tooltip": [
+          { "field": "state", "type": "nominal", "title": "State" },
+          { "field": "year", "type": "ordinal", "title": "Year" },
+          { "field": "month", "type": "nominal", "title": "Month" },
+          { "field": "inflation_yoy", "type": "quantitative", "title": "YoY inflation (%)", "format": ".1f" },
+          { "field": "inflation_mom", "type": "quantitative", "title": "MoM inflation (%)", "format": ".1f" },
+          { "field": "rank", "type": "quantitative", "title": "Rank" }
+        ]
+      }
+    },
+    {
+      "mark": { "type": "text", "dx": 8, "align": "left", "baseline": "middle", "fontSize": 12 },
+      "encoding": {
+        "y": { "field": "state_display", "type": "ordinal", "sort": { "field": "rank", "order": "ascending" } },
+        "x": { "field": "inflation_yoy", "type": "quantitative" },
+        "text": { "field": "inflation_yoy", "type": "quantitative", "format": ".1f" },
+        "color": { "condition": { "test": "datum.rank === 1", "value": "#d9480f" }, "value": "#333" }
+      }
+    }
+  ],
+  "config": {
+    "axis": { "labelFontSize": 11, "titleFontSize": 12 },
+    "view": { "stroke": null },
+    "legend": { "orient": "right" }
+  }
+}

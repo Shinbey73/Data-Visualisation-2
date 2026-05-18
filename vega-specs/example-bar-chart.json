@@ -1,0 +1,49 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": "Example Bar Chart",
+  "description": "A simple bar chart to show how to structure Vega-Lite specifications.",
+  "data": {
+    "values": [
+      {"Category": "A", "Value": 28},
+      {"Category": "B", "Value": 55},
+      {"Category": "C", "Value": 43},
+      {"Category": "D", "Value": 91},
+      {"Category": "E", "Value": 81}
+    ]
+  },
+  "mark": {
+    "type": "bar",
+    "cornerRadius": 4,
+    "tooltip": true
+  },
+  "encoding": {
+    "x": {
+      "field": "Category",
+      "type": "nominal",
+      "axis": {
+        "labelAngle": 0,
+        "title": "Categories"
+      }
+    },
+    "y": {
+      "field": "Value",
+      "type": "quantitative",
+      "axis": {
+        "title": "Values"
+      }
+    },
+    "color": {
+      "field": "Value",
+      "type": "quantitative",
+      "scale": {
+        "scheme": "blues"
+      }
+    },
+    "tooltip": [
+      {"field": "Category", "type": "nominal", "title": "Category"},
+      {"field": "Value", "type": "quantitative", "title": "Value"}
+    ]
+  },
+  "width": 400,
+  "height": 300
+}

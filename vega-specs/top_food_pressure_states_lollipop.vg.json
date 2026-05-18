@@ -1,0 +1,317 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Top food price pressure states",
+    "subtitle": "Ranked by year-on-year inflation for food and non-alcoholic beverages",
+    "anchor": "start",
+    "fontSize": 20,
+    "subtitleFontSize": 12,
+    "subtitleColor": "#555555"
+  },
+  "width": 720,
+  "height": 460,
+  "data": {
+    "url": "data/cpi_food_state_pressure_ranked.csv"
+  },
+  "params": [
+    {
+      "name": "selected_year",
+      "value": 2026,
+      "bind": {
+        "input": "select",
+        "options": [
+          2011,
+          2012,
+          2013,
+          2014,
+          2015,
+          2016,
+          2017,
+          2018,
+          2019,
+          2020,
+          2021,
+          2022,
+          2023,
+          2024,
+          2025,
+          2026
+        ],
+        "name": "Year: "
+      }
+    },
+    {
+      "name": "selected_month",
+      "value": "March",
+      "bind": {
+        "input": "select",
+        "options": [
+          "January",
+          "February",
+          "March",
+          "April",
+          "May",
+          "June",
+          "July",
+          "August",
+          "September",
+          "October",
+          "November",
+          "December"
+        ],
+        "name": "Month: "
+      }
+    }
+  ],
+  "transform": [
+    {
+      "filter": "datum.year == selected_year && datum.month == selected_month"
+    },
+    {
+      "window": [
+        {
+          "op": "rank",
+          "as": "rank"
+        }
+      ],
+      "sort": [
+        {
+          "field": "inflation_yoy",
+          "order": "descending"
+        }
+      ]
+    },
+    {
+      "joinaggregate": [
+        {
+          "op": "max",
+          "field": "inflation_yoy",
+          "as": "highest_inflation"
+        },
+        {
+          "op": "min",
+          "field": "inflation_yoy",
+          "as": "lowest_inflation"
+        }
+      ]
+    },
+    {
+      "calculate": "datum.inflation_yoy == datum.highest_inflation ? 'Highest state' : datum.inflation_yoy == datum.lowest_inflation ? 'Lowest state' : 'Other states'",
+      "as": "highlight_group"
+    },
+    {
+      "calculate": "format(datum.inflation_yoy, '.1f') + '%'",
+      "as": "inflation_label"
+    }
+  ],
+  "layer": [
+    {
+      "mark": {
+        "type": "rule",
+        "strokeWidth": 2,
+        "strokeCap": "round"
+      },
+      "encoding": {
+        "y": {
+          "field": "state_display",
+          "type": "nominal",
+          "sort": {
+            "field": "inflation_yoy",
+            "order": "descending"
+          },
+          "title": null
+        },
+        "x": {
+          "datum": 0,
+          "type": "quantitative",
+          "title": "Food inflation compared with the same month last year (%)"
+        },
+        "x2": {
+          "field": "inflation_yoy"
+        },
+        "color": {
+          "condition": {
+            "test": "datum.highlight_group == 'Highest state'",
+            "value": "#b33a1c"
+          },
+          "value": "#c9c9c9"
+        },
+        "tooltip": [
+          {
+            "field": "state_display",
+            "type": "nominal",
+            "title": "State"
+          },
+          {
+            "field": "rank",
+            "type": "ordinal",
+            "title": "Rank"
+          },
+          {
+            "field": "month",
+            "type": "nominal",
+            "title": "Month"
+          },
+          {
+            "field": "year",
+            "type": "ordinal",
+            "title": "Year"
+          },
+          {
+            "field": "division_name",
+            "type": "nominal",
+            "title": "Division"
+          },
+          {
+            "field": "inflation_yoy",
+            "type": "quantitative",
+            "title": "Year-on-year inflation (%)",
+            "format": ".1f"
+          },
+          {
+            "field": "inflation_mom",
+            "type": "quantitative",
+            "title": "Month-on-month inflation (%)",
+            "format": ".1f"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "size": 95,
+        "stroke": "white",
+        "strokeWidth": 1.3
+      },
+      "encoding": {
+        "y": {
+          "field": "state_display",
+          "type": "nominal",
+          "sort": {
+            "field": "inflation_yoy",
+            "order": "descending"
+          },
+          "title": null
+        },
+        "x": {
+          "field": "inflation_yoy",
+          "type": "quantitative",
+          "title": "Food inflation compared with the same month last year (%)"
+        },
+        "color": {
+          "condition": {
+            "test": "datum.highlight_group == 'Highest state'",
+            "value": "#b33a1c"
+          },
+          "value": "#6f6f6f"
+        },
+        "tooltip": [
+          {
+            "field": "state_display",
+            "type": "nominal",
+            "title": "State"
+          },
+          {
+            "field": "rank",
+            "type": "ordinal",
+            "title": "Rank"
+          },
+          {
+            "field": "inflation_yoy",
+            "type": "quantitative",
+            "title": "Year-on-year inflation (%)",
+            "format": ".1f"
+          },
+          {
+            "field": "inflation_mom",
+            "type": "quantitative",
+            "title": "Month-on-month inflation (%)",
+            "format": ".1f"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "middle",
+        "dx": 8,
+        "fontSize": 11,
+        "color": "#333333"
+      },
+      "encoding": {
+        "y": {
+          "field": "state_display",
+          "type": "nominal",
+          "sort": {
+            "field": "inflation_yoy",
+            "order": "descending"
+          },
+          "title": null
+        },
+        "x": {
+          "field": "inflation_yoy",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "inflation_label"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.highlight_group == 'Highest state'"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "middle",
+        "dx": 42,
+        "fontSize": 11,
+        "fontWeight": "bold",
+        "color": "#8f2d16"
+      },
+      "encoding": {
+        "y": {
+          "field": "state_display",
+          "type": "nominal",
+          "sort": {
+            "field": "inflation_yoy",
+            "order": "descending"
+          },
+          "title": null
+        },
+        "x": {
+          "field": "inflation_yoy",
+          "type": "quantitative"
+        },
+        "text": {
+          "value": "Highest pressure"
+        }
+      }
+    }
+  ],
+  "resolve": {
+    "scale": {
+      "color": "independent"
+    }
+  },
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFont": "Inter, Arial, sans-serif",
+      "titleFont": "Inter, Arial, sans-serif",
+      "gridColor": "#eeeeee",
+      "tickColor": "#cccccc",
+      "domainColor": "#cccccc"
+    },
+    "font": "Inter, Arial, sans-serif"
+  }
+}

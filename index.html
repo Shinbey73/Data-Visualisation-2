@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Malaysia Food Inflation by State - Data Visualisation 2</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/grids-responsive-min.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="pure-g">
+        <div class="pure-u-1 header">
+            <div class="content">
+                <h1>Food Price Pressure in Malaysia</h1>
+                <p class="subtitle">Geographic variation, rank ordering, and long-term trend in food and beverage prices</p>
+                <p class="metadata"><strong>Author:</strong> Your Name | <strong>Date:</strong> May 2026</p>
+            </div>
+        </div>
+
+        <div class="pure-u-1 section">
+            <div class="content">
+                <h2>Why This Matters</h2>
+                <p>
+                    Food price inflation affects household budgets differently across Malaysia's states.
+                    This story moves from where pressure is highest, to which states rank highest,
+                    to whether food prices have been building over time.
+                </p>
+            </div>
+        </div>
+
+        <div class="pure-u-1 section">
+            <div class="content">
+                <h2>1. Where is pressure highest?</h2>
+                <div class="pure-g vis-row">
+                    <div class="pure-u-1">
+                        <div class="vis-container">
+                            <div id="vis1"></div>
+                            <p class="vis-caption"><strong>How to read this map:</strong> Darker states show stronger food price pressure. Use the year and month filters to compare how food inflation shifted across Malaysia over time. 2026 data only includes January to March.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="pure-u-1 section">
+            <div class="content">
+                <h2>2. Which states rank highest?</h2>
+                <div class="pure-g vis-row">
+                    <div class="pure-u-1">
+                        <div class="vis-container">
+                            <div id="vis2"></div>
+                            <p class="vis-caption">This chart ranks Malaysian states by food inflation for the selected month. The highlighted state shows where food price pressure was strongest compared with the same month in the previous year.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="pure-u-1 section">
+            <div class="content">
+                <h2>3. Has pressure increased over time?</h2>
+                <div class="pure-g vis-row">
+                    <div class="pure-u-1">
+                        <div class="vis-container">
+                            <div id="vis3"></div>
+                            <p class="vis-caption">Food prices have risen steadily across the selected states since 2020. The line chart helps compare whether food price increases are shared across states or concentrated in specific areas.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="pure-u-1 section data-sources">
+            <div class="content">
+                <h2>Data Sources &amp; Methodology</h2>
+                <p><strong>Primary Data:</strong> Department of Statistics Malaysia CPI data for food and non-alcoholic beverages at state level.</p>
+                <p><strong>Geographic Data:</strong> Malaysia state boundaries from TopoJSON for the map only.</p>
+                <p><strong>Visualisation Idioms:</strong> Choropleth map, ranked lollipop chart, and layered multi-line trend chart.</p>
+            </div>
+        </div>
+
+        <div class="pure-u-1 footer">
+            <div class="content">
+                <p>&copy; 2026 Your Name. All visualisations created with Vega-Lite.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
