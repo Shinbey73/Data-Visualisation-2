@@ -29,6 +29,10 @@ body {
     padding: 2rem;
 }
 
+.heatmap-section .content {
+    max-width: 1450px;
+}
+
 /* ========================================
    Header
    ======================================== */
@@ -103,6 +107,10 @@ body {
     padding: 1.5rem;
     box-shadow: 0 2px 4px rgba(0,0,0,0.08);
     transition: box-shadow 0.3s ease;
+}
+
+.heatmap-section .vis-container {
+    padding: 1rem 1rem 1.25rem;
 }
 
 .vis-container:hover {

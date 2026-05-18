@@ -32,8 +32,10 @@ document.addEventListener('DOMContentLoaded', function() {
     loadVisualization('js/top_food_pressure_states_lollipop.vg.json', 'vis2');
     // Load the Food CPI trend chart
     loadVisualization('js/food_cpi_trend_selected_states.vg.json', 'vis3');
+    // Load Chart 4 heatmap
+    loadVisualization('js/state_vs_cpi_division_heatmap.vg.json', 'vis4');
 
-    console.log('Malaysia choropleth, lollipop chart, and trend chart loaded.');
+    console.log('Malaysia choropleth, lollipop, trend, and heatmap charts loaded.');
 });
 
 // ========================================
