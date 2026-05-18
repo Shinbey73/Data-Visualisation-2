@@ -1,0 +1,222 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Where is crop production concentrated?",
+    "subtitle": "Crop production by Malaysian state, with ocean and neighbouring countries for geographic context",
+    "anchor": "start",
+    "fontSize": 20,
+    "subtitleFontSize": 12,
+    "subtitleColor": "#555555"
+  },
+  "width": 850,
+  "height": 520,
+  "background": "#ffffff",
+  "params": [
+    {
+      "name": "selected_year",
+      "value": 2022,
+      "bind": {
+        "input": "select",
+        "options": [
+          2017,
+          2018,
+          2019,
+          2020,
+          2021,
+          2022
+        ],
+        "name": "Year: "
+      }
+    },
+    {
+      "name": "selected_crop",
+      "value": "All food crops",
+      "bind": {
+        "input": "select",
+        "options": [
+          "All food crops",
+          "Paddy",
+          "Fruits",
+          "Vegetables",
+          "Coconut",
+          "Herbs",
+          "Spices"
+        ],
+        "name": "Crop type: "
+      }
+    }
+  ],
+  "projection": {
+    "type": "mercator",
+    "center": [
+      109.5,
+      3.9
+    ],
+    "scale": 1750
+  },
+  "layer": [
+    {
+      "data": {
+        "sphere": true
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#e8f4fb",
+        "stroke": null
+      }
+    },
+    {
+      "data": {
+        "url": "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-50m.json",
+        "format": {
+          "type": "topojson",
+          "feature": "countries"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#f4f0e7",
+        "stroke": "#d7d0c4",
+        "strokeWidth": 0.5
+      }
+    },
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/jnewbery/CartogramMalaysia/master/public/data/malaysia-states.topojson",
+        "format": {
+          "type": "topojson",
+          "feature": "states"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#eeeeee",
+        "stroke": "#ffffff",
+        "strokeWidth": 0.8
+      }
+    },
+    {
+      "data": {
+        "url": "data/crop_production_state_map_clean.csv",
+        "format": {
+          "type": "csv"
+        }
+      },
+      "transform": [
+        {
+          "filter": "datum.year == selected_year && datum.crop_group == selected_crop"
+        },
+        {
+          "lookup": "map_state",
+          "from": {
+            "data": {
+              "url": "https://raw.githubusercontent.com/jnewbery/CartogramMalaysia/master/public/data/malaysia-states.topojson",
+              "format": {
+                "type": "topojson",
+                "feature": "states"
+              }
+            },
+            "key": "properties.Name"
+          },
+          "as": "geo"
+        }
+      ],
+      "mark": {
+        "type": "geoshape",
+        "stroke": "#ffffff",
+        "strokeWidth": 1.1
+      },
+      "encoding": {
+        "shape": {
+          "field": "geo",
+          "type": "geojson"
+        },
+        "color": {
+          "field": "production_thousand_tonnes",
+          "type": "quantitative",
+          "title": "Crop production (thousand metric tonnes)",
+          "scale": {
+            "type": "sqrt",
+            "scheme": "greens"
+          },
+          "legend": {
+            "orient": "right",
+            "titleLimit": 190,
+            "labelFontSize": 11,
+            "titleFontSize": 12,
+            "gradientLength": 220
+          }
+        },
+        "tooltip": [
+          {
+            "field": "state_display",
+            "type": "nominal",
+            "title": "State"
+          },
+          {
+            "field": "year",
+            "type": "ordinal",
+            "title": "Year"
+          },
+          {
+            "field": "crop_group",
+            "type": "nominal",
+            "title": "Crop type"
+          },
+          {
+            "field": "production",
+            "type": "quantitative",
+            "title": "Production (metric tonnes)",
+            "format": ",.0f"
+          },
+          {
+            "field": "planted_area",
+            "type": "quantitative",
+            "title": "Planted area (hectares)",
+            "format": ",.1f"
+          },
+          {
+            "field": "production_share_percent",
+            "type": "quantitative",
+            "title": "Share of selected crop production (%)",
+            "format": ".1f"
+          },
+          {
+            "field": "production_rank",
+            "type": "ordinal",
+            "title": "Production rank"
+          }
+        ]
+      }
+    },
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/jnewbery/CartogramMalaysia/master/public/data/malaysia-states.topojson",
+        "format": {
+          "type": "topojson",
+          "mesh": "states"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": null,
+        "stroke": "#ffffff",
+        "strokeWidth": 0.8
+      }
+    }
+  ],
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "font": "Inter, Arial, sans-serif",
+    "axis": {
+      "labelFontSize": 11,
+      "titleFontSize": 12
+    },
+    "legend": {
+      "labelFontSize": 11,
+      "titleFontSize": 12
+    }
+  }
+}

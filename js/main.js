@@ -38,8 +38,12 @@ document.addEventListener('DOMContentLoaded', function() {
     loadVisualization('js/food_price_barcode_timeline.vg.json', 'vis5');
     // Load Chart 6 slope chart
     loadVisualization('js/food_inflation_before_vs_latest_slope.vg.json', 'vis6');
+    // Load Chart 7 crop production map
+    loadVisualization('js/crop_production_by_state_map.vg.json', 'vis7');
+    // Load Chart 8 scatter plot
+    loadVisualization('js/crop_production_vs_food_inflation_scatter.vg.json', 'vis8');
 
-    console.log('Malaysia choropleth, lollipop, trend, heatmap, barcode timeline, and slope charts loaded.');
+    console.log('Malaysia choropleth, lollipop, trend, heatmap, barcode timeline, slope charts, crop production map and scatter plot loaded.');
 });
 
 // ========================================
