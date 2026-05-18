@@ -34,8 +34,12 @@ document.addEventListener('DOMContentLoaded', function() {
     loadVisualization('js/food_cpi_trend_selected_states.vg.json', 'vis3');
     // Load Chart 4 heatmap
     loadVisualization('js/state_vs_cpi_division_heatmap.vg.json', 'vis4');
+    // Load Chart 5 barcode timeline
+    loadVisualization('js/food_price_barcode_timeline.vg.json', 'vis5');
+    // Load Chart 6 slope chart
+    loadVisualization('js/food_inflation_before_vs_latest_slope.vg.json', 'vis6');
 
-    console.log('Malaysia choropleth, lollipop, trend, and heatmap charts loaded.');
+    console.log('Malaysia choropleth, lollipop, trend, heatmap, barcode timeline, and slope charts loaded.');
 });
 
 // ========================================
