@@ -8,8 +8,8 @@
     "subtitleFontSize": 12,
     "subtitleColor": "#555555"
   },
-  "width": 760,
-  "height": 480,
+  "width": 920,
+  "height": 560,
   "data": {
     "url": "data/cpi_food_slope_chart_clean.csv"
   },
@@ -483,8 +483,7 @@
     },
     {
       "mark": {
-        "type": "line",
-        "strokeWidth": 2.2
+        "type": "line"
       },
       "encoding": {
         "x": {
@@ -521,14 +520,28 @@
           "condition": [
             {
               "test": "datum.highlight_group == 'Strongest increase'",
-              "value": "#b33a1c"
+              "value": "#1b9e77"
             },
             {
               "test": "datum.highlight_group == 'Strongest easing'",
               "value": "#2c7bb6"
             }
           ],
-          "value": "#b7b7b7"
+          "value": "#cfcfcf"
+        },
+        "size": {
+          "condition": [
+            {"test": "datum.highlight_group == 'Strongest increase'", "value": 4},
+            {"test": "datum.highlight_group == 'Strongest easing'", "value": 4}
+          ],
+          "value": 1.2
+        },
+        "opacity": {
+          "condition": [
+            {"test": "datum.highlight_group == 'Strongest increase'", "value": 1},
+            {"test": "datum.highlight_group == 'Strongest easing'", "value": 1}
+          ],
+          "value": 0.35
         },
         "tooltip": [
           {
@@ -561,13 +574,7 @@
       }
     },
     {
-      "mark": {
-        "type": "point",
-        "filled": true,
-        "size": 80,
-        "stroke": "white",
-        "strokeWidth": 1.2
-      },
+      "mark": {"type": "point", "filled": true},
       "encoding": {
         "x": {
           "field": "comparison_period",
@@ -584,16 +591,17 @@
         },
         "color": {
           "condition": [
-            {
-              "test": "datum.highlight_group == 'Strongest increase'",
-              "value": "#b33a1c"
-            },
-            {
-              "test": "datum.highlight_group == 'Strongest easing'",
-              "value": "#2c7bb6"
-            }
+            {"test": "datum.highlight_group == 'Strongest increase'", "value": "#1b9e77"},
+            {"test": "datum.highlight_group == 'Strongest easing'", "value": "#2c7bb6"}
           ],
-          "value": "#777777"
+          "value": "#888888"
+        },
+        "size": {
+          "condition": [
+            {"test": "datum.highlight_group == 'Strongest increase'", "value": 220},
+            {"test": "datum.highlight_group == 'Strongest easing'", "value": 220}
+          ],
+          "value": 64
         },
         "tooltip": [
           {
@@ -634,8 +642,8 @@
         "type": "text",
         "align": "left",
         "baseline": "middle",
-        "dx": 10,
-        "fontSize": 11,
+        "dx": 14,
+        "fontSize": 12,
         "fontWeight": "bold"
       },
       "encoding": {
@@ -659,7 +667,7 @@
           "condition": [
             {
               "test": "datum.highlight_group == 'Strongest increase'",
-              "value": "#b33a1c"
+              "value": "#1b9e77"
             },
             {
               "test": "datum.highlight_group == 'Strongest easing'",
