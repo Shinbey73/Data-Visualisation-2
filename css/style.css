@@ -15,6 +15,11 @@ body {
     padding: 0;
 }
 
+/* Prevent horizontal scrolling on small viewports */
+html, body {
+    overflow-x: hidden;
+}
+
 /* ========================================
    Grid & Layout
    ======================================== */
@@ -74,6 +79,45 @@ body {
     border-bottom: 1px solid #eee;
 }
 
+/* Section frame that groups multiple charts visually */
+.section-frame {
+    margin-top: 1rem;
+    padding: 1rem;
+    background: linear-gradient(180deg, #ffffff 0%, #fbfbfd 100%);
+    border: 1px solid #eceff5;
+    border-radius: 10px;
+    max-width: 1200px; /* match `.content` width for consistency */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Responsive chart grid inside each section frame */
+.chart-grid {
+    display: grid;
+    grid-template-columns: 1fr; /* stack charts vertically by default */
+    gap: 1.25rem;
+    align-items: start;
+}
+
+.chart-grid.single {
+    grid-template-columns: 1fr;
+}
+
+.chart-item {
+    min-width: 0; /* allow children to shrink without forcing horizontal scroll */
+}
+
+.chart-item .vis-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.chart-item .vis-container > div[id^="vis"] {
+    flex: 1 1 auto;
+    min-height: 260px;
+}
+
 .section h2 {
     font-size: 2rem;
     margin-top: 0;
@@ -128,6 +172,11 @@ body {
     display: block;
     max-width: 100%;
     height: auto;
+}
+
+/* Ensure Vega embeds are responsive inside the grid */
+.vis-container .vega-embed, .vis-container > div[id^="vis"] {
+    width: 100% !important;
 }
 
 .vis-caption {
@@ -213,6 +262,12 @@ strong {
 
     .content {
         padding: 1.5rem;
+    }
+}
+
+@media (max-width: 700px) {
+    .section h2 {
+        font-size: 1.4rem;
     }
 }
 

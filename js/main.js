@@ -42,8 +42,12 @@ document.addEventListener('DOMContentLoaded', function() {
     loadVisualization('js/crop_production_by_state_map.vg.json', 'vis7');
     // Load Chart 8 scatter plot
     loadVisualization('js/crop_production_vs_food_inflation_scatter.vg.json', 'vis8');
+    // Load Chart 9 fish landing versus food inflation connected dot plot
+    loadVisualization('js/fish_landing_vs_food_inflation_connected_dot.vg.json', 'vis9');
+    // Load Chart 10 food security pressure profile
+    loadVisualization('js/food_security_pressure_profile.vg.json', 'vis10');        
 
-    console.log('Malaysia choropleth, lollipop, trend, heatmap, barcode timeline, slope charts, crop production map and scatter plot loaded.');
+    console.log('Choropleth map, ranked lollipop chart, layered multi-line trend chart, state-versus-division heatmap, barcode timeline, slope chart, crop production map, production-versus-inflation bubble plot, fish landing connected dot plot, and a custom food security pressure profile strip loaded successfully.');
 });
 
 // ========================================

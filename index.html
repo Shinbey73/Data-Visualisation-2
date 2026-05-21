@@ -37,12 +37,33 @@
 
         <div class="pure-u-1 section">
             <div class="content">
-                <h2>1. Where is pressure highest?</h2>
-                <div class="pure-g vis-row">
-                    <div class="pure-u-1">
-                        <div class="vis-container">
-                            <div id="vis1"></div>
-                            <p class="vis-caption"><strong>How to read this map:</strong> Darker states show stronger food price pressure. Use the year and month filters to compare how food inflation shifted across Malaysia over time. 2026 data only includes January to March.</p>
+                <h2>Section 1: Food price pressure is uneven</h2>
+                <p>Food inflation choropleth map, ranked lollipop chart, and trend line together show where and how pressure differs across states.</p>
+
+                <div class="section-frame">
+                    <div class="chart-grid">
+                        <div class="chart-item">
+                            <div class="vis-container">
+                                <h3>Food inflation choropleth map</h3>
+                                <div id="vis1"></div>
+                                <p class="vis-caption"><strong>How to read this map:</strong> Darker states show stronger food price pressure. Use the year and month filters to compare shifts over time.</p>
+                            </div>
+                        </div>
+
+                        <div class="chart-item">
+                            <div class="vis-container">
+                                <h3>Ranked lollipop chart</h3>
+                                <div id="vis2"></div>
+                                <p class="vis-caption">Ranks states by food inflation for the selected month; highlighted state shows the strongest year-on-year pressure.</p>
+                            </div>
+                        </div>
+
+                        <div class="chart-item">
+                            <div class="vis-container">
+                                <h3>Food CPI trend line chart</h3>
+                                <div id="vis3"></div>
+                                <p class="vis-caption">Compare whether food price increases are shared across states or concentrated in specific areas.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -51,12 +72,33 @@
 
         <div class="pure-u-1 section">
             <div class="content">
-                <h2>2. Which states rank highest?</h2>
-                <div class="pure-g vis-row">
-                    <div class="pure-u-1">
-                        <div class="vis-container">
-                            <div id="vis2"></div>
-                            <p class="vis-caption">This chart ranks Malaysian states by food inflation for the selected month. The highlighted state shows where food price pressure was strongest compared with the same month in the previous year.</p>
+                <h2>Section 2: Pressure changes across time and category</h2>
+                <p>State-category heatmap, barcode timeline, and slope chart reveal how pressure shifts across divisions and over time.</p>
+
+                <div class="section-frame">
+                    <div class="chart-grid">
+                        <div class="chart-item">
+                            <div class="vis-container">
+                                <h3>State-category heatmap</h3>
+                                <div id="vis4"></div>
+                                <p class="vis-caption">Compares price pressure across states and CPI divisions; darker cells indicate stronger year-on-year inflation.</p>
+                            </div>
+                        </div>
+
+                        <div class="chart-item">
+                            <div class="vis-container">
+                                <h3>Barcode timeline</h3>
+                                <div id="vis5"></div>
+                                <p class="vis-caption">Each vertical strip represents a month; darker colours show intensified food price pressure.</p>
+                            </div>
+                        </div>
+
+                        <div class="chart-item">
+                            <div class="vis-container">
+                                <h3>Slope chart</h3>
+                                <div id="vis6"></div>
+                                <p class="vis-caption">Compares food inflation between two periods; highlights strong increases and easing.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -65,101 +107,51 @@
 
         <div class="pure-u-1 section">
             <div class="content">
-                <h2>3. Has pressure increased over time?</h2>
-                <div class="pure-g vis-row">
-                    <div class="pure-u-1">
-                        <div class="vis-container">
-                            <div id="vis3"></div>
-                            <p class="vis-caption">Food prices have risen steadily across the selected states since 2020. The line chart helps compare whether food price increases are shared across states or concentrated in specific areas.</p>
+                <h2>Section 3: Production does not always mean affordability</h2>
+                <p>Crop production map, production vs inflation scatter, and fish landings comparison show that high production doesn't always imply affordability.</p>
+
+                <div class="section-frame">
+                    <div class="chart-grid">
+                        <div class="chart-item">
+                            <div class="vis-container">
+                                <h3>Crop production map</h3>
+                                <div id="vis7"></div>
+                                <p class="vis-caption">Shows where selected crop production is concentrated; darker states produce more of the selected crop.</p>
+                            </div>
+                        </div>
+
+                        <div class="chart-item">
+                            <div class="vis-container">
+                                <h3>Crop production vs inflation scatter plot</h3>
+                                <div id="vis8"></div>
+                                <p class="vis-caption">Compares crop production with average food inflation by state; dot size shows planted area.</p>
+                            </div>
+                        </div>
+
+                        <div class="chart-item">
+                            <div class="vis-container">
+                                <h3>Fish landing vs inflation chart</h3>
+                                <div id="vis9"></div>
+                                <p class="vis-caption">Connected dot plot comparing fish landing rank with food inflation rank by state.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="pure-u-1 section heatmap-section">
+        <div class="pure-u-1 section profile-section">
             <div class="content">
-                <h2>4. Which categories create pressure?</h2>
-                <div class="pure-g vis-row">
-                    <div class="pure-u-1">
-                        <div class="vis-container">
-                            <div id="vis4"></div>
-                            <p class="vis-caption">This heatmap compares price pressure across states and Consumer Price Index divisions. Darker red cells show stronger year-on-year inflation, helping identify whether food-related pressure is concentrated in specific states or shared across Malaysia.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="pure-u-1 section barcode-section">
-            <div class="content">
-                <h2>5. When did food inflation become more intense?</h2>
-                <div class="pure-g vis-row">
-                    <div class="pure-u-1">
-                        <div class="vis-container">
-                            <div id="vis5"></div>
-                            <p class="vis-caption">
-                                Each vertical strip represents one month of food inflation. 
-                                Darker orange-red periods show when food price pressure intensified, 
-                                while blue periods show price easing compared with the same month in the previous year.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="pure-u-1 section slope-section">
-            <div class="content">
-                <h2>6. Is food inflation increasing or easing?</h2>
-                <div class="pure-g vis-row">
-                    <div class="pure-u-1">
-                        <div class="vis-container">
-                            <div id="vis6"></div>
-                            <p class="vis-caption">
-                                This slope chart compares food inflation between two selected periods. 
-                                Red highlights the state with the strongest increase, while blue highlights 
-                                the state with the strongest easing.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="pure-u-1 section crop-map-section">
-            <div class="content">
-                <h2>Section 3: Does local production reduce food security risk?</h2>
-                <h3>7. Where is crop production concentrated?</h3>
-
-                <div class="pure-g vis-row">
-                    <div class="pure-u-1">
-                        <div class="vis-container">
-                            <div id="vis7"></div>
-                            <p class="vis-caption">
-                                This map shows where selected food crop production is concentrated across Malaysian states.
-                                Darker green states produce more of the selected crop type. The filter allows comparison
-                                across crop types and years from 2017 to 2022.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="pure-u-1 section scatter-section">
-            <div class="content">
-                <h3>8. Does higher crop production reduce food inflation?</h3>
-
-                <div class="pure-g vis-row">
-                    <div class="pure-u-1">
-                        <div class="vis-container">
-                            <div id="vis8"></div>
-                            <p class="vis-caption">
-                                This chart compares crop production with average food inflation by state.
-                                Larger dots show wider planted area, while colour highlights whether a state
-                                has high production but still faces high food price pressure.
-                            </p>
+                <h2>Section 4: State food security profile</h2>
+                <p>Custom food security pressure strip summarising exposure by state.</p>
+                <div class="section-frame single">
+                    <div class="chart-grid single">
+                        <div class="chart-item">
+                            <div class="vis-container">
+                                <h3>Food security pressure profile</h3>
+                                <div id="vis10"></div>
+                                <p class="vis-caption">Higher bars indicate greater relative exposure within the selected year; combines multiple indicators.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -171,7 +163,7 @@
                 <h2>Data Sources &amp; Methodology</h2>
                 <p><strong>Primary Data:</strong> Department of Statistics Malaysia CPI data for food and non-alcoholic beverages at state level.</p>
                 <p><strong>Geographic Data:</strong> Malaysia state boundaries from TopoJSON for the map only.</p>
-                <p><strong>Visualisation Idioms:</strong> Choropleth map, ranked lollipop chart, layered multi-line trend chart, state-versus-division heatmap, barcode timeline, slope chart, crop production map, and production-versus-inflation bubble plot.</p>
+                <p><strong>Visualisation Idioms:</strong> Choropleth map, ranked lollipop chart, layered multi-line trend chart, state-versus-division heatmap, barcode timeline, slope chart, crop production map, production-versus-inflation bubble plot, fish landing connected dot plot, and a custom food security pressure profile strip.</p>
             </div>
         </div>
 

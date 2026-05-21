@@ -1,0 +1,85 @@
+year,state,state_display,fish_landings_tonnes,average_food_inflation_yoy,months_used_for_inflation,fish_records_used,fish_landing_rank,food_inflation_rank,rank_gap_food_minus_fish,pattern_group,fish_landings_label,food_inflation_label
+2018,Perak,Perak,313852.0,1.1,12,12,1,10,9,High landing and lower inflation rank,"313,852 tonnes",1.1%
+2018,Sarawak,Sarawak,180599.0,1.6333333333333335,12,12,2,4,2,High landing and high inflation,"180,599 tonnes",1.6%
+2018,Sabah,Sabah,163049.0,1.0666666666666667,12,12,3,11,8,High landing and lower inflation rank,"163,049 tonnes",1.1%
+2018,Kedah,Kedah,149272.0,-1.15,12,12,4,14,10,High landing and lower inflation rank,"149,272 tonnes",-1.1%
+2018,Selangor,Selangor,141265.0,1.6500000000000001,12,12,5,3,-2,Lower landing and high inflation rank,"141,265 tonnes",1.7%
+2018,Pahang,Pahang,121205.0,1.125,12,12,6,8,2,Other states,"121,205 tonnes",1.1%
+2018,Kelantan,Kelantan,99409.0,1.0250000000000001,12,12,7,12,5,Other states,"99,409 tonnes",1.0%
+2018,Perlis,Perlis,95990.0,-0.3833333333333333,12,12,8,13,5,Other states,"95,990 tonnes",-0.4%
+2018,Johor,Johor,69667.0,1.7,12,24,9,1,-8,Lower landing and high inflation rank,"69,667 tonnes",1.7%
+2018,Pulau Pinang,Penang,54847.0,1.675,12,12,10,2,-8,Lower landing and high inflation rank,"54,847 tonnes",1.7%
+2018,Terengganu,Terengganu,41725.0,1.1083333333333334,12,12,11,9,-2,Other states,"41,725 tonnes",1.1%
+2018,W.P. Labuan,Labuan,19321.0,1.325,12,12,12,6,-6,Other states,"19,321 tonnes",1.3%
+2018,Melaka,Melaka,1906.0,1.325,12,12,13,7,-6,Other states,"1,906 tonnes",1.3%
+2018,Negeri Sembilan,Negeri Sembilan,666.0,1.5583333333333333,12,12,14,5,-9,Other states,666 tonnes,1.6%
+2019,Perak,Perak,314952.0,1.5333333333333332,12,12,1,6,5,High landing and lower inflation rank,"314,952 tonnes",1.5%
+2019,Sabah,Sabah,179714.0,0.44166666666666665,12,12,2,14,12,High landing and lower inflation rank,"179,714 tonnes",0.4%
+2019,Sarawak,Sarawak,171482.0,1.0416666666666667,12,12,3,11,8,High landing and lower inflation rank,"171,482 tonnes",1.0%
+2019,Selangor,Selangor,156416.0,1.8583333333333334,12,12,4,3,-1,High landing and high inflation,"156,416 tonnes",1.9%
+2019,Kedah,Kedah,149251.0,2.725,12,12,5,1,-4,Lower landing and high inflation rank,"149,251 tonnes",2.7%
+2019,Perlis,Perlis,113519.0,1.5833333333333333,12,12,6,5,-1,Other states,"113,519 tonnes",1.6%
+2019,Pahang,Pahang,99739.0,0.9500000000000001,12,12,7,13,6,Other states,"99,739 tonnes",1.0%
+2019,Kelantan,Kelantan,90200.0,1.025,12,12,8,12,4,Other states,"90,200 tonnes",1.0%
+2019,Johor,Johor,65127.0,1.9166666666666667,12,24,9,2,-7,Lower landing and high inflation rank,"65,127 tonnes",1.9%
+2019,Pulau Pinang,Penang,51688.0,1.8416666666666668,12,12,10,4,-6,Lower landing and high inflation rank,"51,688 tonnes",1.8%
+2019,Terengganu,Terengganu,40448.0,1.1583333333333334,12,12,11,10,-1,Other states,"40,448 tonnes",1.2%
+2019,W.P. Labuan,Labuan,20272.0,1.175,12,12,12,9,-3,Other states,"20,272 tonnes",1.2%
+2019,Melaka,Melaka,1872.0,1.2916666666666667,12,12,13,8,-5,Other states,"1,872 tonnes",1.3%
+2019,Negeri Sembilan,Negeri Sembilan,672.0,1.5,12,12,14,7,-7,Other states,672 tonnes,1.5%
+2020,Perak,Perak,328296.0,1.5333333333333332,12,12,1,2,1,High landing and high inflation,"328,296 tonnes",1.5%
+2020,Sabah,Sabah,206702.0,0.21666666666666667,12,12,2,14,12,High landing and lower inflation rank,"206,702 tonnes",0.2%
+2020,Selangor,Selangor,161031.0,2.033333333333333,12,12,3,1,-2,High landing and high inflation,"161,031 tonnes",2.0%
+2020,Kedah,Kedah,134420.0,0.6583333333333333,12,12,4,11,7,High landing and lower inflation rank,"134,420 tonnes",0.7%
+2020,Sarawak,Sarawak,124454.0,0.6333333333333333,12,12,5,12,7,Other states,"124,454 tonnes",0.6%
+2020,Pahang,Pahang,101317.0,1.3416666666666666,12,12,6,5,-1,Other states,"101,317 tonnes",1.3%
+2020,Kelantan,Kelantan,73580.0,0.8833333333333333,12,12,7,8,1,Other states,"73,580 tonnes",0.9%
+2020,Johor,Johor,70177.0,1.5250000000000001,12,24,8,3,-5,Lower landing and high inflation rank,"70,177 tonnes",1.5%
+2020,Perlis,Perlis,69358.0,0.5416666666666666,12,12,9,13,4,Other states,"69,358 tonnes",0.5%
+2020,Pulau Pinang,Penang,56849.0,1.2916666666666667,12,12,10,6,-4,Other states,"56,849 tonnes",1.3%
+2020,Terengganu,Terengganu,37227.0,1.425,12,12,11,4,-7,Lower landing and high inflation rank,"37,227 tonnes",1.4%
+2020,W.P. Labuan,Labuan,17497.0,0.7083333333333334,12,12,12,10,-2,Other states,"17,497 tonnes",0.7%
+2020,Melaka,Melaka,1797.0,0.75,12,12,13,9,-4,Other states,"1,797 tonnes",0.8%
+2020,Negeri Sembilan,Negeri Sembilan,597.0,1.2166666666666666,12,12,14,7,-7,Other states,597 tonnes,1.2%
+2021,Perak,Perak,358398.0,1.8166666666666667,12,12,1,5,4,High landing and lower inflation rank,"358,398 tonnes",1.8%
+2021,Sabah,Sabah,216314.0,0.625,12,12,2,14,12,High landing and lower inflation rank,"216,314 tonnes",0.6%
+2021,Selangor,Selangor,167579.0,2.433333333333333,12,12,3,1,-2,High landing and high inflation,"167,579 tonnes",2.4%
+2021,Sarawak,Sarawak,138879.0,1.0833333333333333,12,12,4,13,9,High landing and lower inflation rank,"138,879 tonnes",1.1%
+2021,Kedah,Kedah,122828.0,1.25,12,12,5,11,6,Other states,"122,828 tonnes",1.2%
+2021,Pahang,Pahang,94815.0,2.216666666666667,12,12,6,3,-3,Lower landing and high inflation rank,"94,815 tonnes",2.2%
+2021,Kelantan,Kelantan,58274.0,2.1166666666666667,12,12,7,4,-3,Lower landing and high inflation rank,"58,274 tonnes",2.1%
+2021,Johor,Johor,51418.0,1.8,12,24,8,6,-2,Other states,"51,418 tonnes",1.8%
+2021,Pulau Pinang,Penang,35369.0,1.1416666666666666,12,12,9,12,3,Other states,"35,369 tonnes",1.1%
+2021,Perlis,Perlis,33057.0,1.4083333333333332,12,12,10,9,-1,Other states,"33,057 tonnes",1.4%
+2021,Terengganu,Terengganu,30641.0,2.2416666666666667,12,12,11,2,-9,Lower landing and high inflation rank,"30,641 tonnes",2.2%
+2021,W.P. Labuan,Labuan,17724.0,1.3666666666666665,12,12,12,10,-2,Other states,"17,724 tonnes",1.4%
+2021,Melaka,Melaka,2089.0,1.4083333333333332,12,12,13,8,-5,Other states,"2,089 tonnes",1.4%
+2021,Negeri Sembilan,Negeri Sembilan,567.0,1.5833333333333333,12,12,14,7,-7,Other states,567 tonnes,1.6%
+2022,Perak,Perak,301376.0,5.391666666666667,12,12,1,5,4,High landing and lower inflation rank,"301,376 tonnes",5.4%
+2022,Sabah,Sabah,230172.0,5.075,12,12,2,6,4,High landing and lower inflation rank,"230,172 tonnes",5.1%
+2022,Selangor,Selangor,171057.0,7.316666666666666,12,12,3,1,-2,High landing and high inflation,"171,057 tonnes",7.3%
+2022,Kedah,Kedah,140866.0,3.6916666666666664,12,12,4,13,9,High landing and lower inflation rank,"140,866 tonnes",3.7%
+2022,Pahang,Pahang,107982.0,4.941666666666666,12,12,5,7,2,Other states,"107,982 tonnes",4.9%
+2022,Sarawak,Sarawak,103839.0,5.491666666666667,12,12,6,4,-2,Lower landing and high inflation rank,"103,839 tonnes",5.5%
+2022,Johor,Johor,57727.0,6.1499999999999995,12,24,7,2,-5,Lower landing and high inflation rank,"57,727 tonnes",6.1%
+2022,Kelantan,Kelantan,55084.0,4.491666666666666,12,12,8,12,4,Other states,"55,084 tonnes",4.5%
+2022,Pulau Pinang,Penang,47605.0,6.016666666666667,12,12,9,3,-6,Lower landing and high inflation rank,"47,605 tonnes",6.0%
+2022,Perlis,Perlis,38005.0,4.8999999999999995,12,12,10,9,-1,Other states,"38,005 tonnes",4.9%
+2022,Terengganu,Terengganu,33692.0,4.908333333333333,12,12,11,8,-3,Other states,"33,692 tonnes",4.9%
+2022,W.P. Labuan,Labuan,18411.0,3.4416666666666664,12,12,12,14,2,Other states,"18,411 tonnes",3.4%
+2022,Melaka,Melaka,2001.0,4.633333333333334,12,12,13,11,-2,Other states,"2,001 tonnes",4.6%
+2022,Negeri Sembilan,Negeri Sembilan,599.0,4.783333333333333,12,12,14,10,-4,Other states,599 tonnes,4.8%
+2023,Perak,Perak,335943.0,4.783333333333333,12,12,1,5,4,High landing and lower inflation rank,"335,943 tonnes",4.8%
+2023,Sabah,Sabah,212787.0,4.1000000000000005,12,12,2,9,7,High landing and lower inflation rank,"212,787 tonnes",4.1%
+2023,Kedah,Kedah,141312.0,2.875,12,12,3,14,11,High landing and lower inflation rank,"141,312 tonnes",2.9%
+2023,Selangor,Selangor,120593.0,6.075,12,12,4,2,-2,High landing and high inflation,"120,593 tonnes",6.1%
+2023,Pahang,Pahang,116204.0,4.908333333333333,12,12,5,4,-1,Lower landing and high inflation rank,"116,204 tonnes",4.9%
+2023,Sarawak,Sarawak,94341.0,6.141666666666667,12,12,6,1,-5,Lower landing and high inflation rank,"94,341 tonnes",6.1%
+2023,Kelantan,Kelantan,60032.0,3.2083333333333335,12,12,7,13,6,Other states,"60,032 tonnes",3.2%
+2023,Johor,Johor,49824.0,4.358333333333333,12,24,8,8,0,Other states,"49,824 tonnes",4.4%
+2023,Terengganu,Terengganu,45701.0,3.5833333333333335,12,12,9,11,2,Other states,"45,701 tonnes",3.6%
+2023,Pulau Pinang,Penang,38227.0,5.05,12,12,10,3,-7,Lower landing and high inflation rank,"38,227 tonnes",5.0%
+2023,Perlis,Perlis,34063.0,3.5666666666666664,12,12,11,12,1,Other states,"34,063 tonnes",3.6%
+2023,W.P. Labuan,Labuan,18762.0,3.6333333333333333,12,12,12,10,-2,Other states,"18,762 tonnes",3.6%
+2023,Melaka,Melaka,1993.0,4.675,12,12,13,6,-7,Other states,"1,993 tonnes",4.7%
+2023,Negeri Sembilan,Negeri Sembilan,503.0,4.558333333333333,12,12,14,7,-7,Other states,503 tonnes,4.6%
