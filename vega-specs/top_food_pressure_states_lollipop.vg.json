@@ -132,7 +132,7 @@
         "color": {
           "condition": {
             "test": "datum.highlight_group == 'Highest state'",
-            "value": "#b33a1c"
+            "value": "#7b3294"
           },
           "value": "#c9c9c9"
         },
@@ -203,7 +203,7 @@
         "color": {
           "condition": {
             "test": "datum.highlight_group == 'Highest state'",
-            "value": "#b33a1c"
+            "value": "#7b3294"
           },
           "value": "#6f6f6f"
         },

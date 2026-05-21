@@ -1,8 +1,8 @@
 ﻿{
     "$schema":  "https://vega.github.io/schema/vega-lite/v5.json",
     "title":  {
-                  "text":  "Food Consumer Price Index trend over time",
-                  "subtitle":  "Selected Malaysian states, food and non-alcoholic beverages",
+                  "text":  "Urban versus rural food Consumer Price Index",
+                  "subtitle":  "Monthly food and beverages Consumer Price Index by household strata",
                   "anchor":  "start",
                   "fontSize":  20,
                   "subtitleFontSize":  12,
@@ -10,14 +10,14 @@
                   "offset":  20
               },
     "width":  780,
-    "height":  430,
+    "height":  420,
     "data":  {
-                 "url":  "data/cpi_food_selected_states_trend_clean.csv"
+                 "url":  "data/urban_rural_food_cpi_clean.csv"
              },
     "params":  [
                    {
                        "name":  "start_year",
-                       "value":  2020,
+                       "value":  2010,
                        "bind":  {
                                     "input":  "select",
                                     "options":  [
@@ -72,121 +72,31 @@
                ],
     "transform":  [
                       {
-                          "calculate":  "start_year \u003c= end_year ? start_year : end_year",
-                          "as":  "range_start_year"
-                      },
-                      {
-                          "calculate":  "start_year \u003c= end_year ? end_year : start_year",
-                          "as":  "range_end_year"
-                      },
-                      {
-                          "filter":  "datum.year \u003e= datum.range_start_year \u0026\u0026 datum.year \u003c= datum.range_end_year \u0026\u0026 datum.division == \u002701\u0027 \u0026\u0026 (datum.state_display == \u0027Selangor\u0027 || datum.state_display == \u0027Sabah\u0027 || datum.state_display == \u0027Kelantan\u0027 || datum.state_display == \u0027Johor\u0027 || datum.state_display == \u0027Sarawak\u0027)"
+                          "filter":  "datum.year \u003e= start_year \u0026\u0026 datum.year \u003c= end_year"
                       }
                   ],
     "layer":  [
                   {
                       "mark":  {
-                                   "type":  "point",
-                                   "filled":  true,
-                                   "size":  48,
-                                   "opacity":  0,
-                                   "tooltip":  true
-                               },
-                      "encoding":  {
-                                       "x":  {
-                                                 "field":  "date",
-                                                 "type":  "temporal",
-                                                 "timeUnit":  "yearmonth"
-                                             },
-                                       "y":  {
-                                                 "field":  "food_consumer_price_index",
-                                                 "type":  "quantitative"
-                                             },
-                                       "color":  {
-                                                     "field":  "state_display",
-                                                     "type":  "nominal",
-                                                     "legend":  null,
-                                                     "scale": {
-        "domain": ["Selangor", "Sabah", "Kelantan", "Johor", "Sarawak"],
-        "range": ["#412D15", "#F59E0B", "#3357ff", "#f333ff", "#A77F60"]
-    }
-                                                 },
-                                       "tooltip":  [
-                                                       {
-                                                           "field":  "state_display",
-                                                           "type":  "nominal",
-                                                           "title":  "State"
-                                                       },
-                                                       {
-                                                           "field":  "month",
-                                                           "type":  "nominal",
-                                                           "title":  "Month"
-                                                       },
-                                                       {
-                                                           "field":  "year",
-                                                           "type":  "ordinal",
-                                                           "title":  "Year"
-                                                       },
-                                                       {
-                                                           "field":  "division_name",
-                                                           "type":  "nominal",
-                                                           "title":  "Division"
-                                                       },
-                                                       {
-                                                           "field":  "food_consumer_price_index",
-                                                           "type":  "quantitative",
-                                                           "title":  "Food Consumer Price Index",
-                                                           "format":  ".1f"
-                                                       }
-                                                   ]
-                                   }
-                  },
-                  {
-                      "mark":  {
-                                   "type":  "rule",
-                                   "strokeDash":  [
-                                                      4,
-                                                      4
-                                                  ],
-                                   "strokeWidth":  1,
-                                   "color":  "#777777",
-                                   "opacity":  0.45
-                               },
-                      "transform":  [
-                                        {
-                                            "filter":  "datum.year == 2020 \u0026\u0026 datum.month_number == 1"
-                                        }
-                                    ],
-                      "encoding":  {
-                                       "x":  {
-                                                 "field":  "date",
-                                                 "type":  "temporal",
-                                                 "timeUnit":  "yearmonth"
-                                             }
-                                   }
-                  },
-                  {
-                      "mark":  {
                                    "type":  "line",
                                    "interpolate":  "monotone",
-                                   "strokeWidth":  2.4
+                                   "strokeWidth":  2.6
                                },
                       "encoding":  {
                                        "x":  {
                                                  "field":  "date",
                                                  "type":  "temporal",
-                                                 "timeUnit":  "yearmonth",
                                                  "title":  "Month",
                                                  "axis":  {
-                                                              "format":  "%b %Y",
-                                                              "labelAngle":  -45,
+                                                              "format":  "%Y",
+                                                              "labelAngle":  0,
                                                               "grid":  false
                                                           }
                                              },
                                        "y":  {
                                                  "field":  "food_consumer_price_index",
                                                  "type":  "quantitative",
-                                                 "title":  "Food Consumer Price Index",
+                                                 "title":  "Food and beverages Consumer Price Index",
                                                  "scale":  {
                                                                "zero":  false
                                                            },
@@ -195,15 +105,25 @@
                                                           }
                                              },
                                        "color":  {
-                                                     "field":  "state_display",
+                                                     "field":  "strata_display",
                                                      "type":  "nominal",
-                                                     "title":  "State"
+                                                     "title":  "Household strata",
+                                                     "scale":  {
+                                                                   "domain":  [
+                                                                                  "Urban households",
+                                                                                  "Rural households"
+                                                                              ],
+                                                                   "range":  [
+                                                                                 "#4c78a8",
+                                                                                 "#f58518"
+                                                                             ]
+                                                               }
                                                  },
                                        "tooltip":  [
                                                        {
-                                                           "field":  "state_display",
+                                                           "field":  "strata_display",
                                                            "type":  "nominal",
-                                                           "title":  "State"
+                                                           "title":  "Household strata"
                                                        },
                                                        {
                                                            "field":  "month",
@@ -223,7 +143,7 @@
                                                        {
                                                            "field":  "food_consumer_price_index",
                                                            "type":  "quantitative",
-                                                           "title":  "Food Consumer Price Index",
+                                                           "title":  "Food and beverages Consumer Price Index",
                                                            "format":  ".1f"
                                                        }
                                                    ]
@@ -240,14 +160,14 @@
                                                                   }
                                                               ],
                                             "groupby":  [
-                                                            "state_display"
+                                                            "strata_display"
                                                         ]
                                         },
                                         {
                                             "filter":  "datum.date_number == datum.latest_date_number"
                                         },
                                         {
-                                            "calculate":  "datum.state_display + \u0027  \u0027 + format(datum.food_consumer_price_index, \u0027.1f\u0027)",
+                                            "calculate":  "datum.strata_display + \u0027  \u0027 + format(datum.food_consumer_price_index, \u0027.1f\u0027)",
                                             "as":  "end_label"
                                         }
                                     ],
@@ -269,13 +189,46 @@
                                                  "type":  "quantitative"
                                              },
                                        "color":  {
-                                                     "field":  "state_display",
+                                                     "field":  "strata_display",
                                                      "type":  "nominal",
-                                                     "legend":  null
+                                                     "legend":  null,
+                                                     "scale":  {
+                                                                   "domain":  [
+                                                                                  "Urban households",
+                                                                                  "Rural households"
+                                                                              ],
+                                                                   "range":  [
+                                                                                 "#4c78a8",
+                                                                                 "#f58518"
+                                                                             ]
+                                                               }
                                                  },
                                        "text":  {
                                                     "field":  "end_label"
                                                 }
+                                   }
+                  },
+                  {
+                      "transform":  [
+                                        {
+                                            "filter":  "datum.year == 2020 \u0026\u0026 datum.month_number == 1"
+                                        }
+                                    ],
+                      "mark":  {
+                                   "type":  "rule",
+                                   "strokeDash":  [
+                                                      4,
+                                                      4
+                                                  ],
+                                   "strokeWidth":  1,
+                                   "color":  "#777777",
+                                   "opacity":  0.45
+                               },
+                      "encoding":  {
+                                       "x":  {
+                                                 "field":  "date",
+                                                 "type":  "temporal"
+                                             }
                                    }
                   }
               ],

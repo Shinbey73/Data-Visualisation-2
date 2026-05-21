@@ -30,6 +30,15 @@ document.addEventListener('DOMContentLoaded', function() {
     loadVisualization('vega-specs/malaysia_food_inflation_choropleth.vg.json', 'vis1');
     // Load the ranked lollipop chart for top food pressure states
     loadVisualization('js/top_food_pressure_states_lollipop.vg.json', 'vis2');
+    loadVisualization('js/state_food_inflation_bump_chart_show_all.vg.json', 'vis_bump');
+    // Load food item price small multiples
+    loadVisualization('js/food_item_price_small_multiples.vg.json', 'vis_food_item_small_multiples');
+    // Load food basket price index
+    loadVisualization('js/food_basket_price_index.vg.json', 'vis_food_basket_index');   
+    // Load urban versus rural food Consumer Price Index chart
+    loadVisualization('js/urban_rural_food_cpi.vg.json', 'vis_urban_rural_food_cpi');
+    // Load low-income household food pressure chart
+    loadVisualization('js/low_income_food_pressure.vg.json', 'vis_low_income_food_pressure');
     // Load the Food CPI trend chart
     loadVisualization('js/food_cpi_trend_selected_states.vg.json', 'vis3');
     // Load Chart 4 heatmap

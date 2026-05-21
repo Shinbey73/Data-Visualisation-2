@@ -1,202 +1,674 @@
-{
-  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "title": {
-    "text": "Food security pressure profile by state",
-    "subtitle": "Four indicators combined into one state profile strip. Higher bars mean higher relative exposure within the selected year.",
-    "anchor": "start",
-    "fontSize": 20,
-    "subtitleFontSize": 12,
-    "subtitleColor": "#555555"
-  },
-  "params": [
-    {
-      "name": "selected_year",
-      "value": 2022,
-      "bind": {
-        "input": "select",
-        "options": [2018, 2019, 2020, 2021, 2022],
-        "name": "Year: "
-      }
-    }
-  ],
-  "vconcat": [
-    {
-      "width": 900,
-      "height": 220,
-      "data": {"url": "data/food_security_pressure_profile_clean.csv"},
-      "transform": [
-        {"filter": "datum.year == selected_year"},
-        {"filter": "datum.indicator == 'Food inflation'"},
-        {"joinaggregate": [{"op": "max", "field": "overall_exposure_score", "as": "max_overall"}]},
-        {"calculate": "datum.overall_exposure_score == datum.max_overall ? 'Most exposed state' : 'Other states'", "as": "highlight_group"}
-      ],
-      "layer": [
-        {
-          "mark": {"type": "bar", "cornerRadiusEnd": 2, "opacity": 0.15, "color": "#bdbdbd"},
-          "encoding": {
-            "y": {"field": "state_display", "type": "nominal", "sort": {"field": "overall_exposure_score", "order": "descending"}, "title": null,
-              "axis": {"labelFontSize": 11, "labelLimit": 120}},
-            "x": {"datum": 0, "type": "quantitative", "scale": {"domain": [0, 100]}, "title": "Relative exposure score"},
-            "x2": {"datum": 100, "type": "quantitative"}
-          }
-        },
-        {
-          "mark": {"type": "bar", "cornerRadiusEnd": 2},
-          "encoding": {
-            "y": {"field": "state_display", "type": "nominal", "sort": {"field": "overall_exposure_score", "order": "descending"}, "title": null},
-            "x": {"datum": 0, "type": "quantitative", "scale": {"domain": [0, 100]}, "title": "Relative exposure score"},
-            "x2": {"field": "exposure_score", "type": "quantitative"},
-            "color": {"type": "nominal", "condition": {"test": "datum.highlight_group == 'Most exposed state'", "value": "#b33a1c"}, "value": "#4c78a8"},
-            "tooltip": [
-              {"field": "state_display", "type": "nominal", "title": "State"},
-              {"field": "year", "type": "ordinal", "title": "Year"},
-              {"field": "indicator", "type": "nominal", "title": "Indicator"},
-              {"field": "indicator_value_label", "type": "nominal", "title": "Value"},
-              {"field": "exposure_score", "type": "quantitative", "title": "Relative exposure score", "format": ".0f"},
-              {"field": "indicator_meaning", "type": "nominal", "title": "Interpretation"},
-              {"field": "overall_exposure_score", "type": "quantitative", "title": "Overall average exposure score", "format": ".0f"}
-            ]
-          }
-        }
-      ],
-      "title": {"text": "Food inflation", "fontSize": 12}
-    },
-    {
-      "width": 900,
-      "height": 220,
-      "data": {"url": "data/food_security_pressure_profile_clean.csv"},
-      "transform": [
-        {"filter": "datum.year == selected_year"},
-        {"filter": "datum.indicator == 'Crop production per 1,000 residents'"},
-        {"joinaggregate": [{"op": "max", "field": "overall_exposure_score", "as": "max_overall"}]},
-        {"calculate": "datum.overall_exposure_score == datum.max_overall ? 'Most exposed state' : 'Other states'", "as": "highlight_group"}
-      ],
-      "layer": [
-        {
-          "mark": {"type": "bar", "cornerRadiusEnd": 2, "opacity": 0.15, "color": "#bdbdbd"},
-          "encoding": {
-            "y": {"field": "state_display", "type": "nominal", "sort": {"field": "overall_exposure_score", "order": "descending"}, "title": null,
-              "axis": {"labelFontSize": 11, "labelLimit": 220}},
-            "x": {"datum": 0, "type": "quantitative", "scale": {"domain": [0, 100]}, "title": null},
-            "x2": {"datum": 100, "type": "quantitative"}
-          }
-        },
-        {
-          "mark": {"type": "bar", "cornerRadiusEnd": 2},
-          "encoding": {
-            "y": {"field": "state_display", "type": "nominal", "sort": {"field": "overall_exposure_score", "order": "descending"}, "title": null, "axis": {"labelFontSize": 11, "labelLimit": 220}},
-            "x": {"datum": 0, "type": "quantitative", "scale": {"domain": [0, 100]}, "title": null},
-            "x2": {"field": "exposure_score", "type": "quantitative"},
-            "color": {"type": "nominal", "condition": {"test": "datum.highlight_group == 'Most exposed state'", "value": "#b33a1c"}, "value": "#54a24b"},
-            "tooltip": [
-              {"field": "state_display", "type": "nominal", "title": "State"},
-              {"field": "year", "type": "ordinal", "title": "Year"},
-              {"field": "indicator", "type": "nominal", "title": "Indicator"},
-              {"field": "indicator_value_label", "type": "nominal", "title": "Value"},
-              {"field": "food_crop_production_tonnes", "type": "quantitative", "title": "Total food crop production (tonnes)", "format": ",.0f"},
-              {"field": "food_crop_planted_area_hectares", "type": "quantitative", "title": "Food crop planted area (hectares)", "format": ",.0f"},
-              {"field": "exposure_score", "type": "quantitative", "title": "Relative exposure score", "format": ".0f"},
-              {"field": "indicator_meaning", "type": "nominal", "title": "Interpretation"}
-            ]
-          }
-        }
-      ],
-      "title": {"text": "Crop capacity", "fontSize": 12}
-    },
-    {
-      "width": 900,
-      "height": 220,
-      "data": {"url": "data/food_security_pressure_profile_clean.csv"},
-      "transform": [
-        {"filter": "datum.year == selected_year"},
-        {"filter": "datum.indicator == 'Fish landings per 1,000 residents'"},
-        {"joinaggregate": [{"op": "max", "field": "overall_exposure_score", "as": "max_overall"}]},
-        {"calculate": "datum.overall_exposure_score == datum.max_overall ? 'Most exposed state' : 'Other states'", "as": "highlight_group"}
-      ],
-      "layer": [
-        {
-          "mark": {"type": "bar", "cornerRadiusEnd": 2, "opacity": 0.15, "color": "#bdbdbd"},
-          "encoding": {
-            "y": {"field": "state_display", "type": "nominal", "sort": {"field": "overall_exposure_score", "order": "descending"}, "title": null,
-              "axis": {"labelFontSize": 11, "labelLimit": 220}},
-            "x": {"datum": 0, "type": "quantitative", "scale": {"domain": [0, 100]}, "title": null},
-            "x2": {"datum": 100, "type": "quantitative"}
-          }
-        },
-        {
-          "mark": {"type": "bar", "cornerRadiusEnd": 2},
-          "encoding": {
-            "y": {"field": "state_display", "type": "nominal", "sort": {"field": "overall_exposure_score", "order": "descending"}, "title": null, "axis": {"labelFontSize": 11, "labelLimit": 220}},
-            "x": {"datum": 0, "type": "quantitative", "scale": {"domain": [0, 100]}, "title": null},
-            "x2": {"field": "exposure_score", "type": "quantitative"},
-            "color": {"type": "nominal", "condition": {"test": "datum.highlight_group == 'Most exposed state'", "value": "#b33a1c"}, "value": "#72b7b2"},
-            "tooltip": [
-              {"field": "state_display", "type": "nominal", "title": "State"},
-              {"field": "year", "type": "ordinal", "title": "Year"},
-              {"field": "indicator", "type": "nominal", "title": "Indicator"},
-              {"field": "indicator_value_label", "type": "nominal", "title": "Value"},
-              {"field": "fish_landings_tonnes", "type": "quantitative", "title": "Total fish landings (tonnes)", "format": ",.0f"},
-              {"field": "exposure_score", "type": "quantitative", "title": "Relative exposure score", "format": ".0f"},
-              {"field": "indicator_meaning", "type": "nominal", "title": "Interpretation"}
-            ]
-          }
-        }
-      ],
-      "title": {"text": "Fish supply", "fontSize": 12}
-    },
-    {
-      "width": 900,
-      "height": 220,
-      "data": {"url": "data/food_security_pressure_profile_clean.csv"},
-      "transform": [
-        {"filter": "datum.year == selected_year"},
-        {"filter": "datum.indicator == 'Population'"},
-        {"joinaggregate": [{"op": "max", "field": "overall_exposure_score", "as": "max_overall"}]},
-        {"calculate": "datum.overall_exposure_score == datum.max_overall ? 'Most exposed state' : 'Other states'", "as": "highlight_group"}
-      ],
-      "layer": [
-        {
-          "mark": {"type": "bar", "cornerRadiusEnd": 2, "opacity": 0.15, "color": "#bdbdbd"},
-          "encoding": {
-            "y": {"field": "state_display", "type": "nominal", "sort": {"field": "overall_exposure_score", "order": "descending"}, "title": null,
-              "axis": {"labelFontSize": 11, "labelLimit": 220}},
-            "x": {"datum": 0, "type": "quantitative", "scale": {"domain": [0, 100]}, "title": null},
-            "x2": {"datum": 100, "type": "quantitative"}
-          }
-        },
-        {
-          "mark": {"type": "bar", "cornerRadiusEnd": 2},
-          "encoding": {
-            "y": {"field": "state_display", "type": "nominal", "sort": {"field": "overall_exposure_score", "order": "descending"}, "title": null, "axis": {"labelFontSize": 11, "labelLimit": 220}},
-            "x": {"datum": 0, "type": "quantitative", "scale": {"domain": [0, 100]}, "title": null},
-            "x2": {"field": "exposure_score", "type": "quantitative"},
-            "color": {"type": "nominal", "condition": {"test": "datum.highlight_group == 'Most exposed state'", "value": "#b33a1c"}, "value": "#eeca3b"},
-            "tooltip": [
-              {"field": "state_display", "type": "nominal", "title": "State"},
-              {"field": "year", "type": "ordinal", "title": "Year"},
-              {"field": "indicator", "type": "nominal", "title": "Indicator"},
-              {"field": "indicator_value_label", "type": "nominal", "title": "Value"},
-              {"field": "exposure_score", "type": "quantitative", "title": "Relative exposure score", "format": ".0f"},
-              {"field": "indicator_meaning", "type": "nominal", "title": "Interpretation"},
-              {"field": "overall_exposure_score", "type": "quantitative", "title": "Overall average exposure score", "format": ".0f"}
-            ]
-          }
-        }
-      ],
-      "title": {"text": "Demand pressure", "fontSize": 12}
-    }
-  ],
-  "resolve": {"scale": {"y": "shared"}},
-  "config": {
-    "view": {"stroke": null},
-    "font": "Inter, Arial, sans-serif",
-    "axis": {
-      "labelFont": "Inter, Arial, sans-serif",
-      "titleFont": "Inter, Arial, sans-serif",
-      "grid": false,
-      "tickColor": "#cccccc",
-      "domainColor": "#cccccc"
-    },
-    "concat": {"spacing": 18}
-  }
+﻿{
+    "$schema":  "https://vega.github.io/schema/vega-lite/v5.json",
+    "title":  {
+                  "text":  "Food security pressure profile by state",
+                  "subtitle":  "Four indicators combined into one state profile strip. Higher bars mean higher relative exposure within the selected year.",
+                  "anchor":  "start",
+                  "fontSize":  20,
+                  "subtitleFontSize":  12,
+                  "subtitleColor":  "#555555",
+                  "offset":  20
+              },
+    "params":  [
+                   {
+                       "name":  "selected_year",
+                       "value":  2022,
+                       "bind":  {
+                                    "input":  "select",
+                                    "options":  [
+                                                    2018,
+                                                    2019,
+                                                    2020,
+                                                    2021,
+                                                    2022
+                                                ],
+                                    "name":  "Year: "
+                                }
+                   }
+               ],
+    "vconcat":  [
+                    {
+                        "width":  900,
+                        "height":  220,
+                        "data":  {
+                                     "url":  "data/food_security_pressure_profile_clean.csv"
+                                 },
+                        "transform":  [
+                                          {
+                                              "filter":  "datum.year == selected_year"
+                                          },
+                                          {
+                                              "filter":  "datum.indicator == \u0027Food inflation\u0027"
+                                          },
+                                          {
+                                              "joinaggregate":  [
+                                                                    {
+                                                                        "op":  "max",
+                                                                        "field":  "overall_exposure_score",
+                                                                        "as":  "max_overall"
+                                                                    }
+                                                                ]
+                                          },
+                                          {
+                                              "calculate":  "datum.overall_exposure_score == datum.max_overall ? \u0027Most exposed state\u0027 : \u0027Other states\u0027",
+                                              "as":  "highlight_group"
+                                          }
+                                      ],
+                        "layer":  [
+                                      {
+                                          "mark":  {
+                                                       "type":  "bar",
+                                                       "cornerRadiusEnd":  2,
+                                                       "opacity":  0.15,
+                                                       "color":  "#bdbdbd"
+                                                   },
+                                          "encoding":  {
+                                                           "y":  {
+                                                                     "field":  "state_display",
+                                                                     "type":  "nominal",
+                                                                     "sort":  {
+                                                                                  "field":  "overall_exposure_score",
+                                                                                  "order":  "descending"
+                                                                              },
+                                                                     "title":  null,
+                                                                     "axis":  {
+                                                                                  "labelFontSize":  11,
+                                                                                  "labelLimit":  120
+                                                                              }
+                                                                 },
+                                                           "x":  {
+                                                                     "datum":  0,
+                                                                     "type":  "quantitative",
+                                                                     "scale":  {
+                                                                                   "domain":  [
+                                                                                                  0,
+                                                                                                  100
+                                                                                              ]
+                                                                               },
+                                                                     "title":  "Relative exposure score"
+                                                                 },
+                                                           "x2":  {
+                                                                      "datum":  100,
+                                                                      "type":  "quantitative"
+                                                                  }
+                                                       }
+                                      },
+                                      {
+                                          "mark":  {
+                                                       "type":  "bar",
+                                                       "cornerRadiusEnd":  2
+                                                   },
+                                          "encoding":  {
+                                                           "y":  {
+                                                                     "field":  "state_display",
+                                                                     "type":  "nominal",
+                                                                     "sort":  {
+                                                                                  "field":  "overall_exposure_score",
+                                                                                  "order":  "descending"
+                                                                              },
+                                                                     "title":  null
+                                                                 },
+                                                           "x":  {
+                                                                     "datum":  0,
+                                                                     "type":  "quantitative",
+                                                                     "scale":  {
+                                                                                   "domain":  [
+                                                                                                  0,
+                                                                                                  100
+                                                                                              ]
+                                                                               },
+                                                                     "title":  "Relative exposure score"
+                                                                 },
+                                                           "x2":  {
+                                                                      "field":  "exposure_score",
+                                                                      "type":  "quantitative"
+                                                                  },
+                                                           "color":  {
+                                                                         "type":  "nominal",
+                                                                         "condition":  {
+                                                                                           "test":  "datum.highlight_group == \u0027Most exposed state\u0027",
+                                                                                           "value":  "#7b3294"
+                                                                                       },
+                                                                         "value":  "#4c78a8"
+                                                                     },
+                                                           "tooltip":  [
+                                                                           {
+                                                                               "field":  "state_display",
+                                                                               "type":  "nominal",
+                                                                               "title":  "State"
+                                                                           },
+                                                                           {
+                                                                               "field":  "year",
+                                                                               "type":  "ordinal",
+                                                                               "title":  "Year"
+                                                                           },
+                                                                           {
+                                                                               "field":  "indicator",
+                                                                               "type":  "nominal",
+                                                                               "title":  "Indicator"
+                                                                           },
+                                                                           {
+                                                                               "field":  "indicator_value_label",
+                                                                               "type":  "nominal",
+                                                                               "title":  "Value"
+                                                                           },
+                                                                           {
+                                                                               "field":  "exposure_score",
+                                                                               "type":  "quantitative",
+                                                                               "title":  "Relative exposure score",
+                                                                               "format":  ".0f"
+                                                                           },
+                                                                           {
+                                                                               "field":  "indicator_meaning",
+                                                                               "type":  "nominal",
+                                                                               "title":  "Interpretation"
+                                                                           },
+                                                                           {
+                                                                               "field":  "overall_exposure_score",
+                                                                               "type":  "quantitative",
+                                                                               "title":  "Overall average exposure score",
+                                                                               "format":  ".0f"
+                                                                           }
+                                                                       ]
+                                                       }
+                                      }
+                                  ],
+                        "title":  {
+                                      "text":  "Food inflation",
+                                      "fontSize":  12
+                                  }
+                    },
+                    {
+                        "width":  900,
+                        "height":  220,
+                        "data":  {
+                                     "url":  "data/food_security_pressure_profile_clean.csv"
+                                 },
+                        "transform":  [
+                                          {
+                                              "filter":  "datum.year == selected_year"
+                                          },
+                                          {
+                                              "filter":  "datum.indicator == \u0027Crop production per 1,000 residents\u0027"
+                                          },
+                                          {
+                                              "joinaggregate":  [
+                                                                    {
+                                                                        "op":  "max",
+                                                                        "field":  "overall_exposure_score",
+                                                                        "as":  "max_overall"
+                                                                    }
+                                                                ]
+                                          },
+                                          {
+                                              "calculate":  "datum.overall_exposure_score == datum.max_overall ? \u0027Most exposed state\u0027 : \u0027Other states\u0027",
+                                              "as":  "highlight_group"
+                                          }
+                                      ],
+                        "layer":  [
+                                      {
+                                          "mark":  {
+                                                       "type":  "bar",
+                                                       "cornerRadiusEnd":  2,
+                                                       "opacity":  0.15,
+                                                       "color":  "#bdbdbd"
+                                                   },
+                                          "encoding":  {
+                                                           "y":  {
+                                                                     "field":  "state_display",
+                                                                     "type":  "nominal",
+                                                                     "sort":  {
+                                                                                  "field":  "overall_exposure_score",
+                                                                                  "order":  "descending"
+                                                                              },
+                                                                     "title":  null,
+                                                                     "axis":  {
+                                                                                  "labelFontSize":  11,
+                                                                                  "labelLimit":  220
+                                                                              }
+                                                                 },
+                                                           "x":  {
+                                                                     "datum":  0,
+                                                                     "type":  "quantitative",
+                                                                     "scale":  {
+                                                                                   "domain":  [
+                                                                                                  0,
+                                                                                                  100
+                                                                                              ]
+                                                                               },
+                                                                     "title":  null
+                                                                 },
+                                                           "x2":  {
+                                                                      "datum":  100,
+                                                                      "type":  "quantitative"
+                                                                  }
+                                                       }
+                                      },
+                                      {
+                                          "mark":  {
+                                                       "type":  "bar",
+                                                       "cornerRadiusEnd":  2
+                                                   },
+                                          "encoding":  {
+                                                           "y":  {
+                                                                     "field":  "state_display",
+                                                                     "type":  "nominal",
+                                                                     "sort":  {
+                                                                                  "field":  "overall_exposure_score",
+                                                                                  "order":  "descending"
+                                                                              },
+                                                                     "title":  null,
+                                                                     "axis":  {
+                                                                                  "labelFontSize":  11,
+                                                                                  "labelLimit":  220
+                                                                              }
+                                                                 },
+                                                           "x":  {
+                                                                     "datum":  0,
+                                                                     "type":  "quantitative",
+                                                                     "scale":  {
+                                                                                   "domain":  [
+                                                                                                  0,
+                                                                                                  100
+                                                                                              ]
+                                                                               },
+                                                                     "title":  null
+                                                                 },
+                                                           "x2":  {
+                                                                      "field":  "exposure_score",
+                                                                      "type":  "quantitative"
+                                                                  },
+                                                           "color":  {
+                                                                         "type":  "nominal",
+                                                                         "condition":  {
+                                                                                           "test":  "datum.highlight_group == \u0027Most exposed state\u0027",
+                                                                                           "value":  "#7b3294"
+                                                                                       },
+                                                                         "value":  "#f58518"
+                                                                     },
+                                                           "tooltip":  [
+                                                                           {
+                                                                               "field":  "state_display",
+                                                                               "type":  "nominal",
+                                                                               "title":  "State"
+                                                                           },
+                                                                           {
+                                                                               "field":  "year",
+                                                                               "type":  "ordinal",
+                                                                               "title":  "Year"
+                                                                           },
+                                                                           {
+                                                                               "field":  "indicator",
+                                                                               "type":  "nominal",
+                                                                               "title":  "Indicator"
+                                                                           },
+                                                                           {
+                                                                               "field":  "indicator_value_label",
+                                                                               "type":  "nominal",
+                                                                               "title":  "Value"
+                                                                           },
+                                                                           {
+                                                                               "field":  "food_crop_production_tonnes",
+                                                                               "type":  "quantitative",
+                                                                               "title":  "Total food crop production (tonnes)",
+                                                                               "format":  ",.0f"
+                                                                           },
+                                                                           {
+                                                                               "field":  "food_crop_planted_area_hectares",
+                                                                               "type":  "quantitative",
+                                                                               "title":  "Food crop planted area (hectares)",
+                                                                               "format":  ",.0f"
+                                                                           },
+                                                                           {
+                                                                               "field":  "exposure_score",
+                                                                               "type":  "quantitative",
+                                                                               "title":  "Relative exposure score",
+                                                                               "format":  ".0f"
+                                                                           },
+                                                                           {
+                                                                               "field":  "indicator_meaning",
+                                                                               "type":  "nominal",
+                                                                               "title":  "Interpretation"
+                                                                           }
+                                                                       ]
+                                                       }
+                                      }
+                                  ],
+                        "title":  {
+                                      "text":  "Crop capacity",
+                                      "fontSize":  12
+                                  }
+                    },
+                    {
+                        "width":  900,
+                        "height":  220,
+                        "data":  {
+                                     "url":  "data/food_security_pressure_profile_clean.csv"
+                                 },
+                        "transform":  [
+                                          {
+                                              "filter":  "datum.year == selected_year"
+                                          },
+                                          {
+                                              "filter":  "datum.indicator == \u0027Fish landings per 1,000 residents\u0027"
+                                          },
+                                          {
+                                              "joinaggregate":  [
+                                                                    {
+                                                                        "op":  "max",
+                                                                        "field":  "overall_exposure_score",
+                                                                        "as":  "max_overall"
+                                                                    }
+                                                                ]
+                                          },
+                                          {
+                                              "calculate":  "datum.overall_exposure_score == datum.max_overall ? \u0027Most exposed state\u0027 : \u0027Other states\u0027",
+                                              "as":  "highlight_group"
+                                          }
+                                      ],
+                        "layer":  [
+                                      {
+                                          "mark":  {
+                                                       "type":  "bar",
+                                                       "cornerRadiusEnd":  2,
+                                                       "opacity":  0.15,
+                                                       "color":  "#bdbdbd"
+                                                   },
+                                          "encoding":  {
+                                                           "y":  {
+                                                                     "field":  "state_display",
+                                                                     "type":  "nominal",
+                                                                     "sort":  {
+                                                                                  "field":  "overall_exposure_score",
+                                                                                  "order":  "descending"
+                                                                              },
+                                                                     "title":  null,
+                                                                     "axis":  {
+                                                                                  "labelFontSize":  11,
+                                                                                  "labelLimit":  220
+                                                                              }
+                                                                 },
+                                                           "x":  {
+                                                                     "datum":  0,
+                                                                     "type":  "quantitative",
+                                                                     "scale":  {
+                                                                                   "domain":  [
+                                                                                                  0,
+                                                                                                  100
+                                                                                              ]
+                                                                               },
+                                                                     "title":  null
+                                                                 },
+                                                           "x2":  {
+                                                                      "datum":  100,
+                                                                      "type":  "quantitative"
+                                                                  }
+                                                       }
+                                      },
+                                      {
+                                          "mark":  {
+                                                       "type":  "bar",
+                                                       "cornerRadiusEnd":  2
+                                                   },
+                                          "encoding":  {
+                                                           "y":  {
+                                                                     "field":  "state_display",
+                                                                     "type":  "nominal",
+                                                                     "sort":  {
+                                                                                  "field":  "overall_exposure_score",
+                                                                                  "order":  "descending"
+                                                                              },
+                                                                     "title":  null,
+                                                                     "axis":  {
+                                                                                  "labelFontSize":  11,
+                                                                                  "labelLimit":  220
+                                                                              }
+                                                                 },
+                                                           "x":  {
+                                                                     "datum":  0,
+                                                                     "type":  "quantitative",
+                                                                     "scale":  {
+                                                                                   "domain":  [
+                                                                                                  0,
+                                                                                                  100
+                                                                                              ]
+                                                                               },
+                                                                     "title":  null
+                                                                 },
+                                                           "x2":  {
+                                                                      "field":  "exposure_score",
+                                                                      "type":  "quantitative"
+                                                                  },
+                                                           "color":  {
+                                                                         "type":  "nominal",
+                                                                         "condition":  {
+                                                                                           "test":  "datum.highlight_group == \u0027Most exposed state\u0027",
+                                                                                           "value":  "#7b3294"
+                                                                                       },
+                                                                         "value":  "#72b7b2"
+                                                                     },
+                                                           "tooltip":  [
+                                                                           {
+                                                                               "field":  "state_display",
+                                                                               "type":  "nominal",
+                                                                               "title":  "State"
+                                                                           },
+                                                                           {
+                                                                               "field":  "year",
+                                                                               "type":  "ordinal",
+                                                                               "title":  "Year"
+                                                                           },
+                                                                           {
+                                                                               "field":  "indicator",
+                                                                               "type":  "nominal",
+                                                                               "title":  "Indicator"
+                                                                           },
+                                                                           {
+                                                                               "field":  "indicator_value_label",
+                                                                               "type":  "nominal",
+                                                                               "title":  "Value"
+                                                                           },
+                                                                           {
+                                                                               "field":  "fish_landings_tonnes",
+                                                                               "type":  "quantitative",
+                                                                               "title":  "Total fish landings (tonnes)",
+                                                                               "format":  ",.0f"
+                                                                           },
+                                                                           {
+                                                                               "field":  "exposure_score",
+                                                                               "type":  "quantitative",
+                                                                               "title":  "Relative exposure score",
+                                                                               "format":  ".0f"
+                                                                           },
+                                                                           {
+                                                                               "field":  "indicator_meaning",
+                                                                               "type":  "nominal",
+                                                                               "title":  "Interpretation"
+                                                                           }
+                                                                       ]
+                                                       }
+                                      }
+                                  ],
+                        "title":  {
+                                      "text":  "Fish supply",
+                                      "fontSize":  12
+                                  }
+                    },
+                    {
+                        "width":  900,
+                        "height":  220,
+                        "data":  {
+                                     "url":  "data/food_security_pressure_profile_clean.csv"
+                                 },
+                        "transform":  [
+                                          {
+                                              "filter":  "datum.year == selected_year"
+                                          },
+                                          {
+                                              "filter":  "datum.indicator == \u0027Population\u0027"
+                                          },
+                                          {
+                                              "joinaggregate":  [
+                                                                    {
+                                                                        "op":  "max",
+                                                                        "field":  "overall_exposure_score",
+                                                                        "as":  "max_overall"
+                                                                    }
+                                                                ]
+                                          },
+                                          {
+                                              "calculate":  "datum.overall_exposure_score == datum.max_overall ? \u0027Most exposed state\u0027 : \u0027Other states\u0027",
+                                              "as":  "highlight_group"
+                                          }
+                                      ],
+                        "layer":  [
+                                      {
+                                          "mark":  {
+                                                       "type":  "bar",
+                                                       "cornerRadiusEnd":  2,
+                                                       "opacity":  0.15,
+                                                       "color":  "#bdbdbd"
+                                                   },
+                                          "encoding":  {
+                                                           "y":  {
+                                                                     "field":  "state_display",
+                                                                     "type":  "nominal",
+                                                                     "sort":  {
+                                                                                  "field":  "overall_exposure_score",
+                                                                                  "order":  "descending"
+                                                                              },
+                                                                     "title":  null,
+                                                                     "axis":  {
+                                                                                  "labelFontSize":  11,
+                                                                                  "labelLimit":  220
+                                                                              }
+                                                                 },
+                                                           "x":  {
+                                                                     "datum":  0,
+                                                                     "type":  "quantitative",
+                                                                     "scale":  {
+                                                                                   "domain":  [
+                                                                                                  0,
+                                                                                                  100
+                                                                                              ]
+                                                                               },
+                                                                     "title":  null
+                                                                 },
+                                                           "x2":  {
+                                                                      "datum":  100,
+                                                                      "type":  "quantitative"
+                                                                  }
+                                                       }
+                                      },
+                                      {
+                                          "mark":  {
+                                                       "type":  "bar",
+                                                       "cornerRadiusEnd":  2
+                                                   },
+                                          "encoding":  {
+                                                           "y":  {
+                                                                     "field":  "state_display",
+                                                                     "type":  "nominal",
+                                                                     "sort":  {
+                                                                                  "field":  "overall_exposure_score",
+                                                                                  "order":  "descending"
+                                                                              },
+                                                                     "title":  null,
+                                                                     "axis":  {
+                                                                                  "labelFontSize":  11,
+                                                                                  "labelLimit":  220
+                                                                              }
+                                                                 },
+                                                           "x":  {
+                                                                     "datum":  0,
+                                                                     "type":  "quantitative",
+                                                                     "scale":  {
+                                                                                   "domain":  [
+                                                                                                  0,
+                                                                                                  100
+                                                                                              ]
+                                                                               },
+                                                                     "title":  null
+                                                                 },
+                                                           "x2":  {
+                                                                      "field":  "exposure_score",
+                                                                      "type":  "quantitative"
+                                                                  },
+                                                           "color":  {
+                                                                         "type":  "nominal",
+                                                                         "condition":  {
+                                                                                           "test":  "datum.highlight_group == \u0027Most exposed state\u0027",
+                                                                                           "value":  "#7b3294"
+                                                                                       },
+                                                                         "value":  "#eeca3b"
+                                                                     },
+                                                           "tooltip":  [
+                                                                           {
+                                                                               "field":  "state_display",
+                                                                               "type":  "nominal",
+                                                                               "title":  "State"
+                                                                           },
+                                                                           {
+                                                                               "field":  "year",
+                                                                               "type":  "ordinal",
+                                                                               "title":  "Year"
+                                                                           },
+                                                                           {
+                                                                               "field":  "indicator",
+                                                                               "type":  "nominal",
+                                                                               "title":  "Indicator"
+                                                                           },
+                                                                           {
+                                                                               "field":  "indicator_value_label",
+                                                                               "type":  "nominal",
+                                                                               "title":  "Value"
+                                                                           },
+                                                                           {
+                                                                               "field":  "exposure_score",
+                                                                               "type":  "quantitative",
+                                                                               "title":  "Relative exposure score",
+                                                                               "format":  ".0f"
+                                                                           },
+                                                                           {
+                                                                               "field":  "indicator_meaning",
+                                                                               "type":  "nominal",
+                                                                               "title":  "Interpretation"
+                                                                           },
+                                                                           {
+                                                                               "field":  "overall_exposure_score",
+                                                                               "type":  "quantitative",
+                                                                               "title":  "Overall average exposure score",
+                                                                               "format":  ".0f"
+                                                                           }
+                                                                       ]
+                                                       }
+                                      }
+                                  ],
+                        "title":  {
+                                      "text":  "Demand pressure",
+                                      "fontSize":  12
+                                  }
+                    }
+                ],
+    "resolve":  {
+                    "scale":  {
+                                  "y":  "shared"
+                              }
+                },
+    "config":  {
+                   "view":  {
+                                "stroke":  null
+                            },
+                   "font":  "Inter, Arial, sans-serif",
+                   "axis":  {
+                                "labelFont":  "Inter, Arial, sans-serif",
+                                "titleFont":  "Inter, Arial, sans-serif",
+                                "grid":  false,
+                                "tickColor":  "#cccccc",
+                                "domainColor":  "#cccccc"
+                            },
+                   "concat":  {
+                                  "spacing":  18
+                              }
+               }
 }

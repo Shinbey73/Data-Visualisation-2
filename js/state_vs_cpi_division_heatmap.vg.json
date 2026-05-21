@@ -1,137 +1,209 @@
-{
-  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "title": {
-    "text": "State versus food-related price pressure heatmap",
-    "subtitle": "Year-on-year CPI inflation by state and main division",
-    "anchor": "start",
-    "fontSize": 20,
-    "subtitleFontSize": 12,
-    "subtitleColor": "#555555"
-  },
-  "width": "container",
-  "autosize": {
-    "type": "fit-x",
-    "contains": "padding"
-  },
-  "height": 560,
-  "data": {
-    "url": "data/cpi_state_division_heatmap_clean.csv"
-  },
-  "params": [
-    {
-      "name": "selected_year",
-      "value": 2026,
-      "bind": {
-        "input": "select",
-        "options": [2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026],
-        "name": "Year: "
-      }
-    },
-    {
-      "name": "selected_month",
-      "value": "March",
-      "bind": {
-        "input": "select",
-        "options": ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
-        "name": "Month: "
-      }
-    },
-    {
-      "name": "division_view",
-      "value": "Food-related pressure channels",
-      "bind": {
-        "input": "select",
-        "options": ["Food-related pressure channels", "All main divisions"],
-        "name": "Division view: "
-      }
-    }
-  ],
-  "transform": [
-    {
-      "filter": "datum.year == selected_year && datum.month == selected_month"
-    },
-    {
-      "filter": "division_view == 'All main divisions' ? true : datum.division_scope == division_view"
-    },
-    {
-      "joinaggregate": [
-        {
-          "op": "mean",
-          "field": "inflation_yoy",
-          "as": "average_state_inflation"
-        }
-      ],
-      "groupby": ["state_display"]
-    }
-  ],
-  "mark": {
-    "type": "rect",
-    "stroke": "#ffffff",
-    "strokeWidth": 0.8
-  },
-  "encoding": {
-    "x": {
-      "field": "division_label",
-      "type": "nominal",
-      "title": "Consumer Price Index main division",
-      "sort": {
-        "field": "division_order",
-        "order": "ascending"
-      },
-      "axis": {
-        "labelAngle": -28,
-        "labelLimit": 260,
-        "labelFontSize": 10
-      }
-    },
-    "y": {
-      "field": "state_display",
-      "type": "nominal",
-      "title": "State",
-      "sort": {
-        "field": "average_state_inflation",
-        "order": "descending"
-      }
-    },
-    "color": {
-      "field": "inflation_yoy",
-      "type": "quantitative",
-      "title": "Year-on-year inflation (%)",
-      "scale": {
-        "domain": [-5, 0, 10],
-        "range": ["#2c7bb6", "#f7f7f7", "#b33a1c"],
-        "clamp": true
-      },
-      "legend": {
-        "gradientLength": 260,
-        "orient": "bottom",
-        "direction": "horizontal"
-      }
-    },
-    "tooltip": [
-      { "field": "state", "type": "nominal", "title": "State" },
-      { "field": "division_name", "type": "nominal", "title": "Division" },
-      { "field": "year", "type": "ordinal", "title": "Year" },
-      { "field": "month", "type": "nominal", "title": "Month" },
-      { "field": "inflation_yoy", "type": "quantitative", "title": "YoY inflation (%)", "format": ".1f" },
-      { "field": "inflation_mom", "type": "quantitative", "title": "MoM inflation (%)", "format": ".1f" }
-    ]
-  },
-  "config": {
-    "view": { "stroke": null },
-    "font": "Inter, Arial, sans-serif",
-    "axis": {
-      "labelFont": "Inter, Arial, sans-serif",
-      "titleFont": "Inter, Arial, sans-serif",
-      "labelFontSize": 11,
-      "titleFontSize": 12,
-      "grid": false
-    },
-    "legend": {
-      "titleFont": "Inter, Arial, sans-serif",
-      "labelFont": "Inter, Arial, sans-serif",
-      "titleFontSize": 12,
-      "labelFontSize": 11
-    }
-  }
+﻿{
+    "$schema":  "https://vega.github.io/schema/vega-lite/v5.json",
+    "title":  {
+                  "text":  "State versus food-related price pressure heatmap",
+                  "subtitle":  "Year-on-year CPI inflation by state and main division",
+                  "anchor":  "start",
+                  "fontSize":  20,
+                  "subtitleFontSize":  12,
+                  "subtitleColor":  "#555555",
+                  "offset":  20
+              },
+    "width":  "container",
+    "autosize":  {
+                     "type":  "fit-x",
+                     "contains":  "padding"
+                 },
+    "height":  560,
+    "data":  {
+                 "url":  "data/cpi_state_division_heatmap_clean.csv"
+             },
+    "params":  [
+                   {
+                       "name":  "selected_year",
+                       "value":  2026,
+                       "bind":  {
+                                    "input":  "select",
+                                    "options":  [
+                                                    2011,
+                                                    2012,
+                                                    2013,
+                                                    2014,
+                                                    2015,
+                                                    2016,
+                                                    2017,
+                                                    2018,
+                                                    2019,
+                                                    2020,
+                                                    2021,
+                                                    2022,
+                                                    2023,
+                                                    2024,
+                                                    2025,
+                                                    2026
+                                                ],
+                                    "name":  "Year: "
+                                }
+                   },
+                   {
+                       "name":  "selected_month",
+                       "value":  "March",
+                       "bind":  {
+                                    "input":  "select",
+                                    "options":  [
+                                                    "January",
+                                                    "February",
+                                                    "March",
+                                                    "April",
+                                                    "May",
+                                                    "June",
+                                                    "July",
+                                                    "August",
+                                                    "September",
+                                                    "October",
+                                                    "November",
+                                                    "December"
+                                                ],
+                                    "name":  "Month: "
+                                }
+                   },
+                   {
+                       "name":  "division_view",
+                       "value":  "Food-related pressure channels",
+                       "bind":  {
+                                    "input":  "select",
+                                    "options":  [
+                                                    "Food-related pressure channels",
+                                                    "All main divisions"
+                                                ],
+                                    "name":  "Division view: "
+                                }
+                   }
+               ],
+    "transform":  [
+                      {
+                          "filter":  "datum.year == selected_year \u0026\u0026 datum.month == selected_month"
+                      },
+                      {
+                          "filter":  "division_view == \u0027All main divisions\u0027 ? true : datum.division_scope == division_view"
+                      },
+                      {
+                          "joinaggregate":  [
+                                                {
+                                                    "op":  "mean",
+                                                    "field":  "inflation_yoy",
+                                                    "as":  "average_state_inflation"
+                                                }
+                                            ],
+                          "groupby":  [
+                                          "state_display"
+                                      ]
+                      }
+                  ],
+    "mark":  {
+                 "type":  "rect",
+                 "stroke":  "#ffffff",
+                 "strokeWidth":  0.8
+             },
+    "encoding":  {
+                     "x":  {
+                               "field":  "division_label",
+                               "type":  "nominal",
+                               "title":  "Consumer Price Index main division",
+                               "sort":  {
+                                            "field":  "division_order",
+                                            "order":  "ascending"
+                                        },
+                               "axis":  {
+                                            "labelAngle":  -28,
+                                            "labelLimit":  260,
+                                            "labelFontSize":  10
+                                        }
+                           },
+                     "y":  {
+                               "field":  "state_display",
+                               "type":  "nominal",
+                               "title":  "State",
+                               "sort":  {
+                                            "field":  "average_state_inflation",
+                                            "order":  "descending"
+                                        }
+                           },
+                     "color":  {
+                                   "field":  "inflation_yoy",
+                                   "type":  "quantitative",
+                                   "title":  "Year-on-year inflation (%)",
+                                   "scale":  {
+                                                 "domain":  [
+                                                                -5,
+                                                                0,
+                                                                10
+                                                            ],
+                                                 "range":  [
+                                                               "#4c78a8",
+                                                               "#f7f7f7",
+                                                               "#f58518"
+                                                           ],
+                                                 "clamp":  true
+                                             },
+                                   "legend":  {
+                                                  "gradientLength":  260,
+                                                  "orient":  "bottom",
+                                                  "direction":  "horizontal"
+                                              }
+                               },
+                     "tooltip":  [
+                                     {
+                                         "field":  "state",
+                                         "type":  "nominal",
+                                         "title":  "State"
+                                     },
+                                     {
+                                         "field":  "division_name",
+                                         "type":  "nominal",
+                                         "title":  "Division"
+                                     },
+                                     {
+                                         "field":  "year",
+                                         "type":  "ordinal",
+                                         "title":  "Year"
+                                     },
+                                     {
+                                         "field":  "month",
+                                         "type":  "nominal",
+                                         "title":  "Month"
+                                     },
+                                     {
+                                         "field":  "inflation_yoy",
+                                         "type":  "quantitative",
+                                         "title":  "YoY inflation (%)",
+                                         "format":  ".1f"
+                                     },
+                                     {
+                                         "field":  "inflation_mom",
+                                         "type":  "quantitative",
+                                         "title":  "MoM inflation (%)",
+                                         "format":  ".1f"
+                                     }
+                                 ]
+                 },
+    "config":  {
+                   "view":  {
+                                "stroke":  null
+                            },
+                   "font":  "Inter, Arial, sans-serif",
+                   "axis":  {
+                                "labelFont":  "Inter, Arial, sans-serif",
+                                "titleFont":  "Inter, Arial, sans-serif",
+                                "labelFontSize":  11,
+                                "titleFontSize":  12,
+                                "grid":  false
+                            },
+                   "legend":  {
+                                  "titleFont":  "Inter, Arial, sans-serif",
+                                  "labelFont":  "Inter, Arial, sans-serif",
+                                  "titleFontSize":  12,
+                                  "labelFontSize":  11
+                              }
+               }
 }

@@ -1,344 +1,345 @@
-{
-  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "title": {
-    "text": "Does local crop production reduce food price pressure?",
-    "subtitle": "Crop production by state compared with annual average food inflation",
-    "anchor": "start",
-    "fontSize": 20,
-    "subtitleFontSize": 12,
-    "subtitleColor": "#555555"
-  },
-  "width": 780,
-  "height": 470,
-  "data": {
-    "url": "data/crop_production_vs_food_inflation_clean.csv"
-  },
-  "params": [
-    {
-      "name": "selected_year",
-      "value": 2022,
-      "bind": {
-        "input": "select",
-        "options": [
-          2017,
-          2018,
-          2019,
-          2020,
-          2021,
-          2022
-        ],
-        "name": "Year: "
-      }
-    },
-    {
-      "name": "selected_crop",
-      "value": "All food crops",
-      "bind": {
-        "input": "select",
-        "options": [
-          "All food crops",
-          "Paddy",
-          "Fruits",
-          "Vegetables",
-          "Coconut",
-          "Herbs",
-          "Spices"
-        ],
-        "name": "Crop type: "
-      }
-    }
-  ],
-  "transform": [
-    {
-      "filter": "datum.year == selected_year && datum.crop_type_display == selected_crop"
-    },
-    {
-      "joinaggregate": [
-        {
-          "op": "median",
-          "field": "production_tonnes",
-          "as": "median_production"
-        },
-        {
-          "op": "median",
-          "field": "average_food_inflation",
-          "as": "median_food_inflation"
-        },
-        {
-          "op": "max",
-          "field": "production_tonnes",
-          "as": "highest_production"
-        },
-        {
-          "op": "max",
-          "field": "average_food_inflation",
-          "as": "highest_inflation"
-        }
-      ]
-    },
-    {
-      "calculate": "datum.production_tonnes >= datum.median_production && datum.average_food_inflation >= datum.median_food_inflation ? 'High production and high inflation' : datum.production_tonnes >= datum.median_production && datum.average_food_inflation < datum.median_food_inflation ? 'High production and lower inflation' : 'Other states'",
-      "as": "production_pressure_group"
-    },
-    {
-      "calculate": "format(datum.production_thousand_tonnes, ',.1f') + ' thousand tonnes'",
-      "as": "production_label"
-    },
-    {
-      "calculate": "format(datum.average_food_inflation, '.1f') + '%'",
-      "as": "inflation_label"
-    },
-    {
-      "calculate": "datum.production_tonnes == datum.highest_production || datum.average_food_inflation == datum.highest_inflation || datum.production_pressure_group == 'High production and high inflation'",
-      "as": "show_label"
-    }
-  ],
-  "layer": [
-    {
-      "mark": {
-        "type": "rule",
-        "strokeDash": [
-          4,
-          4
-        ],
-        "color": "#b8b8b8",
-        "strokeWidth": 1
-      },
-      "encoding": {
-        "x": {
-          "field": "median_production",
-          "type": "quantitative"
-        }
-      }
-    },
-    {
-      "mark": {
-        "type": "rule",
-        "strokeDash": [
-          4,
-          4
-        ],
-        "color": "#b8b8b8",
-        "strokeWidth": 1
-      },
-      "encoding": {
-        "y": {
-          "field": "median_food_inflation",
-          "type": "quantitative"
-        }
-      }
-    },
-    {
-      "mark": {
-        "type": "point",
-        "filled": true,
-        "opacity": 0.82,
-        "stroke": "white",
-        "strokeWidth": 1.1
-      },
-      "encoding": {
-        "x": {
-          "field": "production_tonnes",
-          "type": "quantitative",
-          "title": "Crop production (metric tonnes)",
-          "scale": {
-            "type": "sqrt",
-            "zero": true
-          },
-          "axis": {
-            "format": "~s",
-            "grid": true
-          }
-        },
-        "y": {
-          "field": "average_food_inflation",
-          "type": "quantitative",
-          "title": "Average food inflation (%)",
-          "scale": {
-            "zero": false
-          },
-          "axis": {
-            "grid": true
-          }
-        },
-        "size": {
-          "field": "planted_area_hectares",
-          "type": "quantitative",
-          "title": "Planted area (hectares)",
-          "scale": {
-            "range": [
-              55,
-              520
-            ]
-          },
-          "legend": {
-            "orient": "right"
-          }
-        },
-        "color": {
-          "field": "production_pressure_group",
-          "type": "nominal",
-          "title": null,
-          "scale": {
-            "domain": [
-              "High production and high inflation",
-              "High production and lower inflation",
-              "Other states"
-            ],
-            "range": [
-              "#b33a1c",
-              "#2f7d32",
-              "#b8b8b8"
-            ]
-          }
-        },
-        "tooltip": [
-          {
-            "field": "state_display",
-            "type": "nominal",
-            "title": "State"
-          },
-          {
-            "field": "year",
-            "type": "ordinal",
-            "title": "Year"
-          },
-          {
-            "field": "crop_type_display",
-            "type": "nominal",
-            "title": "Crop type"
-          },
-          {
-            "field": "production_tonnes",
-            "type": "quantitative",
-            "title": "Production (metric tonnes)",
-            "format": ",.0f"
-          },
-          {
-            "field": "planted_area_hectares",
-            "type": "quantitative",
-            "title": "Planted area (hectares)",
-            "format": ",.0f"
-          },
-          {
-            "field": "production_share_percent",
-            "type": "quantitative",
-            "title": "Share of selected production (%)",
-            "format": ".1f"
-          },
-          {
-            "field": "average_food_inflation",
-            "type": "quantitative",
-            "title": "Average food inflation (%)",
-            "format": ".1f"
-          },
-          {
-            "field": "months_available",
-            "type": "quantitative",
-            "title": "Inflation months averaged"
-          }
-        ]
-      }
-    },
-    {
-      "transform": [
-        {
-          "filter": "datum.show_label"
-        }
-      ],
-      "mark": {
-        "type": "text",
-        "align": "left",
-        "baseline": "middle",
-        "dx": 8,
-        "fontSize": 11,
-        "fontWeight": "bold"
-      },
-      "encoding": {
-        "x": {
-          "field": "production_tonnes",
-          "type": "quantitative",
-          "scale": {
-            "type": "sqrt",
-            "zero": true
-          }
-        },
-        "y": {
-          "field": "average_food_inflation",
-          "type": "quantitative",
-          "scale": {
-            "zero": false
-          }
-        },
-        "text": {
-          "field": "state_display"
-        },
-        "color": {
-          "field": "production_pressure_group",
-          "type": "nominal",
-          "legend": null,
-          "scale": {
-            "domain": [
-              "High production and high inflation",
-              "High production and lower inflation",
-              "Other states"
-            ],
-            "range": [
-              "#8f2d16",
-              "#245c27",
-              "#555555"
-            ]
-          }
-        }
-      }
-    },
-    {
-      "mark": {
-        "type": "text",
-        "align": "left",
-        "baseline": "top",
-        "dx": 8,
-        "dy": 8,
-        "fontSize": 11,
-        "color": "#6b6b6b"
-      },
-      "encoding": {
-        "x": {
-          "field": "median_production",
-          "type": "quantitative",
-          "scale": {
-            "type": "sqrt",
-            "zero": true
-          }
-        },
-        "y": {
-          "field": "median_food_inflation",
-          "type": "quantitative",
-          "scale": {
-            "zero": false
-          }
-        },
-        "text": {
-          "value": "Median split"
-        }
-      }
-    }
-  ],
-  "config": {
-    "view": {
-      "stroke": null
-    },
-    "font": "Inter, Arial, sans-serif",
-    "axis": {
-      "labelFont": "Inter, Arial, sans-serif",
-      "titleFont": "Inter, Arial, sans-serif",
-      "gridColor": "#eeeeee",
-      "tickColor": "#cccccc",
-      "domainColor": "#cccccc"
-    },
-    "legend": {
-      "labelFont": "Inter, Arial, sans-serif",
-      "titleFont": "Inter, Arial, sans-serif"
-    }
-  }
+﻿{
+    "$schema":  "https://vega.github.io/schema/vega-lite/v5.json",
+    "title":  {
+                  "text":  "Does local crop production reduce food price pressure?",
+                  "subtitle":  "Crop production by state compared with annual average food inflation",
+                  "anchor":  "start",
+                  "fontSize":  20,
+                  "subtitleFontSize":  12,
+                  "subtitleColor":  "#555555",
+                  "offset":  20
+              },
+    "width":  780,
+    "height":  470,
+    "data":  {
+                 "url":  "data/crop_production_vs_food_inflation_clean.csv"
+             },
+    "params":  [
+                   {
+                       "name":  "selected_year",
+                       "value":  2022,
+                       "bind":  {
+                                    "input":  "select",
+                                    "options":  [
+                                                    2017,
+                                                    2018,
+                                                    2019,
+                                                    2020,
+                                                    2021,
+                                                    2022
+                                                ],
+                                    "name":  "Year: "
+                                }
+                   },
+                   {
+                       "name":  "selected_crop",
+                       "value":  "All food crops",
+                       "bind":  {
+                                    "input":  "select",
+                                    "options":  [
+                                                    "All food crops",
+                                                    "Paddy",
+                                                    "Fruits",
+                                                    "Vegetables",
+                                                    "Coconut",
+                                                    "Herbs",
+                                                    "Spices"
+                                                ],
+                                    "name":  "Crop type: "
+                                }
+                   }
+               ],
+    "transform":  [
+                      {
+                          "filter":  "datum.year == selected_year \u0026\u0026 datum.crop_type_display == selected_crop"
+                      },
+                      {
+                          "joinaggregate":  [
+                                                {
+                                                    "op":  "median",
+                                                    "field":  "production_tonnes",
+                                                    "as":  "median_production"
+                                                },
+                                                {
+                                                    "op":  "median",
+                                                    "field":  "average_food_inflation",
+                                                    "as":  "median_food_inflation"
+                                                },
+                                                {
+                                                    "op":  "max",
+                                                    "field":  "production_tonnes",
+                                                    "as":  "highest_production"
+                                                },
+                                                {
+                                                    "op":  "max",
+                                                    "field":  "average_food_inflation",
+                                                    "as":  "highest_inflation"
+                                                }
+                                            ]
+                      },
+                      {
+                          "calculate":  "datum.production_tonnes \u003e= datum.median_production \u0026\u0026 datum.average_food_inflation \u003e= datum.median_food_inflation ? \u0027High production and high inflation\u0027 : datum.production_tonnes \u003e= datum.median_production \u0026\u0026 datum.average_food_inflation \u003c datum.median_food_inflation ? \u0027High production and lower inflation\u0027 : \u0027Other states\u0027",
+                          "as":  "production_pressure_group"
+                      },
+                      {
+                          "calculate":  "format(datum.production_thousand_tonnes, \u0027,.1f\u0027) + \u0027 thousand tonnes\u0027",
+                          "as":  "production_label"
+                      },
+                      {
+                          "calculate":  "format(datum.average_food_inflation, \u0027.1f\u0027) + \u0027%\u0027",
+                          "as":  "inflation_label"
+                      },
+                      {
+                          "calculate":  "datum.production_tonnes == datum.highest_production || datum.average_food_inflation == datum.highest_inflation || datum.production_pressure_group == \u0027High production and high inflation\u0027",
+                          "as":  "show_label"
+                      }
+                  ],
+    "layer":  [
+                  {
+                      "mark":  {
+                                   "type":  "rule",
+                                   "strokeDash":  [
+                                                      4,
+                                                      4
+                                                  ],
+                                   "color":  "#b8b8b8",
+                                   "strokeWidth":  1
+                               },
+                      "encoding":  {
+                                       "x":  {
+                                                 "field":  "median_production",
+                                                 "type":  "quantitative"
+                                             }
+                                   }
+                  },
+                  {
+                      "mark":  {
+                                   "type":  "rule",
+                                   "strokeDash":  [
+                                                      4,
+                                                      4
+                                                  ],
+                                   "color":  "#b8b8b8",
+                                   "strokeWidth":  1
+                               },
+                      "encoding":  {
+                                       "y":  {
+                                                 "field":  "median_food_inflation",
+                                                 "type":  "quantitative"
+                                             }
+                                   }
+                  },
+                  {
+                      "mark":  {
+                                   "type":  "point",
+                                   "filled":  true,
+                                   "opacity":  0.82,
+                                   "stroke":  "white",
+                                   "strokeWidth":  1.1
+                               },
+                      "encoding":  {
+                                       "x":  {
+                                                 "field":  "production_tonnes",
+                                                 "type":  "quantitative",
+                                                 "title":  "Crop production (metric tonnes)",
+                                                 "scale":  {
+                                                               "type":  "sqrt",
+                                                               "zero":  true
+                                                           },
+                                                 "axis":  {
+                                                              "format":  "~s",
+                                                              "grid":  true
+                                                          }
+                                             },
+                                       "y":  {
+                                                 "field":  "average_food_inflation",
+                                                 "type":  "quantitative",
+                                                 "title":  "Average food inflation (%)",
+                                                 "scale":  {
+                                                               "zero":  false
+                                                           },
+                                                 "axis":  {
+                                                              "grid":  true
+                                                          }
+                                             },
+                                       "size":  {
+                                                    "field":  "planted_area_hectares",
+                                                    "type":  "quantitative",
+                                                    "title":  "Planted area (hectares)",
+                                                    "scale":  {
+                                                                  "range":  [
+                                                                                55,
+                                                                                520
+                                                                            ]
+                                                              },
+                                                    "legend":  {
+                                                                   "orient":  "right"
+                                                               }
+                                                },
+                                       "color":  {
+                                                     "field":  "production_pressure_group",
+                                                     "type":  "nominal",
+                                                     "title":  null,
+                                                     "scale":  {
+                                                                   "domain":  [
+                                                                                  "High production and high inflation",
+                                                                                  "High production and lower inflation",
+                                                                                  "Other states"
+                                                                              ],
+                                                                   "range":  [
+                                                                                 "#7b3294",
+                                                                                 "#4c78a8",
+                                                                                 "#b8b8b8"
+                                                                             ]
+                                                               }
+                                                 },
+                                       "tooltip":  [
+                                                       {
+                                                           "field":  "state_display",
+                                                           "type":  "nominal",
+                                                           "title":  "State"
+                                                       },
+                                                       {
+                                                           "field":  "year",
+                                                           "type":  "ordinal",
+                                                           "title":  "Year"
+                                                       },
+                                                       {
+                                                           "field":  "crop_type_display",
+                                                           "type":  "nominal",
+                                                           "title":  "Crop type"
+                                                       },
+                                                       {
+                                                           "field":  "production_tonnes",
+                                                           "type":  "quantitative",
+                                                           "title":  "Production (metric tonnes)",
+                                                           "format":  ",.0f"
+                                                       },
+                                                       {
+                                                           "field":  "planted_area_hectares",
+                                                           "type":  "quantitative",
+                                                           "title":  "Planted area (hectares)",
+                                                           "format":  ",.0f"
+                                                       },
+                                                       {
+                                                           "field":  "production_share_percent",
+                                                           "type":  "quantitative",
+                                                           "title":  "Share of selected production (%)",
+                                                           "format":  ".1f"
+                                                       },
+                                                       {
+                                                           "field":  "average_food_inflation",
+                                                           "type":  "quantitative",
+                                                           "title":  "Average food inflation (%)",
+                                                           "format":  ".1f"
+                                                       },
+                                                       {
+                                                           "field":  "months_available",
+                                                           "type":  "quantitative",
+                                                           "title":  "Inflation months averaged"
+                                                       }
+                                                   ]
+                                   }
+                  },
+                  {
+                      "transform":  [
+                                        {
+                                            "filter":  "datum.show_label"
+                                        }
+                                    ],
+                      "mark":  {
+                                   "type":  "text",
+                                   "align":  "left",
+                                   "baseline":  "middle",
+                                   "dx":  8,
+                                   "fontSize":  11,
+                                   "fontWeight":  "bold"
+                               },
+                      "encoding":  {
+                                       "x":  {
+                                                 "field":  "production_tonnes",
+                                                 "type":  "quantitative",
+                                                 "scale":  {
+                                                               "type":  "sqrt",
+                                                               "zero":  true
+                                                           }
+                                             },
+                                       "y":  {
+                                                 "field":  "average_food_inflation",
+                                                 "type":  "quantitative",
+                                                 "scale":  {
+                                                               "zero":  false
+                                                           }
+                                             },
+                                       "text":  {
+                                                    "field":  "state_display"
+                                                },
+                                       "color":  {
+                                                     "field":  "production_pressure_group",
+                                                     "type":  "nominal",
+                                                     "legend":  null,
+                                                     "scale":  {
+                                                                   "domain":  [
+                                                                                  "High production and high inflation",
+                                                                                  "High production and lower inflation",
+                                                                                  "Other states"
+                                                                              ],
+                                                                   "range":  [
+                                                                                 "#8f2d16",
+                                                                                 "#245c27",
+                                                                                 "#555555"
+                                                                             ]
+                                                               }
+                                                 }
+                                   }
+                  },
+                  {
+                      "mark":  {
+                                   "type":  "text",
+                                   "align":  "left",
+                                   "baseline":  "top",
+                                   "dx":  8,
+                                   "dy":  8,
+                                   "fontSize":  11,
+                                   "color":  "#6b6b6b"
+                               },
+                      "encoding":  {
+                                       "x":  {
+                                                 "field":  "median_production",
+                                                 "type":  "quantitative",
+                                                 "scale":  {
+                                                               "type":  "sqrt",
+                                                               "zero":  true
+                                                           }
+                                             },
+                                       "y":  {
+                                                 "field":  "median_food_inflation",
+                                                 "type":  "quantitative",
+                                                 "scale":  {
+                                                               "zero":  false
+                                                           }
+                                             },
+                                       "text":  {
+                                                    "value":  "Median split"
+                                                }
+                                   }
+                  }
+              ],
+    "config":  {
+                   "view":  {
+                                "stroke":  null
+                            },
+                   "font":  "Inter, Arial, sans-serif",
+                   "axis":  {
+                                "labelFont":  "Inter, Arial, sans-serif",
+                                "titleFont":  "Inter, Arial, sans-serif",
+                                "gridColor":  "#eeeeee",
+                                "tickColor":  "#cccccc",
+                                "domainColor":  "#cccccc"
+                            },
+                   "legend":  {
+                                  "labelFont":  "Inter, Arial, sans-serif",
+                                  "titleFont":  "Inter, Arial, sans-serif"
+                              }
+               }
 }

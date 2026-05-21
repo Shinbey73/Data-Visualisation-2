@@ -1,0 +1,219 @@
+﻿{
+    "$schema":  "https://vega.github.io/schema/vega-lite/v5.json",
+    "title":  {
+                  "text":  "Daily food item price movement in May 2026",
+                  "subtitle":  "Small multiples show daily median prices for selected food items from PriceCatcher records",
+                  "anchor":  "start",
+                  "fontSize":  20,
+                  "subtitleFontSize":  12,
+                  "subtitleColor":  "#555555",
+                  "offset":  20
+              },
+    "data":  {
+                 "url":  "data/food_item_price_small_multiples_clean.csv"
+             },
+    "width":  210,
+    "height":  120,
+    "facet":  {
+                  "field":  "item_display",
+                  "type":  "nominal",
+                  "title":  null,
+                  "sort":  {
+                               "field":  "item_order",
+                               "order":  "ascending"
+                           },
+                  "header":  {
+                                 "labelFontSize":  11,
+                                 "labelFontWeight":  "bold",
+                                 "labelLimit":  190,
+                                 "title":  null
+                             }
+              },
+    "columns":  3,
+    "spec":  {
+                 "layer":  [
+                               {
+                                   "mark":  {
+                                                "type":  "rule",
+                                                "strokeDash":  [
+                                                                   4,
+                                                                   4
+                                                               ],
+                                                "strokeWidth":  1,
+                                                "opacity":  0.45,
+                                                "color":  "#777777"
+                                            },
+                                   "encoding":  {
+                                                    "y":  {
+                                                              "field":  "item_period_median_price",
+                                                              "type":  "quantitative"
+                                                          },
+                                                    "tooltip":  [
+                                                                    {
+                                                                        "field":  "item_display",
+                                                                        "type":  "nominal",
+                                                                        "title":  "Food item"
+                                                                    },
+                                                                    {
+                                                                        "field":  "display_unit",
+                                                                        "type":  "nominal",
+                                                                        "title":  "Unit"
+                                                                    },
+                                                                    {
+                                                                        "field":  "item_period_median_price",
+                                                                        "type":  "quantitative",
+                                                                        "title":  "Item median for period (Malaysian Ringgit)",
+                                                                        "format":  ".2f"
+                                                                    }
+                                                                ]
+                                                }
+                               },
+                               {
+                                   "mark":  {
+                                                "type":  "line",
+                                                "strokeWidth":  2.2,
+                                                "interpolate":  "monotone",
+                                                "color":  "#4c4c4c"
+                                            },
+                                   "encoding":  {
+                                                    "x":  {
+                                                              "field":  "date",
+                                                              "type":  "temporal",
+                                                              "title":  "Day in May 2026",
+                                                              "axis":  {
+                                                                           "format":  "%d",
+                                                                           "labelAngle":  0,
+                                                                           "tickCount":  6,
+                                                                           "grid":  false
+                                                                       }
+                                                          },
+                                                    "y":  {
+                                                              "field":  "median_price",
+                                                              "type":  "quantitative",
+                                                              "title":  "Median price (Malaysian Ringgit)",
+                                                              "scale":  {
+                                                                            "zero":  false
+                                                                        },
+                                                              "axis":  {
+                                                                           "grid":  true,
+                                                                           "tickCount":  4
+                                                                       }
+                                                          }
+                                                }
+                               },
+                               {
+                                   "mark":  {
+                                                "type":  "point",
+                                                "filled":  true,
+                                                "size":  55,
+                                                "stroke":  "white",
+                                                "strokeWidth":  0.8
+                                            },
+                                   "encoding":  {
+                                                    "x":  {
+                                                              "field":  "date",
+                                                              "type":  "temporal"
+                                                          },
+                                                    "y":  {
+                                                              "field":  "median_price",
+                                                              "type":  "quantitative"
+                                                          },
+                                                    "color":  {
+                                                                  "field":  "price_highlight",
+                                                                  "type":  "nominal",
+                                                                  "title":  "Daily marker",
+                                                                  "scale":  {
+                                                                                "domain":  [
+                                                                                               "Highest daily median",
+                                                                                               "Lowest daily median",
+                                                                                               "Normal daily median"
+                                                                                           ],
+                                                                                "range":  [
+                                                                                              "#7b3294",
+                                                                                              "#4c78a8",
+                                                                                              "#9e9e9e"
+                                                                                          ]
+                                                                            },
+                                                                  "legend":  {
+                                                                                 "orient":  "bottom",
+                                                                                 "direction":  "horizontal"
+                                                                             }
+                                                              },
+                                                    "opacity":  {
+                                                                    "condition":  {
+                                                                                      "test":  "datum.price_highlight == \u0027Normal daily median\u0027",
+                                                                                      "value":  0.35
+                                                                                  },
+                                                                    "value":  1
+                                                                },
+                                                    "tooltip":  [
+                                                                    {
+                                                                        "field":  "item_display",
+                                                                        "type":  "nominal",
+                                                                        "title":  "Food item"
+                                                                    },
+                                                                    {
+                                                                        "field":  "display_unit",
+                                                                        "type":  "nominal",
+                                                                        "title":  "Unit"
+                                                                    },
+                                                                    {
+                                                                        "field":  "date_label",
+                                                                        "type":  "nominal",
+                                                                        "title":  "Date"
+                                                                    },
+                                                                    {
+                                                                        "field":  "median_price",
+                                                                        "type":  "quantitative",
+                                                                        "title":  "Daily median price (Malaysian Ringgit)",
+                                                                        "format":  ".2f"
+                                                                    },
+                                                                    {
+                                                                        "field":  "price_change_from_item_median",
+                                                                        "type":  "quantitative",
+                                                                        "title":  "Difference from item median (Malaysian Ringgit)",
+                                                                        "format":  ".2f"
+                                                                    },
+                                                                    {
+                                                                        "field":  "price_record_count",
+                                                                        "type":  "quantitative",
+                                                                        "title":  "Number of price records",
+                                                                        "format":  ",.0f"
+                                                                    },
+                                                                    {
+                                                                        "field":  "price_highlight",
+                                                                        "type":  "nominal",
+                                                                        "title":  "Marker"
+                                                                    }
+                                                                ]
+                                                }
+                               }
+                           ]
+             },
+    "resolve":  {
+                    "scale":  {
+                                  "y":  "independent"
+                              }
+                },
+    "config":  {
+                   "view":  {
+                                "stroke":  null
+                            },
+                   "font":  "Inter, Arial, sans-serif",
+                   "axis":  {
+                                "labelFont":  "Inter, Arial, sans-serif",
+                                "titleFont":  "Inter, Arial, sans-serif",
+                                "gridColor":  "#eeeeee",
+                                "tickColor":  "#cccccc",
+                                "domainColor":  "#cccccc"
+                            },
+                   "legend":  {
+                                  "titleFont":  "Inter, Arial, sans-serif",
+                                  "labelFont":  "Inter, Arial, sans-serif"
+                              },
+                   "header":  {
+                                  "labelFont":  "Inter, Arial, sans-serif",
+                                  "titleFont":  "Inter, Arial, sans-serif"
+                              }
+               }
+}

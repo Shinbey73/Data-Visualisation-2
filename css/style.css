@@ -179,6 +179,12 @@ html, body {
     width: 100% !important;
 }
 
+/* Pull the chart closer to its heading and remove extra top whitespace from embeds */
+.vis-container .vega-embed,
+.vis-container > div[id^="vis"] {
+    margin-top: 0.35rem;
+}
+
 .vis-caption {
     margin: 1rem 0 0 0;
     font-size: 0.95rem;

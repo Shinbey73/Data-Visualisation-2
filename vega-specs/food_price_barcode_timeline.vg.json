@@ -90,7 +90,7 @@
       "title": "Food inflation (%)",
       "scale": {
         "domain": [-5, 0, 5, 10],
-        "range": ["#2c7bb6", "#f7f7f7", "#fdae61", "#b33a1c"],
+        "range": ["#4c78a8", "#f7f7f7", "#f58518", "#7b3294"],
         "clamp": true
       },
       "legend": {
