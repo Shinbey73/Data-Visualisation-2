@@ -11,6 +11,12 @@
               },
     "width":  880,
     "height":  430,
+    "padding":  {
+                    "top":  58,
+                    "right":  12,
+                    "bottom":  8,
+                    "left":  8
+                },
     "data":  {
                  "url":  "data/state_food_inflation_bump_clean.csv"
              },
@@ -551,9 +557,38 @@
                       "transform":  [
                                         {
                                             "filter":  "datum.year == end_year \u0026\u0026 datum.rank == 1"
+                                        }
+                                    ],
+                      "mark":  {
+                                   "type":  "rect",
+                                   "cornerRadius":  6,
+                                   "fill":  "#ffffff",
+                                   "fillOpacity":  0.96,
+                                   "stroke":  "#dbe3f0",
+                                   "strokeWidth":  1
+                               },
+                      "encoding":  {
+                                       "x":  {
+                                                 "value":  640
+                                             },
+                                       "x2":  {
+                                                  "value":  850
+                                             },
+                                       "y":  {
+                                                 "value":  -50
+                                             },
+                                       "y2":  {
+                                                  "value":  -8
+                                              }
+                                   }
+                  },
+                  {
+                      "transform":  [
+                                        {
+                                            "filter":  "datum.year == end_year \u0026\u0026 datum.rank == 1"
                                         },
                                         {
-                                            "calculate":  "\u0027Highest in \u0027 + datum.year + \u0027: \u0027 + datum.state_display",
+                                            "calculate":  "\u0027Highest in \u0027 + datum.year",
                                             "as":  "top_label"
                                         }
                                     ],
@@ -561,8 +596,8 @@
                                    "type":  "text",
                                    "align":  "right",
                                    "baseline":  "top",
-                                   "dx":  -12,
-                                   "dy":  12,
+                                   "dx":  -36,
+                                   "dy":  -42,
                                    "fontSize":  11,
                                    "fontWeight":  "bold",
                                    "color":  "#333333"
@@ -576,6 +611,38 @@
                                              },
                                        "text":  {
                                                     "field":  "top_label"
+                                                }
+                                   }
+                  },
+                  {
+                      "transform":  [
+                                        {
+                                            "filter":  "datum.year == end_year \u0026\u0026 datum.rank == 1"
+                                        },
+                                        {
+                                            "calculate":  "datum.state_display + \u0027: rank \u0027 + datum.rank",
+                                            "as":  "top_rank_label"
+                                        }
+                                    ],
+                      "mark":  {
+                                   "type":  "text",
+                                   "align":  "right",
+                                   "baseline":  "top",
+                                   "dx":  -36,
+                                   "dy":  -26,
+                                   "fontSize":  11,
+                                   "fontWeight":  "bold",
+                                   "color":  "#7b3294"
+                               },
+                      "encoding":  {
+                                       "x":  {
+                                                 "value":  880
+                                             },
+                                       "y":  {
+                                                 "value":  0
+                                             },
+                                       "text":  {
+                                                    "field":  "top_rank_label"
                                                 }
                                    }
                   }
