@@ -2,12 +2,18 @@
    Base Styling
    ======================================== */
 
+:root {
+    --font-body: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --font-heading: 'Trebuchet MS', 'Segoe UI', sans-serif;
+    --font-display: Georgia, 'Times New Roman', serif;
+}
+
 * {
     box-sizing: border-box;
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: var(--font-body);
     line-height: 1.6;
     color: #333;
     background-color: #f9f9f9;
@@ -43,14 +49,15 @@ html, body {
    ======================================== */
 
 .header {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
+    background: linear-gradient(135deg, #FFF9D2 0%, #764ba2 100%);
+    color: rgb(0, 0, 0);
     padding: 3rem 1rem;
     text-align: center;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
 .header h1 {
+    font-family: var(--font-display);
     margin: 0;
     font-size: 2.5rem;
     font-weight: 700;
@@ -58,12 +65,14 @@ html, body {
 }
 
 .header .subtitle {
+    font-family: var(--font-body);
     margin: 0.5rem 0 1rem 0;
     font-size: 1.3rem;
     opacity: 0.95;
 }
 
 .header .metadata {
+    font-family: var(--font-body);
     font-size: 0.95rem;
     opacity: 0.85;
     margin: 0;
@@ -119,6 +128,7 @@ html, body {
 }
 
 .section h2 {
+    font-family: var(--font-heading);
     font-size: 2rem;
     margin-top: 0;
     margin-bottom: 1.5rem;
@@ -129,6 +139,7 @@ html, body {
 }
 
 .section p {
+    font-family: var(--font-body);
     font-size: 1.05rem;
     line-height: 1.8;
     max-width: 900px;
@@ -162,6 +173,7 @@ html, body {
 }
 
 .vis-container h3 {
+    font-family: var(--font-heading);
     margin-top: 0;
     margin-bottom: 1rem;
     font-size: 1.5rem;
@@ -186,6 +198,7 @@ html, body {
 }
 
 .vis-caption {
+    font-family: var(--font-body);
     margin: 1rem 0 0 0;
     font-size: 0.95rem;
     color: #666;
