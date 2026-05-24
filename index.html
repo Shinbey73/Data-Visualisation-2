@@ -263,12 +263,45 @@
                                     <div class="chart-panel">
                                         <div id="vis8"></div>
                                     </div>
-                                    <aside class="insight-box">
-                                        <h4>Insight</h4>
-                                        <p>This scatter plot helps test whether stronger production is associated with lower food inflation or whether the relationship is weak.</p>
-                                    </aside>
+                                    <div class="chart-side">
+                                        <aside class="insight-box">
+                                            <h4>Insight</h4>
+                                            <p>Colours split states by whether production level and food inflation sit above or below the selected year's median.</p>
+                                        </aside>
+                                        <div class="legend-box" aria-label="Crop production versus inflation legend">
+                                            <h4>Legend</h4>
+                                            <div class="legend-row">
+                                                <span class="legend-swatch crop-high-pressure"></span>
+                                                <span>High production, high inflation</span>
+                                            </div>
+                                            <div class="legend-row">
+                                                <span class="legend-swatch crop-lower-pressure"></span>
+                                                <span>High production, lower inflation</span>
+                                            </div>
+                                            <div class="legend-row">
+                                                <span class="legend-swatch crop-low-high"></span>
+                                                <span>Lower production, high inflation</span>
+                                            </div>
+                                            <div class="legend-row">
+                                                <span class="legend-swatch crop-low-low"></span>
+                                                <span>Lower production, lower inflation (baseline)</span>
+                                            </div>
+                                            <div class="legend-row">
+                                                <span class="legend-size small"></span>
+                                                <span>Smaller planted area</span>
+                                            </div>
+                                            <div class="legend-row">
+                                                <span class="legend-size large"></span>
+                                                <span>Larger planted area</span>
+                                            </div>
+                                            <div class="legend-row">
+                                                <span class="legend-dash"></span>
+                                                <span>Median split</span>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <p class="vis-caption">Compares crop production with average food inflation by state; dot size shows planted area.</p>
+                                <p class="vis-caption">Compares producing states only. The median split creates four groups: states to the right have above-median production level, states higher up have above-median food inflation, and grey marks show states below the median on both measures.</p>
                             </div>
                         </div>
 
@@ -279,10 +312,27 @@
                                     <div class="chart-panel">
                                         <div id="vis9"></div>
                                     </div>
-                                    <aside class="insight-box">
-                                        <h4>Insight</h4>
-                                        <p>Use this box to point out whether the fish landing rank matches the inflation rank or whether the two measures move in opposite directions.</p>
-                                    </aside>
+                                    <div class="chart-side">
+                                        <aside class="insight-box">
+                                            <h4>Insight</h4>
+                                            <p>Use this box to point out whether the fish landing rank matches the inflation rank or whether the two measures move in opposite directions.</p>
+                                        </aside>
+                                        <div class="legend-box" aria-label="Fish landing versus inflation legend">
+                                            <h4>Legend</h4>
+                                            <div class="legend-row">
+                                                <span class="legend-swatch fish"></span>
+                                                <span>Fish landings rank</span>
+                                            </div>
+                                            <div class="legend-row">
+                                                <span class="legend-swatch inflation"></span>
+                                                <span>Food inflation rank</span>
+                                            </div>
+                                            <div class="legend-row">
+                                                <span class="legend-line"></span>
+                                                <span>Rank gap</span>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <p class="vis-caption">Connected dot plot comparing fish landing rank with food inflation rank by state.</p>
                             </div>

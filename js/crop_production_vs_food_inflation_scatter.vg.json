@@ -1,16 +1,29 @@
 ﻿{
     "$schema":  "https://vega.github.io/schema/vega-lite/v5.json",
     "title":  {
-                  "text":  "Does local crop production reduce food price pressure?",
-                  "subtitle":  "Crop production by state compared with annual average food inflation",
+                  "text":  "Crop Production vs Food Inflation",
+                  "subtitle":  "Each state compares selected crop production level with annual average food inflation",
                   "anchor":  "start",
                   "fontSize":  20,
+                  "fontWeight":  700,
                   "subtitleFontSize":  12,
-                  "subtitleColor":  "#555555",
-                  "offset":  20
+                  "subtitleColor":  "#64748b",
+                  "offset":  18
               },
-    "width":  780,
-    "height":  470,
+    "width":  "container",
+    "height":  460,
+    "autosize":  {
+                     "type":  "fit-x",
+                     "contains":  "padding",
+                     "resize":  true
+                 },
+    "padding":  {
+                    "left":  8,
+                    "right":  28,
+                    "top":  8,
+                    "bottom":  10
+                },
+    "background":  "transparent",
     "data":  {
                  "url":  "data/crop_production_vs_food_inflation_clean.csv"
              },
@@ -51,14 +64,14 @@
                ],
     "transform":  [
                       {
-                          "filter":  "datum.year == selected_year \u0026\u0026 datum.crop_type_display == selected_crop"
+                          "filter":  "datum.year == selected_year && datum.crop_type_display == selected_crop && datum.production_tonnes > 0 && datum.planted_area_hectares > 0"
                       },
                       {
                           "joinaggregate":  [
                                                 {
                                                     "op":  "median",
-                                                    "field":  "production_tonnes",
-                                                    "as":  "median_production"
+                                                    "field":  "production_share_percent",
+                                                    "as":  "median_production_share"
                                                 },
                                                 {
                                                     "op":  "median",
@@ -67,8 +80,8 @@
                                                 },
                                                 {
                                                     "op":  "max",
-                                                    "field":  "production_tonnes",
-                                                    "as":  "highest_production"
+                                                    "field":  "production_share_percent",
+                                                    "as":  "highest_production_share"
                                                 },
                                                 {
                                                     "op":  "max",
@@ -78,7 +91,7 @@
                                             ]
                       },
                       {
-                          "calculate":  "datum.production_tonnes \u003e= datum.median_production \u0026\u0026 datum.average_food_inflation \u003e= datum.median_food_inflation ? \u0027High production and high inflation\u0027 : datum.production_tonnes \u003e= datum.median_production \u0026\u0026 datum.average_food_inflation \u003c datum.median_food_inflation ? \u0027High production and lower inflation\u0027 : \u0027Other states\u0027",
+                          "calculate":  "datum.production_share_percent >= datum.median_production_share && datum.average_food_inflation >= datum.median_food_inflation ? 'High production level, high inflation' : datum.production_share_percent >= datum.median_production_share && datum.average_food_inflation < datum.median_food_inflation ? 'High production level, lower inflation' : datum.production_share_percent < datum.median_production_share && datum.average_food_inflation >= datum.median_food_inflation ? 'Lower production level, high inflation' : 'Lower production level, lower inflation'",
                           "as":  "production_pressure_group"
                       },
                       {
@@ -90,7 +103,7 @@
                           "as":  "inflation_label"
                       },
                       {
-                          "calculate":  "datum.production_tonnes == datum.highest_production || datum.average_food_inflation == datum.highest_inflation || datum.production_pressure_group == \u0027High production and high inflation\u0027",
+                          "calculate":  "datum.production_share_percent == datum.highest_production_share || datum.average_food_inflation == datum.highest_inflation || datum.production_pressure_group == 'High production level, high inflation' || datum.production_pressure_group == 'High production level, lower inflation'",
                           "as":  "show_label"
                       }
                   ],
@@ -102,12 +115,13 @@
                                                       4,
                                                       4
                                                   ],
-                                   "color":  "#b8b8b8",
-                                   "strokeWidth":  1
+                                   "color":  "#94a3b8",
+                                   "strokeWidth":  1.2,
+                                   "opacity":  0.85
                                },
                       "encoding":  {
                                        "x":  {
-                                                 "field":  "median_production",
+                                                 "field":  "median_production_share",
                                                  "type":  "quantitative"
                                              }
                                    }
@@ -119,8 +133,9 @@
                                                       4,
                                                       4
                                                   ],
-                                   "color":  "#b8b8b8",
-                                   "strokeWidth":  1
+                                   "color":  "#94a3b8",
+                                   "strokeWidth":  1.2,
+                                   "opacity":  0.85
                                },
                       "encoding":  {
                                        "y":  {
@@ -133,22 +148,29 @@
                       "mark":  {
                                    "type":  "point",
                                    "filled":  true,
-                                   "opacity":  0.82,
-                                   "stroke":  "white",
-                                   "strokeWidth":  1.1
+                                   "opacity":  0.9,
+                                   "stroke":  "#ffffff",
+                                   "strokeWidth":  1.8
                                },
                       "encoding":  {
                                        "x":  {
-                                                 "field":  "production_tonnes",
+                                                 "field":  "production_share_percent",
                                                  "type":  "quantitative",
-                                                 "title":  "Crop production (metric tonnes)",
+                                                 "title":  "Selected crop production level (%)",
                                                  "scale":  {
-                                                               "type":  "sqrt",
                                                                "zero":  true
                                                            },
                                                  "axis":  {
-                                                              "format":  "~s",
-                                                              "grid":  true
+                                                              "format":  ".0f",
+                                                              "grid":  true,
+                                                              "gridColor":  "#edf2f7",
+                                                              "gridOpacity":  1,
+                                                              "tickColor":  "#cbd5e1",
+                                                              "domainColor":  "#94a3b8",
+                                                              "labelColor":  "#475569",
+                                                              "titleColor":  "#0f172a",
+                                                              "titleFontWeight":  700,
+                                                              "titlePadding":  12
                                                           }
                                              },
                                        "y":  {
@@ -159,7 +181,15 @@
                                                                "zero":  false
                                                            },
                                                  "axis":  {
-                                                              "grid":  true
+                                                              "grid":  true,
+                                                              "gridColor":  "#edf2f7",
+                                                              "gridOpacity":  1,
+                                                              "tickColor":  "#cbd5e1",
+                                                              "domainColor":  "#94a3b8",
+                                                              "labelColor":  "#475569",
+                                                              "titleColor":  "#0f172a",
+                                                              "titleFontWeight":  700,
+                                                              "titlePadding":  12
                                                           }
                                              },
                                        "size":  {
@@ -168,28 +198,29 @@
                                                     "title":  "Planted area (hectares)",
                                                     "scale":  {
                                                                   "range":  [
-                                                                                55,
-                                                                                520
+                                                                                70,
+                                                                                620
                                                                             ]
                                                               },
-                                                    "legend":  {
-                                                                   "orient":  "right"
-                                                               }
+                                                    "legend":  null
                                                 },
                                        "color":  {
                                                      "field":  "production_pressure_group",
                                                      "type":  "nominal",
                                                      "title":  null,
+                                                     "legend":  null,
                                                      "scale":  {
                                                                    "domain":  [
-                                                                                  "High production and high inflation",
-                                                                                  "High production and lower inflation",
-                                                                                  "Other states"
+                                                                                  "High production level, high inflation",
+                                                                                  "High production level, lower inflation",
+                                                                                  "Lower production level, high inflation",
+                                                                                  "Lower production level, lower inflation"
                                                                               ],
                                                                    "range":  [
-                                                                                 "#7b3294",
-                                                                                 "#4c78a8",
-                                                                                 "#b8b8b8"
+                                                                                 "#7c3aed",
+                                                                                 "#2563eb",
+                                                                                 "#f97316",
+                                                                                 "#0891b2"
                                                                              ]
                                                                }
                                                  },
@@ -251,16 +282,15 @@
                                    "type":  "text",
                                    "align":  "left",
                                    "baseline":  "middle",
-                                   "dx":  8,
-                                   "fontSize":  11,
-                                   "fontWeight":  "bold"
+                                   "dx":  13,
+                                   "fontSize":  12,
+                                   "fontWeight":  700
                                },
                       "encoding":  {
                                        "x":  {
-                                                 "field":  "production_tonnes",
+                                                 "field":  "production_share_percent",
                                                  "type":  "quantitative",
                                                  "scale":  {
-                                                               "type":  "sqrt",
                                                                "zero":  true
                                                            }
                                              },
@@ -280,14 +310,16 @@
                                                      "legend":  null,
                                                      "scale":  {
                                                                    "domain":  [
-                                                                                  "High production and high inflation",
-                                                                                  "High production and lower inflation",
-                                                                                  "Other states"
+                                                                                  "High production level, high inflation",
+                                                                                  "High production level, lower inflation",
+                                                                                  "Lower production level, high inflation",
+                                                                                  "Lower production level, lower inflation"
                                                                               ],
                                                                    "range":  [
-                                                                                 "#8f2d16",
-                                                                                 "#245c27",
-                                                                                 "#555555"
+                                                                                 "#5b21b6",
+                                                                                 "#1d4ed8",
+                                                                                 "#9a3412",
+                                                                                 "#0e7490"
                                                                              ]
                                                                }
                                                  }
@@ -301,14 +333,14 @@
                                    "dx":  8,
                                    "dy":  8,
                                    "fontSize":  11,
-                                   "color":  "#6b6b6b"
+                                   "fontWeight":  600,
+                                   "color":  "#64748b"
                                },
                       "encoding":  {
                                        "x":  {
-                                                 "field":  "median_production",
+                                                 "field":  "median_production_share",
                                                  "type":  "quantitative",
                                                  "scale":  {
-                                                               "type":  "sqrt",
                                                                "zero":  true
                                                            }
                                              },
@@ -323,6 +355,57 @@
                                                     "value":  "Median split"
                                                 }
                                    }
+                  },
+                  {
+                      "transform":  [
+                                        {
+                                            "aggregate":  [
+                                                              {
+                                                                  "op":  "max",
+                                                                  "field":  "production_share_percent",
+                                                                  "as":  "max_production_share"
+                                                              },
+                                                              {
+                                                                  "op":  "max",
+                                                                  "field":  "average_food_inflation",
+                                                                  "as":  "max_food_inflation"
+                                                              }
+                                                          ]
+                                        },
+                                        {
+                                            "calculate":  "datum.max_production_share * 0.98",
+                                            "as":  "quadrant_x"
+                                        },
+                                        {
+                                            "calculate":  "datum.max_food_inflation * 0.98",
+                                            "as":  "quadrant_y"
+                                        }
+                                    ],
+                      "mark":  {
+                                   "type":  "text",
+                                   "align":  "right",
+                                   "baseline":  "top",
+                                   "fontSize":  11,
+                                   "fontWeight":  700,
+                                   "color":  "#7c3aed"
+                               },
+                      "encoding":  {
+                                       "x":  {
+                                                 "field":  "quadrant_x",
+                                                 "type":  "quantitative",
+                                                 "scale":  {
+                                                               "zero":  true
+                                                           }
+                                             },
+                                       "y":  {
+                                                 "field":  "quadrant_y",
+                                                 "type":  "quantitative",
+                                                 "scale":  {
+                                                               "zero":  false
+                                                           }
+                                             }
+
+                                   }
                   }
               ],
     "config":  {
@@ -333,9 +416,11 @@
                    "axis":  {
                                 "labelFont":  "Inter, Arial, sans-serif",
                                 "titleFont":  "Inter, Arial, sans-serif",
-                                "gridColor":  "#eeeeee",
-                                "tickColor":  "#cccccc",
-                                "domainColor":  "#cccccc"
+                                "labelFontSize":  11,
+                                "titleFontSize":  12,
+                                "gridColor":  "#edf2f7",
+                                "tickColor":  "#cbd5e1",
+                                "domainColor":  "#94a3b8"
                             },
                    "legend":  {
                                   "labelFont":  "Inter, Arial, sans-serif",
