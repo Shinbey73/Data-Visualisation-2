@@ -35,13 +35,13 @@ html, body {
 }
 
 .content {
-    max-width: 1200px;
+    max-width: 1500px;
     margin: 0 auto;
     padding: 2rem;
 }
 
 .heatmap-section .content {
-    max-width: 1450px;
+    max-width: 1500px;
 }
 
 /* ========================================
@@ -95,7 +95,7 @@ html, body {
     background: linear-gradient(180deg, #ffffff 0%, #fbfbfd 100%);
     border: 1px solid #eceff5;
     border-radius: 10px;
-    max-width: 1200px; /* match `.content` width for consistency */
+    max-width: 1500px; /* give charts more room to breathe */
     margin-left: auto;
     margin-right: auto;
 }
@@ -120,6 +120,61 @@ html, body {
     height: 100%;
     display: flex;
     flex-direction: column;
+}
+
+.chart-body {
+    display: grid;
+    grid-template-columns: minmax(0, 3.8fr) minmax(220px, 0.9fr);
+    gap: 1.5rem;
+    align-items: start;
+}
+
+.chart-panel {
+    min-width: 0;
+    background: white;
+    border: 1px solid #dbe3f0;
+    border-radius: 12px;
+    padding: 1.25rem 1.75rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    overflow: hidden;
+}
+
+.insight-box {
+    background: white;
+    border: 1px solid #dbe3f0;
+    border-radius: 12px;
+    padding: 2rem 1.75rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.insight-box h4 {
+    font-family: var(--font-heading);
+    margin: 0 0 1rem 0;
+    font-size: 2rem;
+    line-height: 1.15;
+    color: #0f172a;
+}
+
+.insight-box p {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.65;
+    color: #334155;
+}
+
+.chart-panel h3 {
+    margin-top: 0;
+}
+
+.chart-panel .vis-caption {
+    margin-bottom: 0;
+}
+
+.chart-panel .vega-embed,
+.chart-panel > div[id^="vis"] {
+    width: 100% !important;
+    max-width: 100%;
+    margin-inline: auto;
 }
 
 .chart-item .vis-container > div[id^="vis"] {
@@ -156,20 +211,20 @@ html, body {
 }
 
 .vis-container {
-    background: white;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    padding: 1.5rem;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.08);
-    transition: box-shadow 0.3s ease;
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    padding: 0;
+    box-shadow: none;
+    transition: none;
 }
 
 .heatmap-section .vis-container {
-    padding: 1rem 1rem 1.25rem;
+    padding: 0;
 }
 
 .vis-container:hover {
-    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    box-shadow: none;
 }
 
 .vis-container h3 {
@@ -263,6 +318,14 @@ strong {
    ======================================== */
 
 @media (max-width: 768px) {
+    .chart-body {
+        grid-template-columns: 1fr;
+    }
+
+    .insight-box h4 {
+        font-size: 1.4rem;
+    }
+
     .header h1 {
         font-size: 1.8rem;
     }
