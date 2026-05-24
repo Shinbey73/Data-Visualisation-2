@@ -227,6 +227,90 @@ html, body {
     flex: 0 0 auto;
 }
 
+.legend-line.bump-highlight {
+    height: 3px;
+    background: #334155;
+    border-radius: 999px;
+}
+
+.legend-line.bump-muted {
+    background: rgba(100, 116, 139, 0.35);
+    border-radius: 999px;
+}
+
+.legend-multi {
+    width: 1.8rem;
+    height: 0.75rem;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #4e79a7, #f28e2b, #59a14f, #b07aa1);
+    flex: 0 0 auto;
+}
+
+.legend-rank {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.35rem;
+    height: 1.35rem;
+    border-radius: 50%;
+    background: #0f172a;
+    color: #ffffff;
+    font-size: 0.8rem;
+    font-weight: 700;
+    line-height: 1;
+    flex: 0 0 auto;
+}
+
+.state-colour-key {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.42rem;
+    margin-top: 0;
+    padding-top: 0;
+    border-top: 0;
+}
+
+.state-key-item {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    min-width: 0;
+    color: #334155;
+    font-size: 0.82rem;
+    line-height: 1.25;
+}
+
+.state-key-item span:last-child {
+    overflow-wrap: anywhere;
+    white-space: normal;
+}
+
+.state-dot {
+    width: 0.62rem;
+    height: 0.62rem;
+    border-radius: 50%;
+    border: 1px solid #ffffff;
+    box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.16);
+    flex: 0 0 auto;
+}
+
+.state-dot.johor { background: #4e79a7; }
+.state-dot.kedah { background: #f28e2b; }
+.state-dot.kelantan { background: #e15759; }
+.state-dot.kuala-lumpur { background: #76b7b2; }
+.state-dot.labuan { background: #59a14f; }
+.state-dot.melaka { background: #edc949; }
+.state-dot.negeri-sembilan { background: #af7aa1; }
+.state-dot.pahang { background: #ff9da7; }
+.state-dot.penang { background: #9c755f; }
+.state-dot.perak { background: #bab0ab; }
+.state-dot.perlis { background: #2f4b7c; }
+.state-dot.putrajaya { background: #a05195; }
+.state-dot.sabah { background: #d45087; }
+.state-dot.sarawak { background: #f95d6a; }
+.state-dot.selangor { background: #665191; }
+.state-dot.terengganu { background: #ffa600; }
+
 .legend-size {
     border-radius: 50%;
     background: #94a3b8;
