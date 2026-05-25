@@ -9,8 +9,11 @@
                   "subtitleColor":  "#555555",
                   "offset":  20
               },
-    "width":  780,
+    "width":  980,
     "height":  420,
+    "padding":  {
+                    "right":  24
+                },
     "data":  {
                  "url":  "data/urban_rural_food_cpi_clean.csv"
              },
@@ -68,11 +71,95 @@
                                                 ],
                                     "name":  "End year: "
                                 }
+                   },
+                   {
+                       "name":  "start_month",
+                       "value":  1,
+                       "bind":  {
+                                    "input":  "select",
+                                    "options":  [
+                                                    1,
+                                                    2,
+                                                    3,
+                                                    4,
+                                                    5,
+                                                    6,
+                                                    7,
+                                                    8,
+                                                    9,
+                                                    10,
+                                                    11,
+                                                    12
+                                                ],
+                                    "labels":  [
+                                                   "January",
+                                                   "February",
+                                                   "March",
+                                                   "April",
+                                                   "May",
+                                                   "June",
+                                                   "July",
+                                                   "August",
+                                                   "September",
+                                                   "October",
+                                                   "November",
+                                                   "December"
+                                               ],
+                                    "name":  "Start month: "
+                                }
+                   },
+                   {
+                       "name":  "end_month",
+                       "value":  12,
+                       "bind":  {
+                                    "input":  "select",
+                                    "options":  [
+                                                    1,
+                                                    2,
+                                                    3,
+                                                    4,
+                                                    5,
+                                                    6,
+                                                    7,
+                                                    8,
+                                                    9,
+                                                    10,
+                                                    11,
+                                                    12
+                                                ],
+                                    "labels":  [
+                                                   "January",
+                                                   "February",
+                                                   "March",
+                                                   "April",
+                                                   "May",
+                                                   "June",
+                                                   "July",
+                                                   "August",
+                                                   "September",
+                                                   "October",
+                                                   "November",
+                                                   "December"
+                                                ],
+                                    "name":  "End month: "
+                                }
                    }
                ],
     "transform":  [
                       {
-                          "filter":  "datum.year \u003e= start_year \u0026\u0026 datum.year \u003c= end_year"
+                          "calculate":  "toNumber(datum.year) * 100 + toNumber(datum.month_number)",
+                          "as":  "date_key"
+                      },
+                      {
+                          "calculate":  "toNumber(start_year) * 100 + toNumber(start_month)",
+                          "as":  "start_key"
+                      },
+                      {
+                          "calculate":  "toNumber(end_year) * 100 + toNumber(end_month)",
+                          "as":  "end_key"
+                      },
+                      {
+                          "filter":  "datum.date_key >= min(datum.start_key, datum.end_key) && datum.date_key <= max(datum.start_key, datum.end_key)"
                       }
                   ],
     "layer":  [
@@ -88,8 +175,9 @@
                                                  "type":  "temporal",
                                                  "title":  "Month",
                                                  "axis":  {
-                                                              "format":  "%Y",
-                                                              "labelAngle":  0,
+                                                              "format":  "%b %Y",
+                                                              "tickCount":  8,
+                                                              "labelAngle":  -30,
                                                               "grid":  false
                                                           }
                                              },
@@ -117,7 +205,8 @@
                                                                                  "#4c78a8",
                                                                                  "#f58518"
                                                                              ]
-                                                               }
+                                                               },
+                                                     "legend":  null
                                                  },
                                        "tooltip":  [
                                                        {
@@ -126,9 +215,9 @@
                                                            "title":  "Household strata"
                                                        },
                                                        {
-                                                           "field":  "month",
-                                                           "type":  "nominal",
-                                                           "title":  "Month"
+                                                          "field":  "month",
+                                                          "type":  "nominal",
+                                                           "title":  "Month in selected view"
                                                        },
                                                        {
                                                            "field":  "year",
@@ -165,19 +254,14 @@
                                         },
                                         {
                                             "filter":  "datum.date_number == datum.latest_date_number"
-                                        },
-                                        {
-                                            "calculate":  "datum.strata_display + \u0027  \u0027 + format(datum.food_consumer_price_index, \u0027.1f\u0027)",
-                                            "as":  "end_label"
                                         }
                                     ],
                       "mark":  {
-                                   "type":  "text",
-                                   "align":  "left",
-                                   "baseline":  "middle",
-                                   "dx":  8,
-                                   "fontSize":  11,
-                                   "fontWeight":  "bold"
+                                   "type":  "point",
+                                   "filled":  true,
+                                   "size":  95,
+                                   "stroke":  "#ffffff",
+                                   "strokeWidth":  1.4
                                },
                       "encoding":  {
                                        "x":  {
@@ -203,9 +287,87 @@
                                                                              ]
                                                                }
                                                  },
-                                       "text":  {
-                                                    "field":  "end_label"
-                                                }
+                                       "tooltip":  [
+                                                       {
+                                                           "field":  "strata_display",
+                                                           "type":  "nominal",
+                                                           "title":  "Household strata"
+                                                       },
+                                                       {
+                                                           "field":  "month",
+                                                           "type":  "nominal",
+                                                           "title":  "Month"
+                                                       },
+                                                       {
+                                                           "field":  "year",
+                                                           "type":  "ordinal",
+                                                           "title":  "Year"
+                                                       },
+                                                       {
+                                                           "field":  "food_consumer_price_index",
+                                                           "type":  "quantitative",
+                                                           "title":  "Latest food CPI",
+                                                           "format":  ".1f"
+                                                       }
+                                                   ]
+                                   }
+                  },
+                  {
+                      "transform":  [
+                                        {
+                                            "filter":  "datum.month_number == 1"
+                                        }
+                                    ],
+                      "mark":  {
+                                   "type":  "point",
+                                   "filled":  true,
+                                   "size":  38,
+                                   "stroke":  "#ffffff",
+                                   "strokeWidth":  0.8,
+                                   "opacity":  0.9
+                               },
+                      "encoding":  {
+                                       "x":  {
+                                                 "field":  "date",
+                                                 "type":  "temporal"
+                                             },
+                                       "y":  {
+                                                 "field":  "food_consumer_price_index",
+                                                 "type":  "quantitative"
+                                             },
+                                       "color":  {
+                                                     "field":  "strata_display",
+                                                     "type":  "nominal",
+                                                     "legend":  null,
+                                                     "scale":  {
+                                                                   "domain":  [
+                                                                                  "Urban households",
+                                                                                  "Rural households"
+                                                                              ],
+                                                                   "range":  [
+                                                                                 "#4c78a8",
+                                                                                 "#f58518"
+                                                                             ]
+                                                               }
+                                                 },
+                                       "tooltip":  [
+                                                       {
+                                                           "field":  "strata_display",
+                                                           "type":  "nominal",
+                                                           "title":  "Household strata"
+                                                       },
+                                                       {
+                                                           "field":  "year",
+                                                           "type":  "ordinal",
+                                                           "title":  "Year marker"
+                                                       },
+                                                       {
+                                                           "field":  "food_consumer_price_index",
+                                                           "type":  "quantitative",
+                                                           "title":  "Food CPI",
+                                                           "format":  ".1f"
+                                                       }
+                                                   ]
                                    }
                   },
                   {

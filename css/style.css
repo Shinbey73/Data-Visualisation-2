@@ -229,6 +229,19 @@ html, body {
     background: #2563eb;
 }
 
+.legend-swatch.basket-high {
+    background: #7b3294;
+}
+
+.legend-swatch.basket-low {
+    background: #2c7bb6;
+}
+
+.legend-swatch.basket-normal {
+    background: #7e1313;
+    opacity: 0.7;
+}
+
 .legend-swatch.crop-high-pressure {
     background: #7c3aed;
 }
@@ -261,6 +274,11 @@ html, body {
     flex: 0 0 auto;
 }
 
+.legend-price-line.basket-index {
+    background: #7e1313;
+    opacity: 0.95;
+}
+
 .legend-bar {
     width: 1.9rem;
     height: 0.8rem;
@@ -281,6 +299,42 @@ html, body {
 .legend-line.bump-muted {
     background: rgba(111, 139, 100, 0.35);
     border-radius: 999px;
+}
+
+.legend-line.urban-cpi {
+    height: 3px;
+    background: #4c78a8;
+    border-radius: 999px;
+}
+
+.legend-line.rural-cpi {
+    height: 3px;
+    background: #f58518;
+    border-radius: 999px;
+}
+
+.legend-line.low-income-food {
+    height: 3px;
+    background: #7b3294;
+    border-radius: 999px;
+}
+
+.legend-line.low-income-all {
+    height: 3px;
+    background: #666666;
+    border-radius: 999px;
+}
+
+.legend-area {
+    width: 1.9rem;
+    height: 0.8rem;
+    border-radius: 3px;
+    flex: 0 0 auto;
+}
+
+.legend-area.low-income-gap {
+    background: rgba(123, 50, 148, 0.18);
+    border: 1px solid rgba(123, 50, 148, 0.35);
 }
 
 .slope-legend {
@@ -459,6 +513,25 @@ html, body {
     height: 1rem;
 }
 
+.legend-size.cpi-latest {
+    width: 0.8rem;
+    height: 0.8rem;
+    background: #94a3b8;
+}
+
+.legend-size.cpi-year {
+    width: 0.58rem;
+    height: 0.58rem;
+    margin-inline: 0.11rem;
+    background: #94a3b8;
+}
+
+.legend-size.low-income-latest {
+    width: 0.8rem;
+    height: 0.8rem;
+    background: #94a3b8;
+}
+
 .legend-dash {
     width: 1.8rem;
     height: 0;
@@ -468,6 +541,16 @@ html, body {
 
 .legend-dash.price-median {
     border-top-color: #94a3b8;
+}
+
+.legend-dash.basket-base {
+    border-top-color: #94a3b8;
+    opacity: 0.75;
+}
+
+.legend-dash.cpi-reference {
+    border-top-color: #777777;
+    opacity: 0.7;
 }
 
 .insight-box h4 {

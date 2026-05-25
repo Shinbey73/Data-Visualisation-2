@@ -162,10 +162,35 @@
                                     <div class="chart-panel">
                                         <div id="vis_food_basket_index"></div>
                                     </div>
-                                    <aside class="insight-box">
-                                        <h4>Insight</h4>
-                                        <p>This box can summarise whether the food basket is trending upward or downward overall, making the item prices easier to interpret as one signal.</p>
-                                    </aside>
+                                    <div class="chart-side">
+                                        <aside class="insight-box">
+                                            <h4>Insight</h4>
+                                            <p>This box can summarise whether the food basket is trending upward or downward overall, making the item prices easier to interpret as one signal.</p>
+                                        </aside>
+                                        <div class="legend-box basket-legend" aria-label="Food basket price index legend">
+                                            <h4>Legend</h4>
+                                            <div class="legend-row">
+                                                <span class="legend-price-line basket-index"></span>
+                                                <span>Basket index trend</span>
+                                            </div>
+                                            <div class="legend-row">
+                                                <span class="legend-swatch basket-normal"></span>
+                                                <span>Daily index point</span>
+                                            </div>
+                                            <div class="legend-row">
+                                                <span class="legend-swatch basket-high"></span>
+                                                <span>Highest point</span>
+                                            </div>
+                                            <div class="legend-row">
+                                                <span class="legend-swatch basket-low"></span>
+                                                <span>Lowest point</span>
+                                            </div>
+                                            <div class="legend-row">
+                                                <span class="legend-dash basket-base"></span>
+                                                <span>Base index = 100</span>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <p class="vis-caption">The selected food basket index shows whether a basic group of food items became more expensive or cheaper during May 2026. This makes item-level prices easier to interpret as one household-facing price signal.</p>
                             </div>
@@ -178,10 +203,35 @@
                                     <div class="chart-panel">
                                         <div id="vis_urban_rural_food_cpi"></div>
                                     </div>
-                                    <aside class="insight-box">
-                                        <h4>Insight</h4>
-                                        <p>Use this space to compare whether urban and rural households follow the same pattern or whether one group consistently faces more pressure.</p>
-                                    </aside>
+                                    <div class="chart-side">
+                                        <aside class="insight-box">
+                                            <h4>Insight</h4>
+                                            <p>Use this space to compare whether urban and rural households follow the same pattern or whether one group consistently faces more pressure.</p>
+                                        </aside>
+                                        <div class="legend-box urban-rural-legend" aria-label="Urban versus rural food CPI legend">
+                                            <h4>Legend</h4>
+                                            <div class="legend-row">
+                                                <span class="legend-line urban-cpi"></span>
+                                                <span>Urban households</span>
+                                            </div>
+                                            <div class="legend-row">
+                                                <span class="legend-line rural-cpi"></span>
+                                                <span>Rural households</span>
+                                            </div>
+                                            <div class="legend-row">
+                                                <span class="legend-size cpi-year"></span>
+                                                <span>January year point</span>
+                                            </div>
+                                            <div class="legend-row">
+                                                <span class="legend-size cpi-latest"></span>
+                                                <span>Latest available point</span>
+                                            </div>
+                                            <div class="legend-row">
+                                                <span class="legend-dash cpi-reference"></span>
+                                                <span>January 2020 marker</span>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <p class="vis-caption">Urban and rural households experience food price pressure through similar national trends, but their Consumer Price Index levels can differ. Comparing both lines helps show whether food price pressure is shared equally or felt more strongly by one household group.</p>
                             </div>
@@ -194,10 +244,32 @@
                                     <div class="chart-panel">
                                         <div id="vis_low_income_food_pressure"></div>
                                     </div>
-                                    <aside class="insight-box">
-                                        <h4>Insight</h4>
-                                        <p>This panel should explain the gap between low-income households and the broader CPI, since that gap shows where affordability pressure is strongest.</p>
-                                    </aside>
+                                    <div class="chart-side">
+                                        <aside class="insight-box">
+                                            <h4>Insight</h4>
+                                            <p>The shaded area shows how far food and beverages CPI sits above or below all-items CPI for low-income households.</p>
+                                        </aside>
+                                        <div class="legend-box low-income-legend" aria-label="Low-income household food pressure legend">
+                                            <h4>Legend</h4>
+                                            <div class="legend-row">
+                                                <span class="legend-line low-income-food"></span>
+                                                <span>Food and beverages CPI</span>
+                                            </div>
+                                            <div class="legend-row">
+                                                <span class="legend-line low-income-all"></span>
+                                                <span>All-items CPI</span>
+                                            </div>
+                                            <div class="legend-row">
+                                                <span class="legend-area low-income-gap"></span>
+                                                <span>Food pressure gap</span>
+                                            </div>
+                                            <div class="legend-row">
+                                                <span class="legend-size low-income-latest"></span>
+                                                <span>Latest available point</span>
+                                            </div>
+                                        </div>
+
+                                    </div>
                                 </div>
                                 <p class="vis-caption">Food and beverages prices sit above the overall Consumer Price Index for low-income households. The widening gap shows why food inflation can create stronger pressure for households with tighter budgets.</p>
                             </div>

@@ -6,11 +6,11 @@
                   "anchor":  "start",
                   "fontSize":  20,
                   "subtitleFontSize":  12,
-                  "subtitleColor":  "#555555",
+                  "subtitleColor":  "#64748b",
                   "offset":  20
               },
-    "width":  760,
-    "height":  360,
+    "width":  980,
+    "height":  560,
     "data":  {
                  "url":  "data/food_basket_price_index_clean.csv"
              },
@@ -56,8 +56,8 @@
                                                       4
                                                   ],
                                    "strokeWidth":  1,
-                                   "color":  "#777777",
-                                   "opacity":  0.45
+                                   "color":  "#94a3b8",
+                                   "opacity":  0.75
                                },
                       "encoding":  {
                                        "y":  {
@@ -69,30 +69,39 @@
                   {
                       "mark":  {
                                    "type":  "line",
-                                   "strokeWidth":  2.6,
+                                   "strokeWidth":  3,
                                    "interpolate":  "monotone",
-                                   "color":  "#4c4c4c"
+                                   "color":  "#7e1313",
+                                   "opacity":  0.95,
+                                   "strokeCap":  "round",
+                                   "strokeJoin":  "round"
                                },
                       "encoding":  {
                                        "x":  {
                                                  "field":  "date",
                                                  "type":  "temporal",
-                                                 "title":  "Date",
+                                                 "title":  "Day in May 2026",
                                                  "axis":  {
                                                               "format":  "%d %b",
                                                               "labelAngle":  0,
-                                                              "grid":  false
+                                                              "grid":  false,
+                                                              "labelColor":  "#64748b",
+                                                              "titleColor":  "#334155"
                                                           }
                                              },
                                        "y":  {
                                                  "field":  "basket_index",
                                                  "type":  "quantitative",
-                                                 "title":  "Food basket price index",
+                                                 "title":  "Food basket price index (base = 100)",
                                                  "scale":  {
                                                                "zero":  false
                                                            },
                                                  "axis":  {
-                                                              "grid":  true
+                                                              "grid":  true,
+                                                              "gridColor":  "#e5e7eb",
+                                                              "labelColor":  "#64748b",
+                                                              "titleColor":  "#334155",
+                                                              "format":  ".1f"
                                                           }
                                              },
                                        "tooltip":  [
@@ -123,60 +132,6 @@
                                                            "field":  "base_date",
                                                            "type":  "nominal",
                                                            "title":  "Base date"
-                                                       },
-                                                       {
-                                                           "field":  "base_basket_price",
-                                                           "type":  "quantitative",
-                                                           "title":  "Base basket price (RM)",
-                                                           "format":  ".2f"
-                                                       },
-                                                       {
-                                                           "field":  "chicken_standard_price",
-                                                           "type":  "quantitative",
-                                                           "title":  "Chicken, standard (RM)",
-                                                           "format":  ".2f"
-                                                       },
-                                                       {
-                                                           "field":  "eggs_grade_a_price",
-                                                           "type":  "quantitative",
-                                                           "title":  "Eggs, grade A (RM)",
-                                                           "format":  ".2f"
-                                                       },
-                                                       {
-                                                           "field":  "kembung_fish_price",
-                                                           "type":  "quantitative",
-                                                           "title":  "Kembung fish (RM)",
-                                                           "format":  ".2f"
-                                                       },
-                                                       {
-                                                           "field":  "tomato_price",
-                                                           "type":  "quantitative",
-                                                           "title":  "Tomato (RM)",
-                                                           "format":  ".2f"
-                                                       },
-                                                       {
-                                                           "field":  "yellow_onion_price",
-                                                           "type":  "quantitative",
-                                                           "title":  "Yellow onion (RM)",
-                                                           "format":  ".2f"
-                                                       },
-                                                       {
-                                                           "field":  "potato_price",
-                                                           "type":  "quantitative",
-                                                           "title":  "Potato (RM)",
-                                                           "format":  ".2f"
-                                                       },
-                                                       {
-                                                           "field":  "water_spinach_price",
-                                                           "type":  "quantitative",
-                                                           "title":  "Water spinach (RM)",
-                                                           "format":  ".2f"
-                                                       },
-                                                       {
-                                                           "field":  "red_chili_kulai_price",
-                                                           "type":  "quantitative",
-                                                           "title":  "Red chili, Kulai (RM)",
-                                                           "format":  ".2f"
                                                        }
                                                    ]
                                    }
@@ -185,9 +140,9 @@
                       "mark":  {
                                    "type":  "point",
                                    "filled":  true,
-                                   "size":  45,
-                                   "color":  "#4c4c4c",
-                                   "opacity":  0.55
+                                   "size":  52,
+                                   "color":  "#7e1313",
+                                   "opacity":  0.7
                                },
                       "encoding":  {
                                        "x":  {
@@ -197,7 +152,79 @@
                                        "y":  {
                                                  "field":  "basket_index",
                                                  "type":  "quantitative"
-                                             }
+                                             },
+                                       "tooltip":  [
+                                                       {
+                                                           "field":  "area",
+                                                           "type":  "nominal",
+                                                           "title":  "Area"
+                                                       },
+                                                       {
+                                                           "field":  "date",
+                                                           "type":  "temporal",
+                                                           "title":  "Date",
+                                                           "format":  "%d %B %Y"
+                                                       },
+                                                       {
+                                                           "field":  "basket_index",
+                                                           "type":  "quantitative",
+                                                           "title":  "Basket price index",
+                                                           "format":  ".1f"
+                                                       },
+                                                       {
+                                                           "field":  "basket_price",
+                                                           "type":  "quantitative",
+                                                           "title":  "Basket price (RM)",
+                                                           "format":  ".2f"
+                                                       },
+                                                       {
+                                                           "field":  "highlight_point",
+                                                           "type":  "nominal",
+                                                           "title":  "Point"
+                                                       }
+                                                   ]
+                                   }
+                  },
+                  {
+                      "transform":  [
+                                        {
+                                            "joinaggregate":  [
+                                                                  {
+                                                                      "op":  "max",
+                                                                      "field":  "date_number",
+                                                                      "as":  "latest_date_number"
+                                                                  }
+                                                              ]
+                                        },
+                                        {
+                                            "filter":  "datum.date_number == datum.latest_date_number"
+                                        },
+                                        {
+                                            "calculate":  "\u0027Latest: \u0027 + format(datum.basket_index, \u0027.1f\u0027)",
+                                            "as":  "latest_label"
+                                        }
+                                    ],
+                      "mark":  {
+                                   "type":  "text",
+                                   "align":  "left",
+                                   "baseline":  "middle",
+                                   "dx":  10,
+                                   "fontSize":  11,
+                                   "fontWeight":  "bold",
+                                   "color":  "#7e1313"
+                               },
+                      "encoding":  {
+                                       "x":  {
+                                                 "field":  "date",
+                                                 "type":  "temporal"
+                                             },
+                                       "y":  {
+                                                 "field":  "basket_index",
+                                                 "type":  "quantitative"
+                                             },
+                                       "text":  {
+                                                    "field":  "latest_label"
+                                                }
                                    }
                   },
                   {
@@ -236,10 +263,7 @@
                                                                                  "#2c7bb6"
                                                                              ]
                                                                },
-                                                     "legend":  {
-                                                                    "orient":  "bottom",
-                                                                    "direction":  "horizontal"
-                                                                }
+                                                     "legend":  null
                                                  },
                                        "tooltip":  [
                                                        {
@@ -271,47 +295,6 @@
                                                            "format":  ".2f"
                                                        }
                                                    ]
-                                   }
-                  },
-                  {
-                      "transform":  [
-                                        {
-                                            "filter":  "datum.highlight_point != \u0027Normal day\u0027"
-                                        }
-                                    ],
-                      "mark":  {
-                                   "type":  "text",
-                                   "dy":  -12,
-                                   "fontSize":  11,
-                                   "fontWeight":  "bold"
-                               },
-                      "encoding":  {
-                                       "x":  {
-                                                 "field":  "date",
-                                                 "type":  "temporal"
-                                             },
-                                       "y":  {
-                                                 "field":  "basket_index",
-                                                 "type":  "quantitative"
-                                             },
-                                       "text":  {
-                                                    "field":  "basket_index_label"
-                                                },
-                                       "color":  {
-                                                     "field":  "highlight_point",
-                                                     "type":  "nominal",
-                                                     "scale":  {
-                                                                   "domain":  [
-                                                                                  "Highest basket index",
-                                                                                  "Lowest basket index"
-                                                                              ],
-                                                                   "range":  [
-                                                                                 "#7b3294",
-                                                                                 "#2c7bb6"
-                                                                             ]
-                                                               },
-                                                     "legend":  null
-                                                 }
                                    }
                   }
               ],
