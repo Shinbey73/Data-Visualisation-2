@@ -1,219 +1,445 @@
-﻿{
-    "$schema":  "https://vega.github.io/schema/vega-lite/v5.json",
-    "title":  {
-                  "text":  "Daily food item price movement in May 2026",
-                  "subtitle":  "Small multiples show daily median prices for selected food items from PriceCatcher records",
-                  "anchor":  "start",
-                  "fontSize":  20,
-                  "subtitleFontSize":  12,
-                  "subtitleColor":  "#555555",
-                  "offset":  20
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Food Item Price Movement in May 2026",
+    "subtitle": "Rank items by price swing, then inspect the daily median price pattern for one selected item",
+    "anchor": "start",
+    "fontSize": 20,
+    "fontWeight": 700,
+    "subtitleFontSize": 12,
+    "subtitleColor": "#64748b",
+    "offset": 18
+  },
+  "data": {
+    "url": "data/food_item_price_small_multiples_clean.csv"
+  },
+  "padding": {
+    "left": 56,
+    "right": 8,
+    "top": 6,
+    "bottom": 6
+  },
+  "params": [
+    {
+      "name": "item_group_view",
+      "value": "Fresh items",
+      "bind": {
+        "input": "select",
+        "options": [
+          "Fresh items",
+          "Packaged staples",
+          "All items"
+        ],
+        "name": "Item group: "
+      }
+    },
+    {
+      "name": "selected_item",
+      "value": "Tomato",
+      "bind": {
+        "input": "select",
+        "options": [
+          "Chicken, standard",
+          "Eggs, grade A",
+          "Rice, imported five percent broken",
+          "Cooking oil, packet assorted brands",
+          "Fish, kembung",
+          "Tomato",
+          "Onion, yellow",
+          "Red chili, Kulai",
+          "Sugar, coarse white",
+          "Wheat flour, packaged",
+          "Water spinach",
+          "Milk powder, Dutch Lady"
+        ],
+        "name": "Daily detail: "
+      }
+    }
+  ],
+  "transform": [
+    {
+      "calculate": "datum.item_group == 'BARANGAN SEGAR' ? 'Fresh items' : datum.item_group == 'BARANGAN BERBUNGKUS' ? 'Packaged staples' : 'Other items'",
+      "as": "item_group_view_label"
+    },
+    {
+      "calculate": "datum.item_display == 'Rice, imported five percent broken' ? 'Rice, imported 5% broken' : datum.item_display == 'Cooking oil, packet assorted brands' ? 'Cooking oil, packet' : datum.item_display == 'Milk powder, Dutch Lady' ? 'Milk powder' : datum.item_display",
+      "as": "item_axis_label"
+    },
+    {
+      "joinaggregate": [
+        {
+          "op": "max",
+          "field": "median_price",
+          "as": "item_max_price"
+        },
+        {
+          "op": "min",
+          "field": "median_price",
+          "as": "item_min_price"
+        },
+        {
+          "op": "median",
+          "field": "item_period_median_price",
+          "as": "item_reference_price"
+        }
+      ],
+      "groupby": [
+        "item_display"
+      ]
+    },
+    {
+      "calculate": "(datum.item_max_price - datum.item_min_price) / datum.item_reference_price * 100",
+      "as": "price_swing_pct"
+    },
+    {
+      "calculate": "datum.item_display == selected_item ? 'Selected item' : 'Other items'",
+      "as": "selection_status"
+    }
+  ],
+  "vconcat": [
+    {
+      "height": 230,
+      "width": 890,
+      "title": {
+        "text": "Largest daily price swings",
+        "anchor": "start",
+        "fontSize": 14,
+        "fontWeight": 700,
+        "offset": 8
+      },
+      "transform": [
+        {
+          "filter": "item_group_view == 'All items' || datum.item_group_view_label == item_group_view"
+        },
+        {
+          "joinaggregate": [
+            {
+              "op": "max",
+              "field": "price_swing_pct",
+              "as": "largest_visible_swing"
+            }
+          ]
+        },
+        {
+          "calculate": "datum.price_swing_pct == datum.largest_visible_swing ? 'Largest swing' : 'Other items'",
+          "as": "swing_highlight"
+        }
+      ],
+      "layer": [
+        {
+          "mark": {
+            "type": "bar",
+            "cornerRadiusEnd": 4
+          },
+          "encoding": {
+            "y": {
+              "field": "item_axis_label",
+              "type": "nominal",
+              "sort": {
+                "op": "max",
+                "field": "price_swing_pct",
+                "order": "descending"
               },
-    "data":  {
-                 "url":  "data/food_item_price_small_multiples_clean.csv"
-             },
-    "width":  210,
-    "height":  120,
-    "facet":  {
-                  "field":  "item_display",
-                  "type":  "nominal",
-                  "title":  null,
-                  "sort":  {
-                               "field":  "item_order",
-                               "order":  "ascending"
-                           },
-                  "header":  {
-                                 "labelFontSize":  11,
-                                 "labelFontWeight":  "bold",
-                                 "labelLimit":  190,
-                                 "title":  null
-                             }
+              "title": null,
+              "axis": {
+                "labelLimit": 180,
+                "labelFontSize": 11,
+                "labelColor": "#334155",
+                "labelPadding": 8,
+                "domain": false,
+                "ticks": false
+              }
+            },
+            "x": {
+              "aggregate": "max",
+              "field": "price_swing_pct",
+              "type": "quantitative",
+              "title": "Swing between lowest and highest daily median (%)",
+              "axis": {
+                "grid": true,
+                "gridColor": "#e5e7eb",
+                "labelColor": "#64748b",
+                "titleColor": "#334155",
+                "format": ".1f",
+                "tickMinStep": 2
+              }
+            },
+            "color": {
+              "field": "swing_highlight",
+              "type": "nominal",
+              "scale": {
+                "domain": [
+                  "Largest swing",
+                  "Other items"
+                ],
+                "range": [
+                  "#622B14",
+                  "#d6dee8"
+                ]
               },
-    "columns":  3,
-    "spec":  {
-                 "layer":  [
-                               {
-                                   "mark":  {
-                                                "type":  "rule",
-                                                "strokeDash":  [
-                                                                   4,
-                                                                   4
-                                                               ],
-                                                "strokeWidth":  1,
-                                                "opacity":  0.45,
-                                                "color":  "#777777"
-                                            },
-                                   "encoding":  {
-                                                    "y":  {
-                                                              "field":  "item_period_median_price",
-                                                              "type":  "quantitative"
-                                                          },
-                                                    "tooltip":  [
-                                                                    {
-                                                                        "field":  "item_display",
-                                                                        "type":  "nominal",
-                                                                        "title":  "Food item"
-                                                                    },
-                                                                    {
-                                                                        "field":  "display_unit",
-                                                                        "type":  "nominal",
-                                                                        "title":  "Unit"
-                                                                    },
-                                                                    {
-                                                                        "field":  "item_period_median_price",
-                                                                        "type":  "quantitative",
-                                                                        "title":  "Item median for period (Malaysian Ringgit)",
-                                                                        "format":  ".2f"
-                                                                    }
-                                                                ]
-                                                }
-                               },
-                               {
-                                   "mark":  {
-                                                "type":  "line",
-                                                "strokeWidth":  2.2,
-                                                "interpolate":  "monotone",
-                                                "color":  "#4c4c4c"
-                                            },
-                                   "encoding":  {
-                                                    "x":  {
-                                                              "field":  "date",
-                                                              "type":  "temporal",
-                                                              "title":  "Day in May 2026",
-                                                              "axis":  {
-                                                                           "format":  "%d",
-                                                                           "labelAngle":  0,
-                                                                           "tickCount":  6,
-                                                                           "grid":  false
-                                                                       }
-                                                          },
-                                                    "y":  {
-                                                              "field":  "median_price",
-                                                              "type":  "quantitative",
-                                                              "title":  "Median price (Malaysian Ringgit)",
-                                                              "scale":  {
-                                                                            "zero":  false
-                                                                        },
-                                                              "axis":  {
-                                                                           "grid":  true,
-                                                                           "tickCount":  4
-                                                                       }
-                                                          }
-                                                }
-                               },
-                               {
-                                   "mark":  {
-                                                "type":  "point",
-                                                "filled":  true,
-                                                "size":  55,
-                                                "stroke":  "white",
-                                                "strokeWidth":  0.8
-                                            },
-                                   "encoding":  {
-                                                    "x":  {
-                                                              "field":  "date",
-                                                              "type":  "temporal"
-                                                          },
-                                                    "y":  {
-                                                              "field":  "median_price",
-                                                              "type":  "quantitative"
-                                                          },
-                                                    "color":  {
-                                                                  "field":  "price_highlight",
-                                                                  "type":  "nominal",
-                                                                  "title":  "Daily marker",
-                                                                  "scale":  {
-                                                                                "domain":  [
-                                                                                               "Highest daily median",
-                                                                                               "Lowest daily median",
-                                                                                               "Normal daily median"
-                                                                                           ],
-                                                                                "range":  [
-                                                                                              "#7b3294",
-                                                                                              "#4c78a8",
-                                                                                              "#9e9e9e"
-                                                                                          ]
-                                                                            },
-                                                                  "legend":  {
-                                                                                 "orient":  "bottom",
-                                                                                 "direction":  "horizontal"
-                                                                             }
-                                                              },
-                                                    "opacity":  {
-                                                                    "condition":  {
-                                                                                      "test":  "datum.price_highlight == \u0027Normal daily median\u0027",
-                                                                                      "value":  0.35
-                                                                                  },
-                                                                    "value":  1
-                                                                },
-                                                    "tooltip":  [
-                                                                    {
-                                                                        "field":  "item_display",
-                                                                        "type":  "nominal",
-                                                                        "title":  "Food item"
-                                                                    },
-                                                                    {
-                                                                        "field":  "display_unit",
-                                                                        "type":  "nominal",
-                                                                        "title":  "Unit"
-                                                                    },
-                                                                    {
-                                                                        "field":  "date_label",
-                                                                        "type":  "nominal",
-                                                                        "title":  "Date"
-                                                                    },
-                                                                    {
-                                                                        "field":  "median_price",
-                                                                        "type":  "quantitative",
-                                                                        "title":  "Daily median price (Malaysian Ringgit)",
-                                                                        "format":  ".2f"
-                                                                    },
-                                                                    {
-                                                                        "field":  "price_change_from_item_median",
-                                                                        "type":  "quantitative",
-                                                                        "title":  "Difference from item median (Malaysian Ringgit)",
-                                                                        "format":  ".2f"
-                                                                    },
-                                                                    {
-                                                                        "field":  "price_record_count",
-                                                                        "type":  "quantitative",
-                                                                        "title":  "Number of price records",
-                                                                        "format":  ",.0f"
-                                                                    },
-                                                                    {
-                                                                        "field":  "price_highlight",
-                                                                        "type":  "nominal",
-                                                                        "title":  "Marker"
-                                                                    }
-                                                                ]
-                                                }
-                               }
-                           ]
-             },
-    "resolve":  {
-                    "scale":  {
-                                  "y":  "independent"
-                              }
+              "legend": null
+            },
+            "opacity": {
+              "condition": {
+                "test": "datum.swing_highlight == 'Largest swing'",
+                "value": 1
+              },
+              "value": 0.88
+            },
+            "tooltip": [
+              {
+                "field": "item_display",
+                "type": "nominal",
+                "title": "Food item"
+              },
+              {
+                "aggregate": "max",
+                "field": "price_swing_pct",
+                "type": "quantitative",
+                "title": "Price swing (%)",
+                "format": ".1f"
+              },
+              {
+                "field": "display_unit",
+                "type": "nominal",
+                "title": "Unit"
+              },
+              {
+                "field": "item_group_view_label",
+                "type": "nominal",
+                "title": "Item group"
+              }
+            ]
+          }
+        },
+        {
+          "mark": {
+            "type": "text",
+            "align": "left",
+            "baseline": "middle",
+            "dx": 7,
+            "fontSize": 11,
+            "fontWeight": 700,
+            "color": "#334155"
+          },
+          "encoding": {
+            "y": {
+              "field": "item_axis_label",
+              "type": "nominal",
+              "sort": {
+                "op": "max",
+                "field": "price_swing_pct",
+                "order": "descending"
+              }
+            },
+            "x": {
+              "aggregate": "max",
+              "field": "price_swing_pct",
+              "type": "quantitative"
+            },
+            "text": {
+              "aggregate": "max",
+              "field": "price_swing_pct",
+              "type": "quantitative",
+              "format": ".1f"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "height": 250,
+      "width": 890,
+      "title": {
+        "text": "Daily pattern for selected item",
+        "anchor": "start",
+        "fontSize": 14,
+        "fontWeight": 700,
+        "offset": 8
+      },
+      "transform": [
+        {
+          "filter": "datum.item_display == selected_item"
+        }
+      ],
+      "layer": [
+        {
+          "mark": {
+            "type": "rule",
+            "strokeDash": [
+              4,
+              4
+            ],
+            "strokeWidth": 1.2,
+            "color": "#94a3b8",
+            "opacity": 0.8
+          },
+          "encoding": {
+            "y": {
+              "field": "item_period_median_price",
+              "type": "quantitative"
+            }
+          }
+        },
+        {
+          "mark": {
+            "type": "line",
+            "strokeWidth": 3,
+            "color": "#0f766e",
+            "interpolate": "monotone",
+            "strokeCap": "round",
+            "strokeJoin": "round"
+          },
+          "encoding": {
+            "x": {
+              "field": "date",
+              "type": "temporal",
+              "title": "Day in May 2026",
+              "axis": {
+                "format": "%d",
+                "labelAngle": 0,
+                "tickCount": 8,
+                "grid": false,
+                "labelColor": "#64748b",
+                "titleColor": "#334155"
+              }
+            },
+            "y": {
+              "field": "median_price",
+              "type": "quantitative",
+              "title": "Daily median price (RM)",
+              "scale": {
+                "zero": false
+              },
+              "axis": {
+                "grid": true,
+                "gridColor": "#e5e7eb",
+                "labelColor": "#64748b",
+                "titleColor": "#334155",
+                "format": ".2f"
+              }
+            }
+          }
+        },
+        {
+          "mark": {
+            "type": "point",
+            "filled": true,
+            "stroke": "#ffffff",
+            "strokeWidth": 1.4
+          },
+          "encoding": {
+            "x": {
+              "field": "date",
+              "type": "temporal"
+            },
+            "y": {
+              "field": "median_price",
+              "type": "quantitative"
+            },
+            "color": {
+              "field": "price_highlight",
+              "type": "nominal",
+              "scale": {
+                "domain": [
+                  "Highest daily median",
+                  "Lowest daily median",
+                  "Normal daily median"
+                ],
+                "range": [
+                  "#ea580c",
+                  "#2563eb",
+                  "#64748b"
+                ]
+              },
+              "legend": null
+            },
+            "size": {
+              "condition": [
+                {
+                  "test": "datum.price_highlight == 'Highest daily median'",
+                  "value": 135
                 },
-    "config":  {
-                   "view":  {
-                                "stroke":  null
-                            },
-                   "font":  "Inter, Arial, sans-serif",
-                   "axis":  {
-                                "labelFont":  "Inter, Arial, sans-serif",
-                                "titleFont":  "Inter, Arial, sans-serif",
-                                "gridColor":  "#eeeeee",
-                                "tickColor":  "#cccccc",
-                                "domainColor":  "#cccccc"
-                            },
-                   "legend":  {
-                                  "titleFont":  "Inter, Arial, sans-serif",
-                                  "labelFont":  "Inter, Arial, sans-serif"
-                              },
-                   "header":  {
-                                  "labelFont":  "Inter, Arial, sans-serif",
-                                  "titleFont":  "Inter, Arial, sans-serif"
-                              }
-               }
+                {
+                  "test": "datum.price_highlight == 'Lowest daily median'",
+                  "value": 135
+                }
+              ],
+              "value": 64
+            },
+            "opacity": {
+              "condition": {
+                "test": "datum.price_highlight == 'Normal daily median'",
+                "value": 0.65
+              },
+              "value": 1
+            },
+            "tooltip": [
+              {
+                "field": "item_display",
+                "type": "nominal",
+                "title": "Food item"
+              },
+              {
+                "field": "display_unit",
+                "type": "nominal",
+                "title": "Unit"
+              },
+              {
+                "field": "date_label",
+                "type": "nominal",
+                "title": "Date"
+              },
+              {
+                "field": "median_price",
+                "type": "quantitative",
+                "title": "Daily median price (RM)",
+                "format": ".2f"
+              },
+              {
+                "field": "price_change_from_item_median",
+                "type": "quantitative",
+                "title": "Difference from item median (%)",
+                "format": ".2f"
+              },
+              {
+                "field": "price_record_count",
+                "type": "quantitative",
+                "title": "Number of price records",
+                "format": ",.0f"
+              },
+              {
+                "field": "price_highlight",
+                "type": "nominal",
+                "title": "Marker"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "resolve": {
+    "scale": {
+      "y": "independent",
+      "color": "independent"
+    }
+  },
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "font": "Inter, Arial, sans-serif",
+    "axis": {
+      "labelFont": "Inter, Arial, sans-serif",
+      "titleFont": "Inter, Arial, sans-serif",
+      "gridColor": "#eeeeee",
+      "tickColor": "#cccccc",
+      "domainColor": "#cccccc"
+    },
+    "legend": {
+      "titleFont": "Inter, Arial, sans-serif",
+      "labelFont": "Inter, Arial, sans-serif"
+    }
+  }
 }

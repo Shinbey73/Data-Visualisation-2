@@ -141,6 +141,7 @@
           "axis": {
             "orient": "bottom",
             "tickMinStep": 1,
+            "labelFlush": false,
             "labelAngle": 0,
             "grid": true,
             "gridColor": "#e5e7eb",

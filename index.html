@@ -77,7 +77,7 @@
                         <div class="chart-item">
                             <div class="vis-container">
                                 <h3 class="chart-title">State food inflation bump chart</h3>
-                                <div class="chart-body">
+                                <div class="chart-body price-movement-body">
                                     <div class="chart-panel">
                                         <div id="vis_bump"></div>
                                     </div>
@@ -117,15 +117,41 @@
                             <div class="vis-container">
                                 <h3 class="chart-title">Food item price movement</h3>
                                 <div class="chart-body">
-                                    <div class="chart-panel">
+                                    <div class="chart-panel price-movement-panel">
                                         <div id="vis_food_item_small_multiples"></div>
                                     </div>
-                                    <aside class="insight-box">
-                                        <h4>Insight</h4>
-                                        <p>Use this panel to call out the items with the sharpest swings, because those are the ones most likely to affect daily household budgets.</p>
-                                    </aside>
+                                    <div class="chart-side">
+                                        <aside class="insight-box">
+                                            <h4>Insight</h4>
+                                            <p>The ranked bars identify which items moved most, while the line below shows the daily pattern for the selected item.</p>
+                                        </aside>
+                                        <div class="legend-box price-movement-legend" aria-label="Food item price movement legend">
+                                            <h4>Legend</h4>
+                                            <div class="legend-row">
+                                                <span class="legend-swatch price-high"></span>
+                                                <span>Highest daily median</span>
+                                            </div>
+                                            <div class="legend-row">
+                                                <span class="legend-swatch price-low"></span>
+                                                <span>Lowest daily median</span>
+                                            </div>
+                                            <div class="legend-row">
+                                                <span class="legend-bar price-largest"></span>
+                                                <span>Largest swing</span>
+                                            </div>
+                                            <div class="legend-row">
+                                                <span class="legend-price-line"></span>
+                                                <span>Selected item daily median</span>
+                                            </div>
+
+                                            <div class="legend-row">
+                                                <span class="legend-dash price-median"></span>
+                                                <span>Selected item period median</span>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <p class="vis-caption">Food item prices do not move equally. Some items remain stable, while others show sharper daily changes. Small multiples make each item readable without forcing different units and price ranges into one shared scale.</p>
+                                <p class="vis-caption">Food item prices do not move equally. Use the item group filter to compare fresh items, packaged staples, or the full set, then choose one item for the detailed daily pattern.</p>
                             </div>
                         </div>
 
@@ -243,10 +269,36 @@
                                     <div class="chart-panel">
                                         <div id="vis6"></div>
                                     </div>
-                                    <aside class="insight-box">
-                                        <h4>Insight</h4>
-                                        <p>This panel is best for comparing the two time points and highlighting the states with the biggest rise or the clearest easing.</p>
-                                    </aside>
+                                    <div class="chart-side">
+                                        <aside class="insight-box">
+                                            <h4>Insight</h4>
+                                            <p>This panel is best for comparing the two time points and highlighting the states with the biggest rise or the clearest easing.</p>
+                                        </aside>
+                                        <div class="legend-box slope-legend" aria-label="Food inflation slope chart legend">
+                                            <h4>Legend</h4>
+                                            <div class="legend-row">
+                                                <span class="legend-slope-mark slope-increase">
+                                                    <span class="legend-line slope-increase"></span>
+                                                    <span class="legend-swatch slope-increase"></span>
+                                                </span>
+                                                <span><strong>Strongest increase</strong><small>Largest positive change</small></span>
+                                            </div>
+                                            <div class="legend-row">
+                                                <span class="legend-slope-mark slope-easing">
+                                                    <span class="legend-line slope-easing"></span>
+                                                    <span class="legend-swatch slope-easing"></span>
+                                                </span>
+                                                <span><strong>Strongest easing</strong><small>Largest negative change</small></span>
+                                            </div>
+                                            <div class="legend-row">
+                                                <span class="legend-slope-mark slope-other">
+                                                    <span class="legend-line slope-other"></span>
+                                                    <span class="legend-swatch slope-other"></span>
+                                                </span>
+                                                <span><strong>Other states</strong><small>All remaining state lines</small></span>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <p class="vis-caption">Compares food inflation between two periods; highlights strong increases and easing.</p>
                             </div>

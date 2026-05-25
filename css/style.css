@@ -136,6 +136,10 @@ html, body {
     margin-top: 0.15rem;
 }
 
+.price-movement-body {
+    grid-template-columns: minmax(0, 4.8fr) minmax(220px, 0.85fr);
+}
+
 .chart-panel {
     min-width: 0;
     background: #fbfdff;
@@ -144,6 +148,20 @@ html, body {
     padding: 1.25rem 1.75rem;
     box-shadow: 0 2px 4px rgba(0,0,0,0.05);
     overflow: hidden;
+}
+
+.price-movement-panel {
+    overflow-x: auto;
+}
+
+.price-movement-panel .vega-embed,
+.price-movement-panel > div[id^="vis"] {
+    margin-left: 0.5rem;
+    margin-right: 0;
+}
+
+.price-movement-panel svg {
+    max-width: none;
 }
 
 .insight-box {
@@ -203,6 +221,14 @@ html, body {
     background: #ea580c;
 }
 
+.legend-swatch.price-high {
+    background: #ea580c;
+}
+
+.legend-swatch.price-low {
+    background: #2563eb;
+}
+
 .legend-swatch.crop-high-pressure {
     background: #7c3aed;
 }
@@ -227,6 +253,25 @@ html, body {
     flex: 0 0 auto;
 }
 
+.legend-price-line {
+    width: 1.9rem;
+    height: 3px;
+    background: #0f766e;
+    border-radius: 999px;
+    flex: 0 0 auto;
+}
+
+.legend-bar {
+    width: 1.9rem;
+    height: 0.8rem;
+    border-radius: 3px;
+    flex: 0 0 auto;
+}
+
+.legend-bar.price-largest {
+    background: #622B14;
+}
+
 .legend-line.bump-highlight {
     height: 3px;
     background: #334155;
@@ -234,8 +279,92 @@ html, body {
 }
 
 .legend-line.bump-muted {
-    background: rgba(100, 116, 139, 0.35);
+    background: rgba(111, 139, 100, 0.35);
     border-radius: 999px;
+}
+
+.slope-legend {
+    padding: 1.5rem;
+}
+
+.slope-legend .legend-row {
+    align-items: center;
+    gap: 0.9rem;
+    min-height: 2.75rem;
+}
+
+.slope-legend .legend-row + .legend-row {
+    border-top: 1px solid rgba(148, 163, 184, 0.22);
+    padding-top: 0.75rem;
+    margin-top: 0.75rem;
+}
+
+.slope-legend .legend-row > span:last-child {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    line-height: 1.2;
+}
+
+.slope-legend strong {
+    color: #0f172a;
+    font-size: 0.96rem;
+}
+
+.slope-legend small {
+    color: #64748b;
+    font-size: 0.78rem;
+}
+
+.legend-slope-mark {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 3rem;
+    height: 1.2rem;
+    flex: 0 0 auto;
+}
+
+.legend-line.slope-increase {
+    height: 5px;
+    background: #7b3294;
+    border-radius: 999px;
+}
+
+.legend-line.slope-easing {
+    height: 5px;
+    background: #2c7bb6;
+    border-radius: 999px;
+}
+
+.legend-line.slope-other {
+    height: 3px;
+    background: #cfcfcf;
+    border-radius: 999px;
+}
+
+.legend-slope-mark .legend-line {
+    width: 2.65rem;
+}
+
+.legend-slope-mark .legend-swatch {
+    position: absolute;
+    right: 0;
+    width: 0.95rem;
+    height: 0.95rem;
+}
+
+.legend-swatch.slope-increase {
+    background: #7b3294;
+}
+
+.legend-swatch.slope-easing {
+    background: #2c7bb6;
+}
+
+.legend-swatch.slope-other {
+    background: #888888;
 }
 
 .legend-multi {
@@ -335,6 +464,10 @@ html, body {
     height: 0;
     border-top: 2px dashed #94a3b8;
     flex: 0 0 auto;
+}
+
+.legend-dash.price-median {
+    border-top-color: #94a3b8;
 }
 
 .insight-box h4 {
