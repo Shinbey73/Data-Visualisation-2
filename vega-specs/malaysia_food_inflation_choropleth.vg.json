@@ -9,7 +9,7 @@
                   "subtitleColor":  "#555",
                   "offset":  20
               },
-    "width":  850,
+    "width":  1050,
     "height":  600,
     "background":  "#ffffff",
     "params":  [
@@ -98,6 +98,71 @@
                   },
                   {
                       "data":  {
+                                   "values":  [
+                                                  {
+                                                      "label":  "Thailand",
+                                                      "longitude":  101.2,
+                                                      "latitude":  7.3,
+                                                      "type":  "land"
+                                                  },
+                                                  {
+                                                      "label":  "Indonesia",
+                                                      "longitude":  112.3,
+                                                      "latitude":  -1.0,
+                                                      "type":  "land"
+                                                  },
+                                                  {
+                                                      "label":  "South China Sea",
+                                                      "longitude":  108.2,
+                                                      "latitude":  6.3,
+                                                      "type":  "water"
+                                                  },
+                                                  {
+                                                      "label":  "Strait of Malacca",
+                                                      "longitude":  100.3,
+                                                      "latitude":  2.1,
+                                                      "type":  "water"
+                                                  }
+                                              ]
+                               },
+                      "mark":  {
+                                   "type":  "text",
+                                   "fontSize":  14,
+                                   "fontStyle":  "italic",
+                                   "fontWeight":  700,
+                                   "opacity":  0.9
+                               },
+                      "encoding":  {
+                                       "longitude":  {
+                                                         "field":  "longitude",
+                                                         "type":  "quantitative"
+                                                     },
+                                       "latitude":  {
+                                                        "field":  "latitude",
+                                                        "type":  "quantitative"
+                                                    },
+                                       "text":  {
+                                                    "field":  "label"
+                                                },
+                                       "color":  {
+                                                     "field":  "type",
+                                                     "type":  "nominal",
+                                                     "scale":  {
+                                                                   "domain":  [
+                                                                                  "land",
+                                                                                  "water"
+                                                                              ],
+                                                                   "range":  [
+                                                                                 "#6f6658",
+                                                                                 "#2f6f91"
+                                                                             ]
+                                                               },
+                                                     "legend":  null
+                                                 }
+                                   }
+                  },
+                  {
+                      "data":  {
                                    "url":  "data/cpi_food_state_inflation_clean.csv"
                                },
                       "transform":  [
@@ -105,16 +170,20 @@
                                             "filter":  "datum.year == selected_year \u0026\u0026 datum.month == selected_month"
                                         },
                                         {
-                                            "lookup":  "map_state",
+                                            "calculate":  "datum.map_state == 'Melaka' ? 'Malacca' : datum.map_state",
+                                            "as":  "geo_state"
+                                        },
+                                        {
+                                            "lookup":  "geo_state",
                                             "from":  {
                                                          "data":  {
-                                                                      "url":  "https://raw.githubusercontent.com/jnewbery/CartogramMalaysia/master/public/data/malaysia-states.topojson",
+                                                                      "url":  "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09/releaseData/gbOpen/MYS/ADM1/geoBoundaries-MYS-ADM1.topojson",
                                                                       "format":  {
                                                                                      "type":  "topojson",
-                                                                                     "feature":  "states"
+                                                                                     "feature":  "MYSADM1gbOpen"
                                                                                  }
                                                                   },
-                                                         "key":  "properties.Name"
+                                                         "key":  "properties.shapeName"
                                                      },
                                             "as":  "geo"
                                         }
@@ -140,13 +209,7 @@
                                                                                   10
                                                                               ]
                                                                },
-                                                     "legend":  {
-                                                                    "orient":  "right",
-                                                                    "titleLimit":  160,
-                                                                    "labelFontSize":  11,
-                                                                    "titleFontSize":  12,
-                                                                    "gradientLength":  220
-                                                                }
+                                                     "legend":  null
                                                  },
                                        "tooltip":  [
                                                        {
@@ -186,10 +249,10 @@
                   },
                   {
                       "data":  {
-                                   "url":  "https://raw.githubusercontent.com/jnewbery/CartogramMalaysia/master/public/data/malaysia-states.topojson",
+                                   "url":  "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09/releaseData/gbOpen/MYS/ADM1/geoBoundaries-MYS-ADM1.topojson",
                                    "format":  {
                                                   "type":  "topojson",
-                                                  "mesh":  "states"
+                                                  "mesh":  "MYSADM1gbOpen"
                                               }
                                },
                       "mark":  {

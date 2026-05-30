@@ -1,6 +1,6 @@
 ﻿{
     "$schema":  "https://vega.github.io/schema/vega-lite/v5.json",
-    "description":  "Ranked lollipop chart showing food inflation (yoy) by state with year and month filters.",
+    "description":  "Ranked lollipop chart showing year-on-year food inflation by state with year and month filters.",
     "title":  {
                   "text":  "Ranked Food Pressure by State",
                   "subtitle":  "Year-on-year food inflation by state; the highlighted state marks the strongest pressure",
@@ -191,13 +191,13 @@
                                                        {
                                                            "field":  "inflation_yoy",
                                                            "type":  "quantitative",
-                                                           "title":  "YoY inflation (%)",
+                                                          "title":  "Year-on-year inflation (%)",
                                                            "format":  ".1f"
                                                        },
                                                        {
                                                            "field":  "inflation_mom",
                                                            "type":  "quantitative",
-                                                           "title":  "MoM inflation (%)",
+                                                          "title":  "Month-on-month inflation (%)",
                                                            "format":  ".1f"
                                                        },
                                                        {

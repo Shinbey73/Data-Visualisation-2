@@ -188,13 +188,13 @@
                                                        {
                                                            "field":  "inflation_yoy",
                                                            "type":  "quantitative",
-                                                           "title":  "YoY inflation (%)",
+                                                          "title":  "Year-on-year inflation (%)",
                                                            "format":  ".1f"
                                                        },
                                                        {
                                                            "field":  "inflation_mom",
                                                            "type":  "quantitative",
-                                                           "title":  "MoM inflation (%)",
+                                                          "title":  "Month-on-month inflation (%)",
                                                            "format":  ".1f"
                                                        },
                                                        {
@@ -252,13 +252,13 @@
                                                        {
                                                            "field":  "inflation_yoy",
                                                            "type":  "quantitative",
-                                                           "title":  "YoY inflation (%)",
+                                                          "title":  "Year-on-year inflation (%)",
                                                            "format":  ".1f"
                                                        },
                                                        {
                                                            "field":  "inflation_mom",
                                                            "type":  "quantitative",
-                                                           "title":  "MoM inflation (%)",
+                                                          "title":  "Month-on-month inflation (%)",
                                                            "format":  ".1f"
                                                        },
                                                        {

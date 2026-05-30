@@ -3,7 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Malaysia Food Inflation by State - Data Visualisation 2</title>
+    <meta name="description" content="Interactive data visualisation exploring food price pressure, household exposure, and crop production patterns across Malaysian states.">
+    <meta name="author" content="Ahmad Sufi Bin Aziz Shah">
+    <meta name="keywords" content="Malaysia food inflation, food prices, Consumer Price Index, food security, crop production, data visualisation, Vega-Lite">
+    <meta name="theme-color" content="#FFF8EC">
+    <meta property="og:title" content="Food Price Pressure in Malaysia">
+    <meta property="og:description" content="Geographic variation, rankings, time trends, household exposure, and production context for Malaysian food price pressure.">
+    <meta property="og:type" content="website">
+    <title>Food Price Pressure in Malaysia | Data Visualisation 2</title>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/grids-responsive-min.css">
@@ -20,18 +27,30 @@
             <div class="content">
                 <h1>Food Price Pressure in Malaysia</h1>
                 <p class="subtitle">Geographic variation, rank ordering, and long-term trend in food and beverage prices</p>
-                <p class="metadata"><strong>Author:</strong> Ahmad Sufi Bin Aziz Shah | <strong>Date:</strong> May 2026</p>
+                <p class="metadata"><strong>Author:</strong> Ahmad Sufi Bin Aziz Shah | <strong>Date:</strong> May 2026 | <strong>Tools:</strong> Vega-Lite, Pure.css</p>
             </div>
         </div>
 
         <div class="pure-u-1 section">
             <div class="content">
-                <h2>Why This Matters</h2>
-                <p>
-                    Food price inflation affects household budgets differently across Malaysia's states.
-                    This story moves from where pressure is highest, to which states rank highest,
-                    to whether food prices have been building over time.
-                </p>
+                <div class="why-layout">
+                    <div class="why-copy">
+                        <h2>Why This Matters</h2>
+                        <p>
+                            Food price inflation affects household budgets differently across Malaysia's states.
+                            This story moves from where pressure is highest, to which states rank highest,
+                            to whether food prices have been building over time.
+                        </p>
+                    </div>
+                    <div class="why-prompts" aria-label="Key questions answered by this visualisation">
+                        <h3>Key Questions</h3>
+                        <ul>
+                            <li>Which states face the strongest food price pressure?</li>
+                            <li>How has food inflation changed across time?</li>
+                            <li>Does local production appear to improve affordability?</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -49,10 +68,36 @@
                                     <div class="chart-panel">
                                         <div id="vis1"></div>
                                     </div>
-                                    <aside class="insight-box">
-                                        <h4>Insight</h4>
-                                        <p>Use this map to point out the states with the darkest shading, since they show the strongest food price pressure in the selected period.</p>
-                                    </aside>
+                                    <div class="chart-side">
+                                        <aside class="insight-box">
+                                            <h4>Insight</h4>
+                                            <p>Use this map to point out the states with the darkest shading, since they show the strongest food price pressure in the selected period.</p>
+                                        </aside>
+                                        <div class="legend-box food-map-legend" aria-label="Food inflation choropleth map legend">
+                                            <h4>Legend</h4>
+                                            <p class="legend-unit">Food inflation (%)</p>
+                                            <div class="legend-gradient food-inflation-gradient" aria-hidden="true"></div>
+                                            <div class="legend-scale-labels food-map-scale">
+                                                <span>-2%</span>
+                                                <span>0%</span>
+                                                <span>4%</span>
+                                                <span>8%</span>
+                                                <span>10%</span>
+                                            </div>
+                                            <div class="legend-row">
+                                                <span class="legend-area food-map-high"></span>
+                                                <span>Darker blue: higher food inflation, up to 10%</span>
+                                            </div>
+                                            <div class="legend-row">
+                                                <span class="legend-area food-map-low"></span>
+                                                <span>Lighter blue: lower or negative inflation, from -2%</span>
+                                            </div>
+                                            <div class="legend-row">
+                                                <span class="legend-text-sample food-map-label">Sea</span>
+                                                <span>Italic labels show nearby seas and countries</span>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <p class="vis-caption"><strong>How to read this map:</strong> Darker states show stronger food price pressure. Use the year and month filters to compare shifts over time.</p>
                             </div>
@@ -65,10 +110,31 @@
                                     <div class="chart-panel">
                                         <div id="vis2"></div>
                                     </div>
-                                    <aside class="insight-box">
-                                        <h4>Insight</h4>
-                                        <p>This chart is best for naming the highest-ranked states and showing how far they sit above the rest of the country.</p>
-                                    </aside>
+                                    <div class="chart-side">
+                                        <aside class="insight-box">
+                                            <h4>Insight</h4>
+                                            <p>This chart is best for naming the highest-ranked states and showing how far they sit above the rest of the country.</p>
+                                        </aside>
+                                        <div class="legend-box lollipop-legend" aria-label="Ranked lollipop chart legend">
+                                            <h4>Legend</h4>
+                                            <div class="legend-row">
+                                                <span class="legend-swatch lollipop-top"></span>
+                                                <span>Highest food inflation state</span>
+                                            </div>
+                                            <div class="legend-row">
+                                                <span class="legend-swatch lollipop-other"></span>
+                                                <span>Other states</span>
+                                            </div>
+                                            <div class="legend-row">
+                                                <span class="legend-line lollipop-stem"></span>
+                                                <span>Distance from 0% inflation</span>
+                                            </div>
+                                            <div class="legend-row">
+                                                <span class="legend-text-sample lollipop-value">2.7</span>
+                                                <span>Point label = year-on-year inflation (%)</span>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <p class="vis-caption">Ranks states by food inflation for the selected month; highlighted state shows the strongest year-on-year pressure.</p>
                             </div>
@@ -365,7 +431,7 @@
                                             </div>
                                             <div class="legend-row">
                                                 <span class="legend-text-sample">1.9</span>
-                                                <span>Cell value = YoY inflation (%)</span>
+                                                <span>Cell value = year-on-year inflation (%)</span>
                                             </div>
                                             <p class="legend-note">In the full division view, values are shown only for stronger cells to keep the heatmap readable.</p>
                                         </div>
@@ -471,12 +537,42 @@
                                     <div class="chart-panel">
                                         <div id="vis7"></div>
                                     </div>
-                                    <aside class="insight-box">
-                                        <h4>Insight</h4>
-                                        <p>Use this box to explain where production is concentrated and whether those high-production states also appear to have lower pressure.</p>
-                                    </aside>
+                                    <div class="chart-side">
+                                        <aside class="insight-box">
+                                            <h4>Insight</h4>
+                                            <p>Use this box to explain where production is concentrated relative to the highest-producing state for the selected crop and year.</p>
+                                        </aside>
+                                        <div class="legend-box crop-map-legend" aria-label="Crop production map legend">
+                                            <h4>Legend</h4>
+                                            <p class="legend-unit crop-map-unit">Relative production (%)</p>
+                                            <div class="legend-gradient crop-production-gradient" aria-hidden="true"></div>
+                                            <div class="legend-scale-labels crop-map-scale">
+                                                <span>0%</span>
+                                                <span>25%</span>
+                                                <span>50%</span>
+                                                <span>75%</span>
+                                                <span>100%</span>
+                                            </div>
+                                            <div class="legend-row">
+                                                <span class="legend-area crop-map-high"></span>
+                                                <span>100%: highest-producing state</span>
+                                            </div>
+                                            <div class="legend-row">
+                                                <span class="legend-area crop-map-low"></span>
+                                                <span>0%: lowest relative production</span>
+                                            </div>
+                                            <div class="legend-row">
+                                                <span class="legend-text-sample">50%</span>
+                                                <span>50% means half of the top state's production</span>
+                                            </div>
+                                            <div class="legend-row">
+                                                <span class="legend-text-sample crop-map-label">Sea</span>
+                                                <span>Italic labels show nearby seas and countries</span>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <p class="vis-caption">Shows where selected crop production is concentrated; darker states produce more of the selected crop.</p>
+                                <p class="vis-caption">Shows where selected crop production is concentrated using a normalised percentage; 100% represents the highest-producing state for the selected crop and year.</p>
                             </div>
                         </div>
 
@@ -612,15 +708,15 @@
         <div class="pure-u-1 section data-sources">
             <div class="content">
                 <h2>Data Sources &amp; Methodology</h2>
-                <p><strong>Primary Data:</strong> Department of Statistics Malaysia CPI data for food and non-alcoholic beverages at state level.</p>
-                <p><strong>Geographic Data:</strong> Malaysia state boundaries from TopoJSON for the map only.</p>
+                <p><strong>Primary Data:</strong> Department of Statistics Malaysia datasets accessed through OpenDOSM and data.gov.my, including Consumer Price Index, food prices, crop production, fish landings, and household price pressure indicators.</p>
+                <p><strong>Geographic Data:</strong> Malaysia administrative state boundaries from geoBoundaries (https://www.geoboundaries.org/), with world-atlas background geography from the world-atlas package (https://github.com/topojson/world-atlas) for neighbouring country and ocean context.</p>
                 <p><strong>Visualisation Idioms:</strong> Choropleth map, ranked lollipop chart, layered multi-line trend chart, state-versus-division heatmap, barcode timeline, slope chart, crop production map, production-versus-inflation bubble plot, fish landing connected dot plot, and a custom food security pressure profile strip.</p>
             </div>
         </div>
 
         <div class="pure-u-1 footer">
             <div class="content">
-                <p>&copy; 2026 Your Name. All visualisations created with Vega-Lite.</p>
+                <p>&copy; 2026 Ahmad Sufi Bin Aziz Shah. All visualisations created with Vega-Lite for Data Visualisation 2.</p>
             </div>
         </div>
     </div>
