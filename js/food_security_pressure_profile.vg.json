@@ -79,9 +79,9 @@
                 "labelFontSize": 13,
                 "labelFontWeight": "bold",
                 "labelColor": "#0f172a",
-                "labelAnchor": "start",
+                "labelAnchor": "middle",
                 "labelOrient": "top",
-                "labelAlign": "left",
+                "labelAlign": "center",
                 "labelPadding": 10
             }
         }

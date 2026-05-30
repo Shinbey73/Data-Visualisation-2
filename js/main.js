@@ -2,14 +2,37 @@
 // Vega-Lite Visualisation Loader
 // ========================================
 
+function maximiseChartWidth(spec) {
+    if (Object.prototype.hasOwnProperty.call(spec, 'width')) {
+        spec.width = 'container';
+    }
+}
+
+function prepareResponsiveSpec(spec) {
+    const isComposedChart = spec.facet || spec.repeat || spec.concat || spec.hconcat || spec.vconcat;
+
+    if (isComposedChart) {
+        return spec;
+    }
+
+    maximiseChartWidth(spec);
+    spec.autosize = {
+        type: 'fit-x',
+        contains: 'padding',
+        resize: true
+    };
+    return spec;
+}
+
 // Helper function to load Vega-Lite specifications
 async function loadVisualization(specPath, elementId) {
     try {
         const response = await fetch(specPath);
-        const spec = await response.json();
+        const spec = prepareResponsiveSpec(await response.json());
         
         // Render the Vega-Lite specification
         vegaEmbed('#' + elementId, spec, {
+            renderer: 'svg',
             actions: {
                 export: true,
                 source: false,
@@ -65,7 +88,8 @@ document.addEventListener('DOMContentLoaded', function() {
 // Use this if you prefer to define specs directly in JavaScript
 
 function createInlineVisualization(spec, elementId) {
-    vegaEmbed('#' + elementId, spec, {
+    vegaEmbed('#' + elementId, prepareResponsiveSpec(spec), {
+        renderer: 'svg',
         actions: {
             export: true,
             source: false,

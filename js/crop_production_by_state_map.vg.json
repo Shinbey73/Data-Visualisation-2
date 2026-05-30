@@ -45,6 +45,17 @@
                                                 ],
                                     "name":  "Crop type: "
                                 }
+                   },
+                   {
+                       "name":  "map_zoom",
+                       "value":  1750,
+                       "bind":  {
+                                    "input":  "range",
+                                    "min":  1200,
+                                    "max":  3200,
+                                    "step":  50,
+                                    "name":  "Map zoom: "
+                                }
                    }
                ],
     "projection":  {
@@ -53,7 +64,9 @@
                                       109.5,
                                       3.9
                                   ],
-                       "scale":  1750
+                       "scale":  {
+                                      "expr":  "map_zoom"
+                                  }
                    },
     "layer":  [
                   {
