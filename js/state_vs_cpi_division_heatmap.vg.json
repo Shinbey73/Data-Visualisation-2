@@ -2,7 +2,7 @@
     "$schema":  "https://vega.github.io/schema/vega-lite/v5.json",
     "title":  {
                   "text":  "State versus food-related price pressure heatmap",
-                  "subtitle":  "Year-on-year CPI inflation by state and main division",
+                  "subtitle":  "Blue cells show easing, pale cells sit near zero, and orange cells show stronger year-on-year inflation",
                   "anchor":  "start",
                   "fontSize":  20,
                   "subtitleFontSize":  12,
@@ -14,6 +14,12 @@
                      "type":  "fit-x",
                      "contains":  "padding"
                  },
+    "padding":  {
+                    "left":  96,
+                    "right":  36,
+                    "top":  24,
+                    "bottom":  112
+                },
     "height":  560,
     "data":  {
                  "url":  "data/cpi_state_division_heatmap_clean.csv"
@@ -88,6 +94,10 @@
                           "filter":  "division_view == \u0027All main divisions\u0027 ? true : datum.division_scope == division_view"
                       },
                       {
+                          "calculate":  "replace(replace(replace(replace(replace(replace(datum.division_label, \u0027Food and non-alcoholic beverages\u0027, \u0027Food & non-alc. beverages\u0027), \u0027Restaurants and accommodation services\u0027, \u0027Restaurants & accommodation\u0027), \u0027Personal care and miscellaneous services\u0027, \u0027Personal care & misc. services\u0027), \u0027Household equipment and maintenance\u0027, \u0027Household equipment\u0027), \u0027Insurance and financial services\u0027, \u0027Insurance & finance\u0027), \u0027Information and communication\u0027, \u0027Info & communication\u0027)",
+                          "as":  "division_axis_label"
+                      },
+                      {
                           "joinaggregate":  [
                                                 {
                                                     "op":  "mean",
@@ -100,93 +110,166 @@
                                       ]
                       }
                   ],
-    "mark":  {
-                 "type":  "rect",
-                 "stroke":  "#ffffff",
-                 "strokeWidth":  0.8
-             },
     "encoding":  {
                      "x":  {
-                               "field":  "division_label",
+                               "field":  "division_axis_label",
                                "type":  "nominal",
-                               "title":  "Consumer Price Index main division",
+                               "title":  "CPI division",
                                "sort":  {
                                             "field":  "division_order",
                                             "order":  "ascending"
                                         },
                                "axis":  {
-                                            "labelAngle":  -28,
-                                            "labelLimit":  260,
-                                            "labelFontSize":  10
+                                            "labelAngle":  -35,
+                                            "labelLimit":  0,
+                                            "labelFontSize":  10,
+                                            "labelPadding":  8,
+                                            "titlePadding":  28
                                         }
                            },
                      "y":  {
                                "field":  "state_display",
                                "type":  "nominal",
-                               "title":  "State",
+                               "title":  null,
                                "sort":  {
                                             "field":  "average_state_inflation",
                                             "order":  "descending"
                                         }
-                           },
-                     "color":  {
-                                   "field":  "inflation_yoy",
-                                   "type":  "quantitative",
-                                   "title":  "Year-on-year inflation (%)",
-                                   "scale":  {
-                                                 "domain":  [
-                                                                -5,
-                                                                0,
-                                                                10
-                                                            ],
-                                                 "range":  [
-                                                               "#4c78a8",
-                                                               "#f7f7f7",
-                                                               "#f58518"
-                                                           ],
-                                                 "clamp":  true
-                                             },
-                                   "legend":  {
-                                                  "gradientLength":  260,
-                                                  "orient":  "bottom",
-                                                  "direction":  "horizontal"
-                                              }
-                               },
-                     "tooltip":  [
-                                     {
-                                         "field":  "state",
-                                         "type":  "nominal",
-                                         "title":  "State"
-                                     },
-                                     {
-                                         "field":  "division_name",
-                                         "type":  "nominal",
-                                         "title":  "Division"
-                                     },
-                                     {
-                                         "field":  "year",
-                                         "type":  "ordinal",
-                                         "title":  "Year"
-                                     },
-                                     {
-                                         "field":  "month",
-                                         "type":  "nominal",
-                                         "title":  "Month"
-                                     },
-                                     {
-                                         "field":  "inflation_yoy",
-                                         "type":  "quantitative",
-                                         "title":  "YoY inflation (%)",
-                                         "format":  ".1f"
-                                     },
-                                     {
-                                         "field":  "inflation_mom",
-                                         "type":  "quantitative",
-                                         "title":  "MoM inflation (%)",
-                                         "format":  ".1f"
-                                     }
-                                 ]
+                           }
                  },
+    "layer":  [
+                  {
+                      "mark":  {
+                                   "type":  "rect",
+                                   "stroke":  "#ffffff",
+                                   "strokeWidth":  0.9
+                               },
+                      "encoding":  {
+                                       "color":  {
+                                                     "field":  "inflation_yoy",
+                                                     "type":  "quantitative",
+                                                     "title":  "Year-on-year inflation (%)",
+                                                     "scale":  {
+                                                                   "domain":  [
+                                                                                  -3,
+                                                                                  0,
+                                                                                  6
+                                                                              ],
+                                                                   "range":  [
+                                                                                 "#2563a9",
+                                                                                 "#f8fafc",
+                                                                                 "#c2410c"
+                                                                             ],
+                                                                   "clamp":  true
+                                                               },
+                                                     "legend":  null
+                                                 },
+                                       "tooltip":  [
+                                                       {
+                                                           "field":  "state",
+                                                           "type":  "nominal",
+                                                           "title":  "State"
+                                                       },
+                                                       {
+                                                           "field":  "division_name",
+                                                           "type":  "nominal",
+                                                           "title":  "Division"
+                                                       },
+                                                       {
+                                                           "field":  "year",
+                                                           "type":  "ordinal",
+                                                           "title":  "Year"
+                                                       },
+                                                       {
+                                                           "field":  "month",
+                                                           "type":  "nominal",
+                                                           "title":  "Month"
+                                                       },
+                                                       {
+                                                           "field":  "inflation_yoy",
+                                                           "type":  "quantitative",
+                                                           "title":  "YoY inflation (%)",
+                                                           "format":  ".1f"
+                                                       },
+                                                       {
+                                                           "field":  "inflation_mom",
+                                                           "type":  "quantitative",
+                                                           "title":  "MoM inflation (%)",
+                                                           "format":  ".1f"
+                                                       },
+                                                       {
+                                                           "field":  "pressure_group",
+                                                           "type":  "nominal",
+                                                           "title":  "Pressure group"
+                                                       }
+                                                   ]
+                                   }
+                  },
+                  {
+                      "mark":  {
+                                   "type":  "text",
+                                   "fontSize":  10,
+                                   "fontWeight":  600
+                               },
+                      "encoding":  {
+                                       "text":  {
+                                                    "condition":  {
+                                                                      "test":  "division_view == \u0027Food-related pressure channels\u0027 || abs(datum.inflation_yoy) >= 4",
+                                                                      "field":  "inflation_yoy",
+                                                                      "type":  "quantitative",
+                                                                      "format":  ".1f"
+                                                                  },
+                                                    "value":  ""
+                                                },
+                                       "color":  {
+                                                     "condition":  {
+                                                                       "test":  "datum.inflation_yoy >= 4.5 || datum.inflation_yoy <= -2",
+                                                                       "value":  "#ffffff"
+                                                                   },
+                                                     "value":  "#1f2937"
+                                                 },
+                                       "tooltip":  [
+                                                       {
+                                                           "field":  "state",
+                                                           "type":  "nominal",
+                                                           "title":  "State"
+                                                       },
+                                                       {
+                                                           "field":  "division_name",
+                                                           "type":  "nominal",
+                                                           "title":  "Division"
+                                                       },
+                                                       {
+                                                           "field":  "year",
+                                                           "type":  "ordinal",
+                                                           "title":  "Year"
+                                                       },
+                                                       {
+                                                           "field":  "month",
+                                                           "type":  "nominal",
+                                                           "title":  "Month"
+                                                       },
+                                                       {
+                                                           "field":  "inflation_yoy",
+                                                           "type":  "quantitative",
+                                                           "title":  "YoY inflation (%)",
+                                                           "format":  ".1f"
+                                                       },
+                                                       {
+                                                           "field":  "inflation_mom",
+                                                           "type":  "quantitative",
+                                                           "title":  "MoM inflation (%)",
+                                                           "format":  ".1f"
+                                                       },
+                                                       {
+                                                           "field":  "pressure_group",
+                                                           "type":  "nominal",
+                                                           "title":  "Pressure group"
+                                                       }
+                                                   ]
+                                   }
+                  }
+              ],
     "config":  {
                    "view":  {
                                 "stroke":  null

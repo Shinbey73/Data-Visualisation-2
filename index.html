@@ -282,10 +282,43 @@
                                     <div class="chart-panel">
                                         <div id="vis3"></div>
                                     </div>
-                                    <aside class="insight-box">
-                                        <h4>Insight</h4>
-                                        <p>Use this box to say whether the trend line is rising broadly across states or whether only a few places are driving the increase.</p>
-                                    </aside>
+                                    <div class="chart-side">
+                                        <aside class="insight-box">
+                                            <h4>Insight</h4>
+                                            <p>Use this box to say whether the trend line is rising broadly across states or whether only a few places are driving the increase.</p>
+                                        </aside>
+                                        <div class="legend-box food-cpi-trend-legend" aria-label="Food CPI trend line chart legend">
+                                            <h4>Legend</h4>
+                                            <div class="legend-row">
+                                                <span class="legend-line food-cpi-selangor"></span>
+                                                <span>Selangor</span>
+                                            </div>
+                                            <div class="legend-row">
+                                                <span class="legend-line food-cpi-sabah"></span>
+                                                <span>Sabah</span>
+                                            </div>
+                                            <div class="legend-row">
+                                                <span class="legend-line food-cpi-kelantan"></span>
+                                                <span>Kelantan</span>
+                                            </div>
+                                            <div class="legend-row">
+                                                <span class="legend-line food-cpi-johor"></span>
+                                                <span>Johor</span>
+                                            </div>
+                                            <div class="legend-row">
+                                                <span class="legend-line food-cpi-sarawak"></span>
+                                                <span>Sarawak</span>
+                                            </div>
+                                            <div class="legend-row">
+                                                <span class="legend-size food-cpi-latest"></span>
+                                                <span>Latest available point</span>
+                                            </div>
+                                            <div class="legend-row">
+                                                <span class="legend-dash food-cpi-reference"></span>
+                                                <span>January 2020 marker</span>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <p class="vis-caption">Compare whether food price increases are shared across states or concentrated in specific areas.</p>
                             </div>
@@ -309,10 +342,34 @@
                                     <div class="chart-panel">
                                         <div id="vis4"></div>
                                     </div>
-                                    <aside class="insight-box">
-                                        <h4>Insight</h4>
-                                        <p>This heatmap is useful for finding the state and CPI division combination with the strongest inflation pressure.</p>
-                                    </aside>
+                                    <div class="chart-side">
+                                        <aside class="insight-box">
+                                            <h4>Insight</h4>
+                                            <p>This heatmap is useful for finding the state and CPI division combination with the strongest inflation pressure.</p>
+                                        </aside>
+                                        <div class="legend-box heatmap-legend" aria-label="State-category heatmap legend">
+                                            <h4>Legend</h4>
+                                            <div class="legend-gradient heatmap-gradient" aria-hidden="true"></div>
+                                            <div class="legend-scale-labels">
+                                                <span>Easing</span>
+                                                <span>0%</span>
+                                                <span>Higher pressure</span>
+                                            </div>
+                                            <div class="legend-row">
+                                                <span class="legend-area heatmap-easing"></span>
+                                                <span>Below zero: price easing</span>
+                                            </div>
+                                            <div class="legend-row">
+                                                <span class="legend-area heatmap-high"></span>
+                                                <span>Above zero: inflation pressure</span>
+                                            </div>
+                                            <div class="legend-row">
+                                                <span class="legend-text-sample">1.9</span>
+                                                <span>Cell value = YoY inflation (%)</span>
+                                            </div>
+                                            <p class="legend-note">In the full division view, values are shown only for stronger cells to keep the heatmap readable.</p>
+                                        </div>
+                                    </div>
                                 </div>
                                 <p class="vis-caption">Compares price pressure across states and CPI divisions; darker cells indicate stronger year-on-year inflation.</p>
                             </div>
@@ -325,10 +382,30 @@
                                     <div class="chart-panel">
                                         <div id="vis5"></div>
                                     </div>
-                                    <aside class="insight-box">
-                                        <h4>Insight</h4>
-                                        <p>Use this box to describe which months look most intense, since the barcode pattern makes spikes and easing easy to spot.</p>
-                                    </aside>
+                                    <div class="chart-side">
+                                        <aside class="insight-box">
+                                            <h4>Insight</h4>
+                                            <p>Use this box to describe which months look most intense, since the barcode pattern makes spikes and easing easy to spot.</p>
+                                        </aside>
+                                        <div class="legend-box barcode-legend" aria-label="Barcode timeline legend">
+                                            <h4>Legend</h4>
+                                            <div class="legend-gradient barcode-gradient" aria-hidden="true"></div>
+                                            <div class="legend-scale-labels">
+                                                <span>Easing</span>
+                                                <span>0%</span>
+                                                <span>High</span>
+                                                <span>Very high</span>
+                                            </div>
+                                            <div class="legend-row">
+                                                <span class="legend-area barcode-easing"></span>
+                                                <span>Below zero: easing</span>
+                                            </div>
+                                            <div class="legend-row">
+                                                <span class="legend-area barcode-high"></span>
+                                                <span>Warmer cells: stronger food inflation</span>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <p class="vis-caption">Each vertical strip represents a month; darker colours show intensified food price pressure.</p>
                             </div>
@@ -502,10 +579,27 @@
                                     <div class="chart-panel">
                                         <div id="vis10"></div>
                                     </div>
-                                    <aside class="insight-box">
-                                        <h4>Insight</h4>
-                                        <p>This profile gives a compact summary of overall exposure, so you can quickly explain which states carry the most pressure in the selected year.</p>
-                                    </aside>
+                                    <div class="chart-side">
+                                        <aside class="insight-box">
+                                            <h4>Insight</h4>
+                                            <p>This profile gives a compact summary of overall exposure, so you can quickly explain which states carry the most pressure in the selected year.</p>
+                                        </aside>
+                                        <div class="legend-box security-profile-legend" aria-label="Food security pressure profile legend">
+                                            <h4>Legend</h4>
+                                            <div class="legend-row">
+                                                <span class="legend-bar security-rank-one"></span>
+                                                <span>Largest exposure in each indicator</span>
+                                            </div>
+                                            <div class="legend-row">
+                                                <span class="legend-bar security-other"></span>
+                                                <span>Other states</span>
+                                            </div>
+                                            <div class="legend-row">
+                                                <span class="legend-area security-track"></span>
+                                                <span>Full 0-100 exposure range</span>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <p class="vis-caption">Higher bars indicate greater relative exposure within the selected year; combines multiple indicators.</p>
                             </div>
