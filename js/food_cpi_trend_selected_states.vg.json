@@ -184,7 +184,7 @@
                                                      "legend":  null,
                                                      "scale": {
         "domain": ["Selangor", "Sabah", "Kelantan", "Johor", "Sarawak"],
-        "range": ["#412D15", "#F59E0B", "#3357ff", "#f333ff", "#A77F60"]
+        "range": ["#0072B2", "#E69F00", "#009E73", "#D55E00", "#CC79A7"]
     }
                                                  },
                                        "tooltip":  [
@@ -215,30 +215,6 @@
                                                            "format":  ".1f"
                                                        }
                                                    ]
-                                   }
-                  },
-                  {
-                      "mark":  {
-                                   "type":  "rule",
-                                   "strokeDash":  [
-                                                      4,
-                                                      4
-                                                  ],
-                                   "strokeWidth":  1,
-                                   "color":  "#777777",
-                                   "opacity":  0.45
-                               },
-                      "transform":  [
-                                        {
-                                            "filter":  "datum.year == 2020 \u0026\u0026 datum.month_number == 1"
-                                        }
-                                    ],
-                      "encoding":  {
-                                       "x":  {
-                                                 "field":  "date",
-                                                 "type":  "temporal",
-                                                 "timeUnit":  "yearmonth"
-                                             }
                                    }
                   },
                   {
@@ -284,11 +260,11 @@
                                                                                   "Sarawak"
                                                                               ],
                                                                    "range":  [
-                                                                                 "#412D15",
-                                                                                 "#F59E0B",
-                                                                                 "#3357ff",
-                                                                                 "#f333ff",
-                                                                                 "#A77F60"
+                                                                                 "#0072B2",
+                                                                                 "#E69F00",
+                                                                                 "#009E73",
+                                                                                 "#D55E00",
+                                                                                 "#CC79A7"
                                                                              ]
                                                                }
                                                  },
@@ -369,11 +345,11 @@
                                                                                   "Sarawak"
                                                                               ],
                                                                    "range":  [
-                                                                                 "#412D15",
-                                                                                 "#F59E0B",
-                                                                                 "#3357ff",
-                                                                                 "#f333ff",
-                                                                                 "#A77F60"
+                                                                                 "#0072B2",
+                                                                                 "#E69F00",
+                                                                                 "#009E73",
+                                                                                 "#D55E00",
+                                                                                 "#CC79A7"
                                                                              ]
                                                                }
                                                  },

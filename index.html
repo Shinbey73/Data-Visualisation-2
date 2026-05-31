@@ -26,7 +26,7 @@
         <div class="pure-u-1 header">
             <div class="content">
                 <h1>Food Price Pressure in Malaysia</h1>
-                <p class="subtitle">Geographic variation, rank ordering, and long-term trend in food and beverage prices</p>
+                <p class="subtitle">An interactive view of where food prices are rising, how pressure shifts across states, and whether local production appears to ease affordability.</p>
                 <p class="metadata"><strong>Author:</strong> Ahmad Sufi Bin Aziz Shah | <strong>Date:</strong> May 2026 | <strong>Tools:</strong> Vega-Lite, Pure.css</p>
             </div>
         </div>
@@ -71,7 +71,7 @@
                                     <div class="chart-side">
                                         <aside class="insight-box">
                                             <h4>Insight</h4>
-                                            <p>Use this map to point out the states with the darkest shading, since they show the strongest food price pressure in the selected period.</p>
+                                            <p>In March 2026, 15 of 16 states recorded positive food inflation, showing that price pressure was broad rather than isolated to one region.</p>
                                         </aside>
                                         <div class="legend-box food-map-legend" aria-label="Food inflation choropleth map legend">
                                             <h4>Legend</h4>
@@ -99,7 +99,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <p class="vis-caption"><strong>How to read this map:</strong> Darker states show stronger food price pressure. Use the year and month filters to compare shifts over time.</p>
+                                <p class="vis-caption">This map tells us where food inflation is strongest in the selected month, showing that pressure is not evenly spread across Malaysia.</p>
                             </div>
                         </div>
 
@@ -113,7 +113,7 @@
                                     <div class="chart-side">
                                         <aside class="insight-box">
                                             <h4>Insight</h4>
-                                            <p>This chart is best for naming the highest-ranked states and showing how far they sit above the rest of the country.</p>
+                                            <p>March 2026 ranged from -0.7% to 2.7%, a 3.4 percentage-point spread that shows different state exposure to the same national food market.</p>
                                         </aside>
                                         <div class="legend-box lollipop-legend" aria-label="Ranked lollipop chart legend">
                                             <h4>Legend</h4>
@@ -136,7 +136,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <p class="vis-caption">Ranks states by food inflation for the selected month; highlighted state shows the strongest year-on-year pressure.</p>
+                                <p class="vis-caption">This chart tells us which states rank highest for food inflation and how far they sit above or below the rest of the country.</p>
                             </div>
                         </div>
 
@@ -150,7 +150,7 @@
                                     <div class="chart-side">
                                         <aside class="insight-box">
                                             <h4>Insight</h4>
-                                            <p>This chart reveals which states move up or down over time, so you can highlight whether pressure is stable or shifting quickly.</p>
+                                            <p>Selangor ranked near the top from 2020 to 2025, but fell to rank 11 in 2026 as its average food inflation eased to 1.0%.</p>
                                         </aside>
                                         <div class="legend-box" aria-label="State food inflation bump chart legend">
                                             <h4>Legend</h4>
@@ -175,7 +175,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <p class="vis-caption">The bump chart tracks how state food inflation rankings change over time. Some states move in and out of the highest-pressure positions, showing that food price pressure is not fixed across Malaysia.</p>
+                                <p class="vis-caption">This chart tells us whether a state’s food inflation position is stable or changing, because rankings can rise and fall across years.</p>
                             </div>
                         </div>
 
@@ -189,7 +189,7 @@
                                     <div class="chart-side">
                                         <aside class="insight-box">
                                             <h4>Insight</h4>
-                                            <p>The ranked bars identify which items moved most, while the line below shows the daily pattern for the selected item.</p>
+                                            <p>Tomato prices were especially volatile in May 2026, moving between RM2.99 and RM6.00 per kilogram in the daily median data.</p>
                                         </aside>
                                         <div class="legend-box price-movement-legend" aria-label="Food item price movement legend">
                                             <h4>Legend</h4>
@@ -217,7 +217,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <p class="vis-caption">Food item prices do not move equally. Use the item group filter to compare fresh items, packaged staples, or the full set, then choose one item for the detailed daily pattern.</p>
+                                <p class="vis-caption">This chart tells us which food items move more sharply, helping explain why the overall food basket can become more expensive.</p>
                             </div>
                         </div>
 
@@ -231,7 +231,7 @@
                                     <div class="chart-side">
                                         <aside class="insight-box">
                                             <h4>Insight</h4>
-                                            <p>This box can summarise whether the food basket is trending upward or downward overall, making the item prices easier to interpret as one signal.</p>
+                                            <p>For Malaysia overall, the basket rose from 100.0 on 2 May to 109.1 on 20 May, meaning the selected basket became about 9% more expensive.</p>
                                         </aside>
                                         <div class="legend-box basket-legend" aria-label="Food basket price index legend">
                                             <h4>Legend</h4>
@@ -255,10 +255,21 @@
                                                 <span class="legend-dash basket-base"></span>
                                                 <span>Base index = 100</span>
                                             </div>
+                                            <p class="legend-note">Basket items included in the index:</p>
+                                            <div class="basket-item-list" aria-label="Food items included in the basket index">
+                                                <span>Chicken</span>
+                                                <span>Eggs</span>
+                                                <span>Kembung fish</span>
+                                                <span>Tomato</span>
+                                                <span>Yellow onion</span>
+                                                <span>Potato</span>
+                                                <span>Water spinach</span>
+                                                <span>Red chili</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <p class="vis-caption">The selected food basket index shows whether a basic group of food items became more expensive or cheaper during May 2026. This makes item-level prices easier to interpret as one household-facing price signal.</p>
+                                <p class="vis-caption">This chart tells us how the selected everyday food basket changes over May 2026, using 100 as the starting price index.</p>
                             </div>
                         </div>
 
@@ -272,7 +283,7 @@
                                     <div class="chart-side">
                                         <aside class="insight-box">
                                             <h4>Insight</h4>
-                                            <p>Use this space to compare whether urban and rural households follow the same pattern or whether one group consistently faces more pressure.</p>
+                                            <p>By April 2026, the urban food Consumer Price Index was 163.7, compared with 145.3 for rural households, showing a clear urban price-index gap.</p>
                                         </aside>
                                         <div class="legend-box urban-rural-legend" aria-label="Urban versus rural food CPI legend">
                                             <h4>Legend</h4>
@@ -292,14 +303,10 @@
                                                 <span class="legend-size cpi-latest"></span>
                                                 <span>Latest available point</span>
                                             </div>
-                                            <div class="legend-row">
-                                                <span class="legend-dash cpi-reference"></span>
-                                                <span>January 2020 marker</span>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <p class="vis-caption">Urban and rural households experience food price pressure through similar national trends, but their Consumer Price Index levels can differ. Comparing both lines helps show whether food price pressure is shared equally or felt more strongly by one household group.</p>
+                                <p class="vis-caption">This chart tells us whether urban and rural households follow similar food price trends or experience different Consumer Price Index levels.</p>
                             </div>
                         </div>
 
@@ -313,7 +320,7 @@
                                     <div class="chart-side">
                                         <aside class="insight-box">
                                             <h4>Insight</h4>
-                                            <p>The shaded area shows how far food and beverages CPI sits above or below all-items CPI for low-income households.</p>
+                                            <p>In April 2026, the low-income food and beverages index was 17.4 points above the low-income all-items index, highlighting stronger food-specific pressure.</p>
                                         </aside>
                                         <div class="legend-box low-income-legend" aria-label="Low-income household food pressure legend">
                                             <h4>Legend</h4>
@@ -337,7 +344,7 @@
 
                                     </div>
                                 </div>
-                                <p class="vis-caption">Food and beverages prices sit above the overall Consumer Price Index for low-income households. The widening gap shows why food inflation can create stronger pressure for households with tighter budgets.</p>
+                                <p class="vis-caption">This chart tells us whether food and beverages are rising faster than the overall basket for low-income households.</p>
                             </div>
                         </div>
 
@@ -351,7 +358,7 @@
                                     <div class="chart-side">
                                         <aside class="insight-box">
                                             <h4>Insight</h4>
-                                            <p>Use this box to say whether the trend line is rising broadly across states or whether only a few places are driving the increase.</p>
+                                            <p>Among the selected states in March 2026, Selangor had the highest food Consumer Price Index at 173.3, ahead of Johor at 168.5.</p>
                                         </aside>
                                         <div class="legend-box food-cpi-trend-legend" aria-label="Food CPI trend line chart legend">
                                             <h4>Legend</h4>
@@ -379,14 +386,10 @@
                                                 <span class="legend-size food-cpi-latest"></span>
                                                 <span>Latest available point</span>
                                             </div>
-                                            <div class="legend-row">
-                                                <span class="legend-dash food-cpi-reference"></span>
-                                                <span>January 2020 marker</span>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <p class="vis-caption">Compare whether food price increases are shared across states or concentrated in specific areas.</p>
+                                <p class="vis-caption">This chart tells us how food Consumer Price Index trends differ across selected comparison states: Selangor and Johor represent large Peninsular markets, Kelantan adds an east-coast perspective, and Sabah and Sarawak show Borneo patterns.</p>
                             </div>
                         </div>
                     </div>
@@ -411,7 +414,7 @@
                                     <div class="chart-side">
                                         <aside class="insight-box">
                                             <h4>Insight</h4>
-                                            <p>This heatmap is useful for finding the state and CPI division combination with the strongest inflation pressure.</p>
+                                            <p>In March 2026, restaurants and accommodation services reached 5.2% in Putrajaya and 5.1% in Labuan, above direct food-at-home pressure.</p>
                                         </aside>
                                         <div class="legend-box heatmap-legend" aria-label="State-category heatmap legend">
                                             <h4>Legend</h4>
@@ -437,7 +440,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <p class="vis-caption">Compares price pressure across states and CPI divisions; darker cells indicate stronger year-on-year inflation.</p>
+                                <p class="vis-caption">This heatmap tells us which state and Consumer Price Index division combinations create stronger price pressure.</p>
                             </div>
                         </div>
 
@@ -451,7 +454,7 @@
                                     <div class="chart-side">
                                         <aside class="insight-box">
                                             <h4>Insight</h4>
-                                            <p>Use this box to describe which months look most intense, since the barcode pattern makes spikes and easing easy to spot.</p>
+                                            <p>The strongest average food inflation month in the 2020-2026 barcode period was November 2022, at about 6.6% across states.</p>
                                         </aside>
                                         <div class="legend-box barcode-legend" aria-label="Barcode timeline legend">
                                             <h4>Legend</h4>
@@ -473,7 +476,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <p class="vis-caption">Each vertical strip represents a month; darker colours show intensified food price pressure.</p>
+                                <p class="vis-caption">This timeline tells us when food inflation pressure was sustained across months, instead of focusing only on one selected date.</p>
                             </div>
                         </div>
 
@@ -487,7 +490,7 @@
                                     <div class="chart-side">
                                         <aside class="insight-box">
                                             <h4>Insight</h4>
-                                            <p>This panel is best for comparing the two time points and highlighting the states with the biggest rise or the clearest easing.</p>
+                                            <p>From January 2025 to March 2026, Selangor fell from 4.3% to 0.8%, the largest easing among the compared states.</p>
                                         </aside>
                                         <div class="legend-box slope-legend" aria-label="Food inflation slope chart legend">
                                             <h4>Legend</h4>
@@ -515,7 +518,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <p class="vis-caption">Compares food inflation between two periods; highlights strong increases and easing.</p>
+                                <p class="vis-caption">This chart tells us which states improved or worsened between two selected periods by comparing their start and end food inflation values.</p>
                             </div>
                         </div>
                     </div>
@@ -540,7 +543,7 @@
                                     <div class="chart-side">
                                         <aside class="insight-box">
                                             <h4>Insight</h4>
-                                            <p>Use this box to explain where production is concentrated relative to the highest-producing state for the selected crop and year.</p>
+                                            <p>For all food crops in 2022, Johor contributed about 19.7% of selected production, followed by Kedah at about 16.5%.</p>
                                         </aside>
                                         <div class="legend-box crop-map-legend" aria-label="Crop production map legend">
                                             <h4>Legend</h4>
@@ -572,7 +575,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <p class="vis-caption">Shows where selected crop production is concentrated using a normalised percentage; 100% represents the highest-producing state for the selected crop and year.</p>
+                                <p class="vis-caption">This map tells us where crop production is concentrated, using a percentage scale where 100% is the top-producing state.</p>
                             </div>
                         </div>
 
@@ -586,7 +589,7 @@
                                     <div class="chart-side">
                                         <aside class="insight-box">
                                             <h4>Insight</h4>
-                                            <p>Colours split states by whether production level and food inflation sit above or below the selected year's median.</p>
+                                            <p>Johor combined the largest 2022 all-food-crop share with average food inflation of 6.15%, showing that high production does not guarantee lower prices.</p>
                                         </aside>
                                         <div class="legend-box" aria-label="Crop production versus inflation legend">
                                             <h4>Legend</h4>
@@ -621,7 +624,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <p class="vis-caption">Compares producing states only. The median split creates four groups: states to the right have above-median production level, states higher up have above-median food inflation, and grey marks show states below the median on both measures.</p>
+                                <p class="vis-caption">This chart tells us whether higher crop production is associated with lower food inflation, while showing that the relationship is not automatic.</p>
                             </div>
                         </div>
 
@@ -635,7 +638,7 @@
                                     <div class="chart-side">
                                         <aside class="insight-box">
                                             <h4>Insight</h4>
-                                            <p>Use this box to point out whether the fish landing rank matches the inflation rank or whether the two measures move in opposite directions.</p>
+                                            <p>In 2023, Kedah ranked third for fish landings but fourteenth for food inflation, suggesting supply volume alone does not explain retail pressure.</p>
                                         </aside>
                                         <div class="legend-box" aria-label="Fish landing versus inflation legend">
                                             <h4>Legend</h4>
@@ -654,7 +657,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <p class="vis-caption">Connected dot plot comparing fish landing rank with food inflation rank by state.</p>
+                                <p class="vis-caption">This chart tells us whether states with stronger fish landings also have lower food inflation ranks, using connected rank comparisons.</p>
                             </div>
                         </div>
                     </div>
@@ -678,7 +681,7 @@
                                     <div class="chart-side">
                                         <aside class="insight-box">
                                             <h4>Insight</h4>
-                                            <p>This profile gives a compact summary of overall exposure, so you can quickly explain which states carry the most pressure in the selected year.</p>
+                                            <p>In 2022, Selangor had the highest overall exposure score at 95.8, combining demand pressure, food inflation, and relative production indicators.</p>
                                         </aside>
                                         <div class="legend-box security-profile-legend" aria-label="Food security pressure profile legend">
                                             <h4>Legend</h4>
@@ -697,7 +700,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <p class="vis-caption">Higher bars indicate greater relative exposure within the selected year; combines multiple indicators.</p>
+                                <p class="vis-caption">This profile tells us which states appear more exposed overall after combining food inflation, demand pressure, crop capacity, and fish supply indicators.</p>
                             </div>
                         </div>
                     </div>
@@ -708,9 +711,20 @@
         <div class="pure-u-1 section data-sources">
             <div class="content">
                 <h2>Data Sources &amp; Methodology</h2>
-                <p><strong>Primary Data:</strong> Department of Statistics Malaysia datasets accessed through OpenDOSM and data.gov.my, including Consumer Price Index, food prices, crop production, fish landings, and household price pressure indicators.</p>
-                <p><strong>Geographic Data:</strong> Malaysia administrative state boundaries from geoBoundaries (https://www.geoboundaries.org/), with world-atlas background geography from the world-atlas package (https://github.com/topojson/world-atlas) for neighbouring country and ocean context.</p>
-                <p><strong>Visualisation Idioms:</strong> Choropleth map, ranked lollipop chart, layered multi-line trend chart, state-versus-division heatmap, barcode timeline, slope chart, crop production map, production-versus-inflation bubble plot, fish landing connected dot plot, and a custom food security pressure profile strip.</p>
+                <div class="source-card-grid">
+                    <div class="source-card">
+                        <h3>Primary Data</h3>
+                        <p>Department of Statistics Malaysia datasets accessed through OpenDOSM and data.gov.my, including Consumer Price Index, food prices, crop production, fish landings, and household price pressure indicators.</p>
+                    </div>
+                    <div class="source-card">
+                        <h3>Geographic Data</h3>
+                        <p>Malaysia administrative state boundaries from geoBoundaries (https://www.geoboundaries.org/), with world-atlas background geography from the world-atlas package (https://github.com/topojson/world-atlas) for neighbouring country and ocean context.</p>
+                    </div>
+                    <div class="source-card">
+                        <h3>Visualisation Idioms</h3>
+                        <p>Choropleth map, ranked lollipop chart, layered multi-line trend chart, state-versus-division heatmap, barcode timeline, slope chart, crop production map, production-versus-inflation bubble plot, fish landing connected dot plot, and a custom food security pressure profile strip.</p>
+                    </div>
+                </div>
             </div>
         </div>
 

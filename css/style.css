@@ -7,6 +7,9 @@
     --font-heading: 'Trebuchet MS', 'Segoe UI', sans-serif;
     --font-display: Georgia, 'Times New Roman', serif;
     --paragraph-line-width: 64ch;
+    --chart-side-width: 280px;
+    --panel-border: #dbe3f0;
+    --accent-blue: #667eea;
 }
 
 * {
@@ -36,7 +39,7 @@ html, body {
 }
 
 .content {
-    max-width: 1500px;
+    max-width: 1480px;
     margin: 0 auto;
     padding: 2rem;
 }
@@ -50,7 +53,7 @@ html, body {
    ======================================== */
 
 .header {
-    background: linear-gradient(135deg, #FFF9D2 0%, #764ba2 100%);
+    background: #f7ead7;
     color: rgb(0, 0, 0);
     padding: 3rem 1rem;
     text-align: center;
@@ -84,7 +87,7 @@ html, body {
    ======================================== */
 
 .section {
-    padding: 2rem 1rem;
+    padding: 2.5rem 1rem;
     background-color: #FFF8EC;
     border-bottom: 1px solid #eee;
 }
@@ -105,7 +108,7 @@ html, body {
 .chart-grid {
     display: grid;
     grid-template-columns: 1fr; /* stack charts vertically by default */
-    gap: 2rem;
+    gap: 2.25rem;
     align-items: start;
 }
 
@@ -116,9 +119,9 @@ html, body {
 .chart-item {
     min-width: 0; /* allow children to shrink without forcing horizontal scroll */
     background: white;
-    border: 1px solid #dbe3f0;
+    border: 1px solid var(--panel-border);
     border-radius: 18px;
-    padding: 1.35rem 1.35rem 1.1rem;
+    padding: 1.45rem;
     box-shadow: 0 10px 28px rgba(15, 23, 42, 0.08);
 }
 
@@ -131,22 +134,22 @@ html, body {
 
 .chart-body {
     display: grid;
-    grid-template-columns: minmax(0, 3.8fr) minmax(220px, 0.9fr);
+    grid-template-columns: minmax(0, 1fr) var(--chart-side-width);
     gap: 1.5rem;
-    align-items: start;
+    align-items: stretch;
     margin-top: 0.15rem;
 }
 
 .price-movement-body {
-    grid-template-columns: minmax(0, 4.8fr) minmax(220px, 0.85fr);
+    grid-template-columns: minmax(0, 1fr) var(--chart-side-width);
 }
 
 .chart-panel {
     min-width: 0;
     background: #fbfdff;
-    border: 1px solid #dbe3f0;
+    border: 1px solid var(--panel-border);
     border-radius: 12px;
-    padding: 1.25rem 1.75rem;
+    padding: 1.25rem 1.5rem;
     box-shadow: 0 2px 4px rgba(0,0,0,0.05);
     overflow: hidden;
 }
@@ -167,9 +170,10 @@ html, body {
 
 .insight-box {
     background: #fbfdff;
-    border: 1px solid #dbe3f0;
+    border: 1px solid var(--panel-border);
+    border-left: 4px solid var(--accent-blue);
     border-radius: 12px;
-    padding: 2rem 1.75rem;
+    padding: 1.35rem 1.4rem;
     box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
 
@@ -178,13 +182,18 @@ html, body {
     flex-direction: column;
     gap: 1rem;
     min-width: 0;
+    width: 100%;
+}
+
+.chart-side > * {
+    width: 100%;
 }
 
 .legend-box {
     background: #fbfdff;
-    border: 1px solid #dbe3f0;
+    border: 1px solid var(--panel-border);
     border-radius: 12px;
-    padding: 1.4rem 1.5rem;
+    padding: 1.35rem 1.4rem;
     box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
 
@@ -199,10 +208,38 @@ html, body {
 .legend-row {
     display: flex;
     align-items: center;
-    gap: 0.7rem;
-    min-height: 1.7rem;
+    gap: 0.9rem;
+    min-height: 2.75rem;
     color: #334155;
     font-size: 0.95rem;
+    line-height: 1.25;
+}
+
+.legend-row + .legend-row {
+    border-top: 1px solid rgba(148, 163, 184, 0.22);
+    padding-top: 0.75rem;
+    margin-top: 0.75rem;
+}
+
+.legend-row > span:last-child {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    color: #0f172a;
+    font-weight: 700;
+    line-height: 1.25;
+}
+
+.legend-row strong {
+    color: #0f172a;
+    font-size: 0.96rem;
+}
+
+.legend-row small {
+    color: #64748b;
+    font-size: 0.78rem;
+    font-weight: 500;
+    line-height: 1.25;
 }
 
 .legend-swatch {
@@ -348,31 +385,31 @@ html, body {
 
 .legend-line.food-cpi-selangor {
     height: 3px;
-    background: #412D15;
+    background: #0072B2;
     border-radius: 999px;
 }
 
 .legend-line.food-cpi-sabah {
     height: 3px;
-    background: #F59E0B;
+    background: #E69F00;
     border-radius: 999px;
 }
 
 .legend-line.food-cpi-kelantan {
     height: 3px;
-    background: #3357ff;
+    background: #009E73;
     border-radius: 999px;
 }
 
 .legend-line.food-cpi-johor {
     height: 3px;
-    background: #f333ff;
+    background: #D55E00;
     border-radius: 999px;
 }
 
 .legend-line.food-cpi-sarawak {
     height: 3px;
-    background: #A77F60;
+    background: #CC79A7;
     border-radius: 999px;
 }
 
@@ -495,6 +532,27 @@ html, body {
     line-height: 1.45;
 }
 
+.basket-item-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    margin-top: 0.55rem;
+}
+
+.basket-item-list span {
+    display: inline-flex;
+    align-items: center;
+    min-height: 1.55rem;
+    padding: 0.18rem 0.55rem;
+    border-radius: 999px;
+    background: #fff7ed;
+    border: 1px solid #fed7aa;
+    color: #7c2d12;
+    font-size: 0.76rem;
+    font-weight: 700;
+    line-height: 1.15;
+}
+
 .legend-unit {
     margin: -0.2rem 0 0.45rem;
     color: #475569;
@@ -524,39 +582,6 @@ html, body {
     font-size: 0.8rem;
     font-weight: 700;
     flex: 0 0 auto;
-}
-
-.slope-legend {
-    padding: 1.5rem;
-}
-
-.slope-legend .legend-row {
-    align-items: center;
-    gap: 0.9rem;
-    min-height: 2.75rem;
-}
-
-.slope-legend .legend-row + .legend-row {
-    border-top: 1px solid rgba(148, 163, 184, 0.22);
-    padding-top: 0.75rem;
-    margin-top: 0.75rem;
-}
-
-.slope-legend .legend-row > span:last-child {
-    display: flex;
-    flex-direction: column;
-    gap: 0.15rem;
-    line-height: 1.2;
-}
-
-.slope-legend strong {
-    color: #0f172a;
-    font-size: 0.96rem;
-}
-
-.slope-legend small {
-    color: #64748b;
-    font-size: 0.78rem;
 }
 
 .legend-slope-mark {
@@ -614,7 +639,7 @@ html, body {
     width: 1.8rem;
     height: 0.75rem;
     border-radius: 999px;
-    background: linear-gradient(90deg, #4e79a7, #f28e2b, #59a14f, #b07aa1);
+    background: linear-gradient(90deg, #0072B2, #E69F00, #009E73, #D55E00, #CC79A7);
     flex: 0 0 auto;
 }
 
@@ -636,7 +661,7 @@ html, body {
 .state-colour-key {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 0.42rem;
+    gap: 0.5rem;
     margin-top: 0;
     padding-top: 0;
     border-top: 0;
@@ -645,10 +670,11 @@ html, body {
 .state-key-item {
     display: flex;
     align-items: center;
-    gap: 0.45rem;
+    gap: 0.65rem;
     min-width: 0;
     color: #334155;
-    font-size: 0.82rem;
+    font-size: 0.84rem;
+    font-weight: 650;
     line-height: 1.25;
 }
 
@@ -658,29 +684,31 @@ html, body {
 }
 
 .state-dot {
-    width: 0.62rem;
-    height: 0.62rem;
+    width: 0.92rem;
+    height: 0.92rem;
     border-radius: 50%;
-    border: 1px solid #ffffff;
-    box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.16);
+    border: 2px solid #ffffff;
+    box-shadow:
+        0 0 0 1px rgba(15, 23, 42, 0.24),
+        0 2px 4px rgba(15, 23, 42, 0.18);
     flex: 0 0 auto;
 }
 
-.state-dot.johor { background: #4e79a7; }
-.state-dot.kedah { background: #f28e2b; }
-.state-dot.kelantan { background: #e15759; }
+.state-dot.johor { background: #D55E00; }
+.state-dot.kedah { background: #56B4E9; }
+.state-dot.kelantan { background: #009E73; }
 .state-dot.kuala-lumpur { background: #76b7b2; }
 .state-dot.labuan { background: #59a14f; }
 .state-dot.melaka { background: #edc949; }
 .state-dot.negeri-sembilan { background: #af7aa1; }
-.state-dot.pahang { background: #ff9da7; }
+.state-dot.pahang { background: #111827; }
 .state-dot.penang { background: #9c755f; }
 .state-dot.perak { background: #bab0ab; }
 .state-dot.perlis { background: #2f4b7c; }
 .state-dot.putrajaya { background: #a05195; }
-.state-dot.sabah { background: #d45087; }
-.state-dot.sarawak { background: #f95d6a; }
-.state-dot.selangor { background: #665191; }
+.state-dot.sabah { background: #E69F00; }
+.state-dot.sarawak { background: #CC79A7; }
+.state-dot.selangor { background: #0072B2; }
 .state-dot.terengganu { background: #ffa600; }
 
 .legend-size {
@@ -755,16 +783,16 @@ html, body {
 
 .insight-box h4 {
     font-family: var(--font-heading);
-    margin: 0 0 1rem 0;
-    font-size: 2rem;
+    margin: 0 0 0.75rem 0;
+    font-size: 1.35rem;
     line-height: 1.15;
     color: #0f172a;
 }
 
 .insight-box p {
     margin: 0;
-    font-size: 1rem;
-    line-height: 1.65;
+    font-size: 0.96rem;
+    line-height: 1.6;
     color: #334155;
     max-width: var(--paragraph-line-width);
 }
@@ -775,12 +803,12 @@ html, body {
 
 .chart-title {
     font-family: var(--font-display);
-    font-size: 1.9rem;
+    font-size: 1.75rem;
     font-weight: 700;
     line-height: 1.15;
     color: #1f2f44;
-    margin: 0 0 1rem 0;
-    padding-bottom: 0.55rem;
+    margin: 0 0 0.9rem 0;
+    padding-bottom: 0.5rem;
     border-bottom: 2px solid #d8e2f1;
 }
 
@@ -806,11 +834,11 @@ html, body {
 
 .section h2 {
     font-family: var(--font-display);
-    font-size: 2rem;
+    font-size: 2.05rem;
     margin-top: 0;
-    margin-bottom: 1.5rem;
+    margin-bottom: 0.85rem;
     color: #2c3e50;
-    border-bottom: 3px solid #667eea;
+    border-bottom: 3px solid var(--accent-blue);
     padding-bottom: 0.5rem;
     display: inline-block;
 }
@@ -820,7 +848,7 @@ html, body {
     font-size: 1.05rem;
     line-height: 1.8;
     max-width: var(--paragraph-line-width);
-    margin: 1rem 0;
+    margin: 0.75rem 0 1.2rem;
 }
 
 .why-layout {
@@ -836,8 +864,8 @@ html, body {
 
 .why-prompts {
     background: #fbfdff;
-    border: 1px solid #dbe3f0;
-    border-left: 4px solid #667eea;
+    border: 1px solid var(--panel-border);
+    border-left: 4px solid var(--accent-blue);
     border-radius: 12px;
     padding: 1.35rem 1.5rem;
     box-shadow: 0 2px 4px rgba(0,0,0,0.05);
@@ -951,6 +979,36 @@ html, body {
     max-width: var(--paragraph-line-width);
 }
 
+.source-card-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.25rem;
+    align-items: start;
+}
+
+.source-card {
+    background: #fbfdff;
+    border: 1px solid var(--panel-border);
+    border-radius: 12px;
+    padding: 1.35rem 1.5rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    min-height: 100%;
+}
+
+.source-card h3 {
+    font-family: var(--font-heading);
+    margin: 0 0 0.75rem;
+    font-size: 1.2rem;
+    color: #1f2f44;
+}
+
+.source-card p {
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.65;
+    max-width: none;
+}
+
 /* ========================================
    Footer
    ======================================== */
@@ -990,6 +1048,12 @@ strong {
 @media (max-width: 768px) {
     .chart-body {
         grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .source-card-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
     }
 
     .why-layout {
@@ -1023,6 +1087,17 @@ strong {
 
     .content {
         padding: 1.5rem;
+    }
+
+    .chart-item {
+        padding: 1rem;
+        border-radius: 14px;
+    }
+
+    .chart-panel,
+    .insight-box,
+    .legend-box {
+        padding: 1rem;
     }
 }
 

@@ -369,29 +369,6 @@
                                                        }
                                                    ]
                                    }
-                  },
-                  {
-                      "transform":  [
-                                        {
-                                            "filter":  "datum.year == 2020 \u0026\u0026 datum.month_number == 1"
-                                        }
-                                    ],
-                      "mark":  {
-                                   "type":  "rule",
-                                   "strokeDash":  [
-                                                      4,
-                                                      4
-                                                  ],
-                                   "strokeWidth":  1,
-                                   "color":  "#777777",
-                                   "opacity":  0.45
-                               },
-                      "encoding":  {
-                                       "x":  {
-                                                 "field":  "date",
-                                                 "type":  "temporal"
-                                             }
-                                   }
                   }
               ],
     "config":  {

@@ -45,6 +45,10 @@
     "transform":  [
                       {
                           "filter":  "datum.area == selected_area"
+                      },
+                      {
+                          "calculate":  "'Chicken, eggs, kembung fish, tomato, yellow onion, potato, water spinach, and red chili'",
+                          "as":  "basket_items_label"
                       }
                   ],
     "layer":  [
@@ -94,7 +98,7 @@
                                                  "type":  "quantitative",
                                                  "title":  "Food basket price index (base = 100)",
                                                  "scale":  {
-                                                               "zero":  false
+                                                               "zero":  true
                                                            },
                                                  "axis":  {
                                                               "grid":  true,
@@ -132,6 +136,11 @@
                                                            "field":  "base_date",
                                                            "type":  "nominal",
                                                            "title":  "Base date"
+                                                       },
+                                                       {
+                                                           "field":  "basket_items_label",
+                                                           "type":  "nominal",
+                                                           "title":  "Basket items"
                                                        }
                                                    ]
                                    }
@@ -181,6 +190,11 @@
                                                            "field":  "highlight_point",
                                                            "type":  "nominal",
                                                            "title":  "Point"
+                                                       },
+                                                       {
+                                                           "field":  "basket_items_label",
+                                                           "type":  "nominal",
+                                                           "title":  "Basket items"
                                                        }
                                                    ]
                                    }
@@ -224,6 +238,47 @@
                                              },
                                        "text":  {
                                                     "field":  "latest_label"
+                                                }
+                                   }
+                  },
+                  {
+                      "data":  {
+                                   "values":  [
+                                                  {
+                                                      "date":  "2026-05-04",
+                                                      "basket_index":  36,
+                                                      "annotation":  [
+                                                                         "The basket index tracks chicken, eggs, fish, tomato, onion, potato, water spinach, and red chili.",
+                                                                         "It is set to 100 on the first available day.",
+                                                                         "Values above 100 mean the basket became more expensive than the base day."
+                                                                     ]
+                                                  }
+                                              ]
+                               },
+                      "mark":  {
+                                   "type":  "text",
+                                   "align":  "left",
+                                   "baseline":  "top",
+                                   "dx":  0,
+                                   "dy":  0,
+                                   "fontSize":  12,
+                                   "fontWeight":  600,
+                                   "color":  "#475569",
+                                   "lineBreak":  "\n",
+                                   "lineHeight":  16
+                               },
+                      "encoding":  {
+                                       "x":  {
+                                                 "field":  "date",
+                                                 "type":  "temporal"
+                                             },
+                                       "y":  {
+                                                 "field":  "basket_index",
+                                                 "type":  "quantitative"
+                                             },
+                                       "text":  {
+                                                    "field":  "annotation",
+                                                    "type":  "nominal"
                                                 }
                                    }
                   },
@@ -293,6 +348,11 @@
                                                            "type":  "quantitative",
                                                            "title":  "Basket price (RM)",
                                                            "format":  ".2f"
+                                                       },
+                                                       {
+                                                           "field":  "basket_items_label",
+                                                           "type":  "nominal",
+                                                           "title":  "Basket items"
                                                        }
                                                    ]
                                    }

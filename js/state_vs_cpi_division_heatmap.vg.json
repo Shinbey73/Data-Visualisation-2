@@ -20,7 +20,7 @@
                     "top":  24,
                     "bottom":  112
                 },
-    "height":  560,
+    "height":  440,
     "data":  {
                  "url":  "data/cpi_state_division_heatmap_clean.csv"
              },
