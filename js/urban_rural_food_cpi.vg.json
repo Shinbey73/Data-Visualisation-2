@@ -306,7 +306,7 @@
                                                        {
                                                            "field":  "food_consumer_price_index",
                                                            "type":  "quantitative",
-                                                           "title":  "Latest food CPI",
+                                                           "title":  "Latest food Consumer Price Index",
                                                            "format":  ".1f"
                                                        }
                                                    ]
@@ -364,7 +364,7 @@
                                                        {
                                                            "field":  "food_consumer_price_index",
                                                            "type":  "quantitative",
-                                                           "title":  "Food CPI",
+                                                           "title":  "Food Consumer Price Index",
                                                            "format":  ".1f"
                                                        }
                                                    ]

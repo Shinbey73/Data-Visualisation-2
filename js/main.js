@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', function() {
     loadVisualization('js/urban_rural_food_cpi.vg.json', 'vis_urban_rural_food_cpi');
     // Load low-income household food pressure chart
     loadVisualization('js/low_income_food_pressure.vg.json', 'vis_low_income_food_pressure');
-    // Load the Food CPI trend chart
+    // Load the Food Consumer Price Index trend chart
     loadVisualization('js/food_cpi_trend_selected_states.vg.json', 'vis3');
     // Load Chart 4 heatmap
     loadVisualization('js/state_vs_cpi_division_heatmap.vg.json', 'vis4');

@@ -114,7 +114,7 @@
                      "x":  {
                                "field":  "division_axis_label",
                                "type":  "nominal",
-                               "title":  "CPI division",
+                               "title":  "Consumer Price Index division",
                                "sort":  {
                                             "field":  "division_order",
                                             "order":  "ascending"
