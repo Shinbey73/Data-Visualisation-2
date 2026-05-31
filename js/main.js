@@ -50,7 +50,7 @@ async function loadVisualization(specPath, elementId) {
 // Load visualisations when page loads
 document.addEventListener('DOMContentLoaded', function() {
     // Load the Malaysia food inflation choropleth map
-    loadVisualization('vega-specs/malaysia_food_inflation_choropleth.vg.json', 'vis1');
+    loadVisualization('js/malaysia_food_inflation_choropleth.vg.json', 'vis1');
     // Load the ranked lollipop chart for top food pressure states
     loadVisualization('js/top_food_pressure_states_lollipop.vg.json', 'vis2');
     loadVisualization('js/state_food_inflation_bump_chart_show_all.vg.json', 'vis_bump');

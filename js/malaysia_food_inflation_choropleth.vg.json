@@ -1,4 +1,4 @@
-﻿{
+{
     "$schema":  "https://vega.github.io/schema/vega-lite/v5.json",
     "title":  {
                   "text":  "Where is food price pressure highest in Malaysia?",
@@ -180,7 +180,7 @@
                                },
                       "transform":  [
                                         {
-                                            "filter":  "datum.year == selected_year \u0026\u0026 datum.month == selected_month"
+                                            "filter":  "datum.year == selected_year && datum.month == selected_month"
                                         },
                                         {
                                             "calculate":  "datum.map_state == 'Melaka' ? 'Malacca' : datum.map_state",
